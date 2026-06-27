@@ -2,7 +2,7 @@
 
 Todas as alterações notáveis deste repositório (instalador web + firmware publicado) serão documentadas aqui.
 
-## [Instalador — multi-device] — 2026-06-27
+## [Site 1.1.0] — 2026-06-27
 
 ### Instalador web
 
