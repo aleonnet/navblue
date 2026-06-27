@@ -1,10 +1,32 @@
 {
-  "name": "navblue Waveshare AMOLED 1.75C",
-  "version": "1.4.1",
+  "name": "NavBlue Device Installer",
   "new_install_prompt_erase": true,
   "builds": [
     {
+      "id": "viewe-smartring-plus",
+      "name": "VIEWE SmartRing-Plus",
       "chipFamily": "ESP32-S3",
+      "version": "1.5.0",
+      "detect": {
+        "flashManufacturer": 133,
+        "flashSizeMB": 16
+      },
+      "parts": [
+        {
+          "path": "firmware/navblue_viewe-smartring-plus_v1.5.0.bin",
+          "offset": 0
+        }
+      ]
+    },
+    {
+      "id": "waveshare-amoled-175C",
+      "name": "Waveshare AMOLED 1.75\"",
+      "chipFamily": "ESP32-S3",
+      "version": "1.4.1",
+      "detect": {
+        "flashManufacturer": 200,
+        "flashSizeMB": 32
+      },
       "parts": [
         {
           "path": "firmware/navblue_waveshare_v1.4.1.bin",

@@ -575,7 +575,7 @@
 
                     <div class="info-row">
                         <span class="info-label">Target</span>
-                        <span class="info-value" id="deviceName">Waveshare AMOLED 1.75C</span>
+                        <span class="info-value" id="deviceName">—</span>
                     </div>
                     <div class="info-row">
                         <span class="info-label">Chip</span>
@@ -583,7 +583,7 @@
                     </div>
                     <div class="info-row">
                         <span class="info-label">Firmware</span>
-                        <span class="info-value accent" id="fwVersion">v1.0.1</span>
+                        <span class="info-value accent" id="fwVersion">—</span>
                     </div>
 
                     <div class="divider"></div>
@@ -606,6 +606,10 @@
                     <!-- STATE: ready (chip detected, waiting user confirmation) -->
                     <div class="card-state" id="stateReady">
                         <p class="state-text" style="margin-bottom:4px;">Device detected and ready.</p>
+                        <p class="erase-note" id="detectNote" style="margin-bottom:10px;"></p>
+                        <div id="deviceSelect" style="display:none;margin-bottom:14px;">
+                            <div id="deviceOptions" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;"></div>
+                        </div>
                         <button class="install-btn" id="startFlashBtn" onclick="startFlash()">
                             <svg viewBox="0 0 24 24"><path d="M11 21h-1l1-7H7.5c-.88 0-.33-.75-.31-.78C8.48 10.94 10.42 7.54 13.01 3h1l-1 7h3.51c.4 0 .62.19.4.66C12.97 17.55 11 21 11 21z"/></svg>
                             Install Firmware
@@ -950,6 +954,9 @@
         animState = 'idle';
         showCardState('stateIdle');
         setBadge('Ready to install', '');
+        selectedBuild = null;
+        document.getElementById('deviceName').textContent = '—';
+        document.getElementById('fwVersion').textContent = '—';
         document.getElementById('chipName').textContent = 'ESP32-S3';
         document.getElementById('progressFill').style.width = '0%';
         document.getElementById('progressPct').textContent = '0%';
@@ -984,6 +991,40 @@
     let currentTransport = null;
     let currentPort = null;
     let currentLoader = null;
+    let selectedBuild = null;   // manifest build chosen by auto-detect or manual override
+
+    // Device-override selector styling (inline to avoid touching the stylesheet).
+    const OPT_BASE = 'padding:8px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.18);background:rgba(255,255,255,0.05);color:#cfd8e3;font-family:inherit;font-size:13px;cursor:pointer;transition:all .15s;';
+    const OPT_SEL  = 'padding:8px 14px;border-radius:10px;border:1px solid #22d3ee;background:rgba(34,211,238,0.16);color:#fff;font-family:inherit;font-size:13px;cursor:pointer;transition:all .15s;';
+
+    // Single source of truth for the active build: updates the Target/Firmware rows and the
+    // selector highlight. The flash step reads `selectedBuild` (never a hardcoded index).
+    function setSelectedBuild(b) {
+        selectedBuild = b;
+        document.getElementById('deviceName').textContent = b ? b.name : '—';
+        document.getElementById('fwVersion').textContent = (b && b.version) ? 'v' + b.version : '—';
+        document.querySelectorAll('#deviceOptions [data-build-id]').forEach(el => {
+            el.setAttribute('style', (b && el.getAttribute('data-build-id') === b.id) ? OPT_SEL : OPT_BASE);
+        });
+    }
+
+    // Build the manual override buttons from the manifest (data-driven; works for N builds).
+    // Always visible when there is more than one build, pre-highlighting the auto-detected one.
+    function renderDeviceOptions() {
+        const wrap = document.getElementById('deviceOptions');
+        if (!wrap || !manifestData) return;
+        wrap.innerHTML = '';
+        manifestData.builds.forEach(b => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.setAttribute('data-build-id', b.id);
+            btn.setAttribute('style', OPT_BASE);
+            btn.textContent = b.name;
+            btn.onclick = () => setSelectedBuild(b);
+            wrap.appendChild(btn);
+        });
+        document.getElementById('deviceSelect').style.display = manifestData.builds.length > 1 ? 'block' : 'none';
+    }
 
     async function startInstall() {
         if (!('serial' in navigator)) {
@@ -1042,9 +1083,25 @@
             }
             const normalize = s => s.toUpperCase().replace(/[^A-Z0-9]/g, '');
             const detectedNorm = normalize(chipName);
-            const compatible = manifestData.builds.find(b => detectedNorm.startsWith(normalize(b.chipFamily)));
-            if (!compatible) {
-                const expected = manifestData.builds.map(b => b.chipFamily).join(', ');
+
+            // The ESP32-S3 has no board-model ID (esptool itself reports "no chip ID"). The only
+            // ROM-readable board discriminator is the external flash JEDEC ID: manufacturer + size.
+            // VIEWE = mfr 0x85 / 16MB ; Waveshare = mfr 0xC8 / 32MB (captured from real hardware).
+            let flashMB = null, flashMfr = null;
+            try {
+                const fid = await currentLoader.readFlashId();
+                flashMfr = fid & 0xFF;
+                const cap = (fid >> 16) & 0xFF;               // capacity byte = log2(bytes)
+                flashMB = Math.round(Math.pow(2, cap) / (1024 * 1024));
+                appendLog('Flash ID 0x' + (fid >>> 0).toString(16) + ' (mfr ' + flashMfr + ', ' + flashMB + 'MB)');
+            } catch (e) {
+                appendLog('Flash ID read failed: ' + (e.message || e));
+            }
+
+            // Chip family must be supported at all, else bail.
+            const chipOk = manifestData.builds.some(b => detectedNorm.startsWith(normalize(b.chipFamily)));
+            if (!chipOk) {
+                const expected = [...new Set(manifestData.builds.map(b => b.chipFamily))].join(', ');
                 showError('Incompatible device', 'Detected ' + chipName + '. Expected: ' + expected + '.');
                 try {
                     await currentTransport.setRTS(true);
@@ -1055,6 +1112,20 @@
                 currentTransport = null; currentLoader = null; currentPort = null;
                 return;
             }
+
+            // Match: chipFamily + flash size (stable anchor) + tolerant manufacturer.
+            // A future flash second-source (same size, other vendor) still matches on size.
+            const match = manifestData.builds.find(b =>
+                detectedNorm.startsWith(normalize(b.chipFamily)) &&
+                b.detect && b.detect.flashSizeMB === flashMB &&
+                (b.detect.flashManufacturer == null || b.detect.flashManufacturer === flashMfr));
+
+            renderDeviceOptions();
+            setSelectedBuild(match || null);   // null → no pre-selection, user must pick
+            const note = document.getElementById('detectNote');
+            if (note) note.textContent = match
+                ? 'Auto-detected: ' + match.name + '. Wrong device? Pick it below.'
+                : 'Could not auto-detect this device — select it below before installing.';
 
             setBadge(chipName + ' detected', 'success');
             animState = 'idle';
@@ -1080,6 +1151,10 @@
             showError('No device connected', 'Please connect a device first.');
             return;
         }
+        if (!selectedBuild) {
+            showError('No device selected', 'Pick the device (VIEWE or Waveshare) before installing.');
+            return;
+        }
 
         try {
             setBadge('Downloading...', 'flashing');
@@ -1087,7 +1162,7 @@
             showCardState('stateConnecting');
             document.getElementById('connectText').textContent = 'Downloading firmware...';
 
-            const fwPath = manifestData.builds[0].parts[0].path;
+            const fwPath = selectedBuild.parts[0].path;
             const fwResponse = await fetch(fwPath);
             if (!fwResponse.ok) throw new Error('Firmware file not found: ' + fwPath);
             const fwBytes = new Uint8Array(await fwResponse.arrayBuffer());

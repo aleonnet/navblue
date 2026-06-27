@@ -2,6 +2,19 @@
 
 Todas as alterações notáveis deste repositório (instalador web + firmware publicado) serão documentadas aqui.
 
+## [Instalador — multi-device] — 2026-06-27
+
+### Instalador web
+
+- **Auto-detecção de device (VIEWE SmartRing-Plus ↔ Waveshare AMOLED 1.75C)**: ambos são ESP32-S3, então são distinguidos pelo **JEDEC ID do chip de flash** (`readFlashId()`), lido da ROM independente do firmware atual — VIEWE = fabricante `0x85` + 16MB, Waveshare = `0xC8` (GigaDevice) + 32MB. O `manifest.json` casa o build por `detect.flashSizeMB` (âncora estável) + `detect.flashManufacturer` (tolerante).
+- **Override manual sempre visível** (VIEWE / Waveshare), pré-marcado no device detectado; se nada casar, o seletor aparece sem pré-seleção. `install.html` grava o binário do `selectedBuild` (nunca um índice fixo).
+- **`manifest.json` multi-build**: de um build hardcoded para uma entrada por device (`id`, `name`, `version`, `detect`, `parts`).
+
+### Firmware publicado
+
+- **VIEWE SmartRing-Plus `1.5.0`** adicionado ao instalador; **Waveshare `1.4.1`** mantido.
+- **Correção de brick (geração do `.bin`)**: o merge usava `--flash_size 32MB` fixo, que gravava um header de 32MB na VIEWE de 16MB → endereçamento de 4 bytes → não bootava. Os `build-web-installer.sh` agora espelham o `pio run -t upload` (`--flash-mode dio`, `--flash-freq 80m`, `--flash-size` real do board) e fazem **upsert** por `id` no manifest (sem um device sobrescrever o outro).
+
 ## [Site 1.0.1] — 2026-06-12
 
 ### Corrigido
