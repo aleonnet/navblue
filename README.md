@@ -8,7 +8,7 @@ Site estático do **NavBlue** (HUD de navegação para motociclistas), hospedado
 | `install.html` | `/install.html` | **Instalador web de firmware** para os devices NavBlue ESP32-S3 (VIEWE SmartRing-Plus e Waveshare AMOLED 1.75C), via Web Serial ([esptool-js](https://github.com/espressif/esptool-js)) com **auto-detecção do device** |
 | `demo.html` | `/demo.html` | **Demo cinematográfica** da engine de navegação (replay interativo gerado por `navblue_flutter_app/tools/simulation/guidance-sim_cinematic.py`) |
 
-**Firmware publicado:** VIEWE SmartRing-Plus `1.5.0` (`firmware/navblue_viewe-smartring-plus_v1.5.0.bin`) e Waveshare AMOLED 1.75C `1.4.1` (`firmware/navblue_waveshare_v1.4.1.bin`). O instalador **detecta automaticamente** qual device está conectado e seleciona o binário certo (com override manual sempre disponível).
+**Firmware publicado:** VIEWE SmartRing-Plus `1.5.1` (`firmware/navblue_viewe-smartring-plus_v1.5.1.bin`) e Waveshare AMOLED 1.75C `1.5.1` (`firmware/navblue_waveshare_v1.5.1.bin`). O instalador **detecta automaticamente** qual device está conectado e seleciona o binário certo (com override manual sempre disponível).
 
 ## Companion mobile app (Navblue)
 
@@ -131,7 +131,7 @@ Or manually:
 By default `.gitignore` excludes `firmware/*.bin`. To distribute the firmware via GitHub Pages, force-add the binaries of **both** devices:
 
 ```bash
-git add -f firmware/navblue_viewe-smartring-plus_v1.5.0.bin firmware/navblue_waveshare_v1.4.1.bin
+git add -f firmware/navblue_viewe-smartring-plus_v1.5.1.bin firmware/navblue_waveshare_v1.5.1.bin
 git commit -m "Add firmware binaries for web installer"
 git push
 ```

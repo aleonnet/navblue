@@ -2,6 +2,13 @@
 
 Todas as alterações notáveis deste repositório (instalador web + firmware publicado) serão documentadas aqui.
 
+## [Site 1.1.1] — 2026-07-01
+
+### Firmware publicado
+
+- **Waveshare AMOLED 1.75C → v1.5.1** e **VIEWE SmartRing-Plus → v1.5.1** (sincronizados). Correções de responsividade: `indicate()` BLE, `decodePolyline` e dreno da fila BLE movidos para fora do loop de render (tasks FreeRTOS no Core 0), eliminando o congelamento de ~1–2 s com o BLE conectado; controle de brilho por arrasto vertical contínuo (com guarda anti-redundância no `setBrightness`); cache do logo em sprite. No SmartRing-Plus, correção da direção invertida do brilho (rotação de 180° do display com touch não rotacionado). Detalhes nos CHANGELOGs de cada firmware.
+- `manifest.json`: ambos os builds atualizados para `v1.5.1`.
+
 ## [Site 1.1.0] — 2026-06-27
 
 ### Instalador web
