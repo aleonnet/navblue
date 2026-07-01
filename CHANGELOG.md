@@ -2,6 +2,13 @@
 
 Todas as alterações notáveis deste repositório (instalador web + firmware publicado) serão documentadas aqui.
 
+## [Site 1.1.2] — 2026-07-01
+
+### Demo
+
+- **Subtítulo do intro responsivo**: "Guidance Simulation · Rio de Janeiro" quebra em duas linhas centralizadas (sem o ponto) abaixo de 700px, acompanhando o template do `guidance-sim_cinematic.py`.
+- **Dados da rota atualizados**: `DATA` regenerado pela última execução do `guidance-sim_cinematic.py` (rota Rio Zona Sul com o waypoint do RioSul ajustado, 1354 frames), preservando as edições manuais da cópia publicada (favicon, link "← NavBlue", código SAT/Mapbox removido).
+
 ## [Site 1.1.1] — 2026-07-01
 
 ### Firmware publicado
