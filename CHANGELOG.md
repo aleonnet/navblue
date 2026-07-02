@@ -2,6 +2,12 @@
 
 Todas as alterações notáveis deste repositório (instalador web + firmware publicado) serão documentadas aqui.
 
+## [Site 1.1.3] — 2026-07-02
+
+### Demo
+
+- **Tipografia unificada com a landing e o app**: display Chakra Petch → **Orbitron** (a fonte dos números do HUD físico) e dígitos de instrumento do DeviceHUD (distância 44px e velocidade) também em Orbitron; IBM Plex Mono mantida na telemetria e no utilitário miúdo (ETA, badges, botões, atalhos). Mesmo híbrido aplicado ao template do gerador (`guidance-sim_cinematic.py` no repo do app).
+
 ## [Site 1.1.2] — 2026-07-01
 
 ### Demo
