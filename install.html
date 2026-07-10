@@ -595,6 +595,8 @@
                             Connect Device
                         </button>
                         <p class="erase-note">First install will erase the device. Connect via USB-C.</p>
+                        <button class="secondary-btn" id="syncClockBtn" onclick="syncClockStandalone()" style="margin-top:10px;">Sync device clock</button>
+                        <p class="erase-note" id="clockIdleStatus" style="display:none;"></p>
                     </div>
 
                     <!-- STATE: connecting -->
@@ -634,6 +636,7 @@
                         </svg>
                         <p class="state-detail success">Installation complete</p>
                         <p class="state-text">Device will restart automatically.</p>
+                        <p class="state-text" id="clockStatus" style="display:none;"></p>
                         <button class="secondary-btn" onclick="resetToIdle()">Flash Again</button>
                     </div>
 
@@ -1207,11 +1210,16 @@
             await currentLoader.after();
 
             await currentTransport.disconnect();
+            const portForClock = currentPort;
             currentTransport = null; currentLoader = null; currentPort = null;
 
             animState = 'done';
             showCardState('stateDone');
             setBadge('Installation complete', 'success');
+
+            // Non-fatal: set the device RTC from the browser's clock while
+            // the port is still ours (firmware boots and starts listening).
+            if (portForClock) await syncClockAfterFlash(portForClock);
 
         } catch (e) {
             console.error('Flash error:', e);
@@ -1228,6 +1236,84 @@
             currentTransport = null; currentLoader = null; currentPort = null;
         }
     }
+
+    // ── Device clock sync (TIME <epochUtc> <offsetMin> over Web Serial) ──
+    // Firmware 216 >= 1.2.0 (TimeKeeper) answers "TIME OK <local ISO>" and
+    // stores the time in the PCF85063 RTC (kept while powered off). Older
+    // firmwares ignore the line — we just time out, non-fatal.
+    async function syncClockOnPort(port, retries, intervalMs) {
+        await port.open({ baudRate: 115200 });
+        const writer = port.writable.getWriter();
+        const reader = port.readable.getReader();
+        const dec = new TextDecoder();
+        const enc = new TextEncoder();
+        let buf = '', okTime = null;
+        try {
+            for (let i = 0; i < retries && !okTime; i++) {
+                const epoch = Math.floor(Date.now() / 1000);
+                const offsetMin = -new Date().getTimezoneOffset();
+                await writer.write(enc.encode('TIME ' + epoch + ' ' + offsetMin + '\n'));
+                const deadline = Date.now() + intervalMs;
+                while (Date.now() < deadline && !okTime) {
+                    const r = await Promise.race([
+                        reader.read(),
+                        sleep(Math.max(1, deadline - Date.now())).then(() => null),
+                    ]);
+                    if (!r) break;          // window elapsed — resend on next retry
+                    if (r.done) { i = retries; break; }
+                    buf += dec.decode(r.value);
+                    const m = buf.match(/TIME OK ([^\r\n]+)/);
+                    if (m) okTime = m[1];
+                    if (buf.length > 4096) buf = buf.slice(-256);
+                }
+            }
+        } finally {
+            try { await reader.cancel(); } catch (_) {}
+            try { reader.releaseLock(); } catch (_) {}
+            try { writer.releaseLock(); } catch (_) {}
+            try { await port.close(); } catch (_) {}
+        }
+        return okTime;
+    }
+
+    async function syncClockAfterFlash(port) {
+        const el = document.getElementById('clockStatus');
+        el.style.display = 'block';
+        el.textContent = 'Setting device clock…';
+        try {
+            // Device boots in ~7s (audio/SD init) before reading serial — keep retrying.
+            const t = await syncClockOnPort(port, 25, 600);
+            el.textContent = t
+                ? 'Device clock set: ' + t
+                : 'Clock not set (firmware without clock support) — install is complete.';
+        } catch (e) {
+            el.textContent = 'Clock not set: ' + (e.message || e);
+        }
+    }
+
+    window.syncClockStandalone = async function() {
+        const el = document.getElementById('clockIdleStatus');
+        let port;
+        try {
+            port = await navigator.serial.requestPort();
+        } catch (_) { return; }   // user cancelled the picker
+        el.style.display = 'block';
+        el.textContent = 'Syncing clock…';
+        setBadge('Syncing clock...', 'flashing');
+        try {
+            const t = await syncClockOnPort(port, 8, 600);
+            if (t) {
+                el.textContent = 'Device clock set: ' + t;
+                setBadge('Clock synced', 'success');
+            } else {
+                el.textContent = 'No response — device needs firmware with clock support (216 ≥ 1.2.0).';
+                setBadge('Ready to install', '');
+            }
+        } catch (e) {
+            el.textContent = 'Clock sync failed: ' + (e.message || e);
+            setBadge('Ready to install', '');
+        }
+    };
 
     function showError(title, detail) {
         animState = 'error';
