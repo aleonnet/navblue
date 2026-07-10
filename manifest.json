@@ -33,6 +33,22 @@
           "offset": 0
         }
       ]
+    },
+    {
+      "id": "waveshare-amoled-216",
+      "name": "Waveshare AMOLED 2.16\"",
+      "chipFamily": "ESP32-S3",
+      "version": "1.0.0",
+      "detect": {
+        "flashManufacturer": 32,
+        "flashSizeMB": 16
+      },
+      "parts": [
+        {
+          "path": "firmware/navblue_waveshare-amoled-216_v1.0.0.bin",
+          "offset": 0
+        }
+      ]
     }
   ]
 }
