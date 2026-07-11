@@ -22,14 +22,14 @@
       "id": "waveshare-amoled-175C",
       "name": "Waveshare AMOLED 1.75C\"",
       "chipFamily": "ESP32-S3",
-      "version": "1.6.0",
+      "version": "1.6.1",
       "detect": {
         "flashManufacturer": 200,
         "flashSizeMB": 32
       },
       "parts": [
         {
-          "path": "firmware/navblue_waveshare_v1.6.0.bin",
+          "path": "firmware/navblue_waveshare_v1.6.1.bin",
           "offset": 0
         }
       ]
