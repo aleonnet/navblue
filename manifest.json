@@ -20,7 +20,7 @@
     },
     {
       "id": "waveshare-amoled-175C",
-      "name": "Waveshare AMOLED 1.75C\"",
+      "name": "Waveshare AMOLED 1.75C",
       "chipFamily": "ESP32-S3",
       "version": "1.6.1",
       "detect": {
@@ -36,7 +36,7 @@
     },
     {
       "id": "waveshare-amoled-216",
-      "name": "Waveshare AMOLED 2.16\"",
+      "name": "Waveshare AMOLED 2.16",
       "chipFamily": "ESP32-S3",
       "version": "1.2.0",
       "detect": {
@@ -52,7 +52,7 @@
     },
     {
       "id": "waveshare-amoled-175B",
-      "name": "Waveshare AMOLED 1.75-B\"",
+      "name": "Waveshare AMOLED 1.75-B",
       "chipFamily": "ESP32-S3",
       "version": "1.0.0",
       "parts": [
