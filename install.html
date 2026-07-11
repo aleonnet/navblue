@@ -1118,17 +1118,23 @@
 
             // Match: chipFamily + flash size (stable anchor) + tolerant manufacturer.
             // A future flash second-source (same size, other vendor) still matches on size.
-            const match = manifestData.builds.find(b =>
+            // Some models share the exact same flash chip (216 and 175-B are both
+            // mfr 32 / 16MB) — with MULTIPLE candidates, pre-selecting one would
+            // flash the wrong firmware silently, so the user must pick.
+            const matches = manifestData.builds.filter(b =>
                 detectedNorm.startsWith(normalize(b.chipFamily)) &&
                 b.detect && b.detect.flashSizeMB === flashMB &&
                 (b.detect.flashManufacturer == null || b.detect.flashManufacturer === flashMfr));
 
             renderDeviceOptions();
-            setSelectedBuild(match || null);   // null → no pre-selection, user must pick
+            const match = matches.length === 1 ? matches[0] : null;
+            setSelectedBuild(match);   // null → no pre-selection, user must pick
             const note = document.getElementById('detectNote');
             if (note) note.textContent = match
                 ? 'Auto-detected: ' + match.name + '. Wrong device? Pick it below.'
-                : 'Could not auto-detect this device — select it below before installing.';
+                : (matches.length > 1
+                    ? 'This hardware matches: ' + matches.map(b => b.name).join(' or ') + ' — pick yours below.'
+                    : 'Could not auto-detect this device — select it below before installing.');
 
             setBadge(chipName + ' detected', 'success');
             animState = 'idle';
