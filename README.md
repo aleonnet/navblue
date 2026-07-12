@@ -5,10 +5,12 @@ Site estático do **NavBlue** (HUD de navegação para motociclistas), hospedado
 | Página | URL | Propósito |
 |---|---|---|
 | `index.html` | `/` | **Landing page** do produto: parallax "night ride", mock animado do device, telas reais do app, links para as lojas, demo e instalador |
-| `install.html` | `/install.html` | **Instalador web de firmware** para os devices NavBlue ESP32-S3 (VIEWE SmartRing-Plus e Waveshare AMOLED 1.75C), via Web Serial ([esptool-js](https://github.com/espressif/esptool-js)) com **auto-detecção do device** |
+| `install.html` | `/install.html` | **Instalador web de firmware** para os devices NavBlue ESP32-S3 (VIEWE SmartRing-Plus, Waveshare AMOLED 1.75C e Waveshare AMOLED 2.16), via Web Serial ([esptool-js](https://github.com/espressif/esptool-js)) com **auto-detecção do device** |
 | `demo.html` | `/demo.html` | **Demo cinematográfica** da engine de navegação (replay interativo gerado por `navblue_flutter_app/tools/simulation/guidance-sim_cinematic.py`) |
 
-**Firmware publicado:** VIEWE SmartRing-Plus `1.5.1` (`firmware/navblue_viewe-smartring-plus_v1.5.1.bin`) e Waveshare AMOLED 1.75C `1.5.1` (`firmware/navblue_waveshare_v1.5.1.bin`). O instalador **detecta automaticamente** qual device está conectado e seleciona o binário certo (com override manual sempre disponível).
+**Firmware publicado** (trem de release alinhado ao app Navblue — todos os firmwares seguem o MAJOR.MINOR do app): VIEWE SmartRing-Plus `1.11.0`, Waveshare AMOLED 1.75C `1.11.0` e Waveshare AMOLED 2.16 `1.11.0` (`firmware/navblue_<device>_v<versão>.bin`). O instalador **detecta automaticamente** qual device está conectado e seleciona o binário certo (com override manual sempre disponível).
+
+> O Waveshare AMOLED **1.75B** não é listado no instalador: o fingerprint JEDEC da flash dele é idêntico ao do 2.16 (fab `0x20`, 16MB), o que quebraria a auto-detecção. Flash do 1.75B é feito via PlatformIO (`pio run -t upload`).
 
 ## Companion mobile app (Navblue)
 
@@ -47,8 +49,9 @@ navblue-device-web-installer/
     dm-sans-latin.woff2
     dm-sans-latin-ext.woff2
   firmware/
-    navblue_viewe-smartring-plus_v*.bin   # Binário mesclado VIEWE (gerado pelo build script)
-    navblue_waveshare_v*.bin              # Binário mesclado Waveshare (gerado pelo build script)
+    navblue_viewe-smartring-plus_v*.bin    # Binário mesclado VIEWE (gerado pelo build script)
+    navblue_waveshare-amoled-175C_v*.bin   # Binário mesclado 1.75C (gerado pelo build script)
+    navblue_waveshare-amoled-216_v*.bin    # Binário mesclado 2.16 (gerado pelo build script)
   .gitignore
   README.md
 ```
@@ -58,7 +61,7 @@ navblue-device-web-installer/
 Each firmware project has its own build script that outputs the merged binary here:
 
 ```bash
-cd /path/to/navblue_esp32s3_viewe-smartring-plus      # or .../navblue_esp32s3_waveshare-amoled-175C
+cd /path/to/navblue_esp32s3_viewe-smartring-plus      # ou .../waveshare-amoled-175C, .../waveshare-amoled-216
 ./build-web-installer.sh
 ```
 
@@ -70,7 +73,7 @@ This will:
    flashed with a 32MB header switches to 4-byte addressing and never boots.
 3. Copy the binary to `../navblue-device-web-installer/firmware/`
 4. **Upsert** this device's entry in `manifest.json` (its `version`, `path` and `detect` block),
-   leaving the other device's entry untouched — so the two builds never clobber each other.
+   leaving the other devices' entries untouched — builds never clobber each other.
 
 ### Prerequisites
 
@@ -103,71 +106,24 @@ http://localhost:8080/
 
 ## Deploy to GitHub Pages
 
-### Step 1 — Create the repository
+O repositório já existe (`git@github.com:aleonnet/navblue.git`, branch `main`,
+Pages servindo a raiz). O fluxo de release é só:
 
 ```bash
-cd navblue-device-web-installer
-
-git init
-git add .
-git commit -m "Initial commit — navblue device web installer"
-
-# Create repo on GitHub (requires gh CLI)
-gh repo create navblue-installer --public --source=. --push
-```
-
-Or manually:
-1. Go to https://github.com/new
-2. Create repository named `navblue-installer`
-3. Push:
-   ```bash
-   git remote add origin https://github.com/aleonnet/navblue-installer.git
-   git branch -M main
-   git push -u origin main
-   ```
-
-### Step 2 — Include the firmware binary
-
-By default `.gitignore` excludes `firmware/*.bin`. To distribute the firmware via GitHub Pages, force-add the binaries of **both** devices:
-
-```bash
-git add -f firmware/navblue_viewe-smartring-plus_v1.5.1.bin firmware/navblue_waveshare_v1.5.1.bin
-git commit -m "Add firmware binaries for web installer"
-git push
-```
-
-### Step 3 — Enable GitHub Pages
-
-1. Go to **Settings > Pages** in your repository
-2. Under **Source**, select **Deploy from a branch**
-3. Select **main** branch, **/ (root)** folder
-4. Click **Save**
-
-### Step 4 — Set the entry page
-
-The `index.html` is already the main installer. The page will be live at:
-
-```
-https://aleonnet.github.io/navblue-installer/
-```
-
-### Updating firmware
-
-When you release a new firmware version:
-
-```bash
-# 1. Build the new firmware (run the script of the device you released)
-cd /path/to/navblue_esp32s3_viewe-smartring-plus      # or .../navblue_esp32s3_waveshare-amoled-175C
+# 1. Build do firmware do device liberado (atualiza bin + manifest.json)
+cd /path/to/navblue_esp32s3_<device>
 ./build-web-installer.sh
 
-# 2. Commit and push the new binary + manifest
+# 2. Commit e push (o .gitignore exclui firmware/*.bin — usar -f)
 cd /path/to/navblue-device-web-installer
-git add -f firmware/navblue_viewe-smartring-plus_v*.bin firmware/navblue_waveshare_v*.bin manifest.json
-git commit -m "Update firmware to vX.Y.Z"
-git push
+git add -A && git add -f firmware/*.bin
+git commit -m "chore: <device> vX.Y.Z"
+git push origin main
 ```
 
-GitHub Pages will automatically redeploy within minutes.
+GitHub Pages redeploya automaticamente em poucos minutos. Ao publicar uma
+versão nova, remova da pasta `firmware/` os binários antigos não
+referenciados no `manifest.json` (mantemos só os listados).
 
 ## How It Works
 
@@ -175,11 +131,12 @@ GitHub Pages will automatically redeploy within minutes.
 2. Clicks **Connect Device**
 3. Browser prompts to select the USB serial port (the NavBlue board)
 4. esptool-js connects and detects the chip (ESP32-S3)
-5. **Device auto-detection** — both boards are ESP32-S3, so they're told apart by the external
-   flash chip's JEDEC ID (`readFlashId()`): VIEWE = manufacturer `0x85` + 16MB, Waveshare =
-   manufacturer `0xC8` + 32MB. The matching build from `manifest.json` (`detect.flashManufacturer`
-   + `detect.flashSizeMB`) is selected; size is the stable anchor, manufacturer is tolerant.
-6. Page shows the detected device + firmware version, plus a **manual override** (VIEWE / Waveshare)
+5. **Device auto-detection** — as placas são todas ESP32-S3, então são distinguidas pelo JEDEC ID
+   da flash externa (`readFlashId()`): VIEWE = fab `0x85` + 16MB, Waveshare 1.75C = fab `0xC8` +
+   32MB, Waveshare 2.16 = fab `0x20` + 16MB. O build correspondente vem do `manifest.json`
+   (`detect.flashManufacturer` + `detect.flashSizeMB`). O 1.75B compartilha o fingerprint do 2.16
+   e por isso fica fora da listagem (flash via PlatformIO).
+6. Page shows the detected device + firmware version, plus a **manual override** (lista de devices)
    pre-selected on the detection — always visible, in case the user needs to correct it
 7. User clicks **Install Firmware** — the selected device's binary is downloaded and flashed with progress
 8. Device is automatically reset after flashing
