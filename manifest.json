@@ -29,7 +29,7 @@
       },
       "parts": [
         {
-          "path": "firmware/navblue_waveshare_v1.6.1.bin",
+          "path": "firmware/navblue_waveshare-amoled-175C_v1.6.1.bin",
           "offset": 0
         }
       ]
