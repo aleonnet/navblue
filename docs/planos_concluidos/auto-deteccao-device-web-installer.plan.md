@@ -45,7 +45,7 @@ que **também** não boota nesta flash — por isso o Arduino grava `dio`.)
 Headers finais: VIEWE `e9 03 02 4f` (dio/16MB/80m), Waveshare `e9 03 02 5f` (dio/32MB/80m).
 
 ## Arquivos
-- `navblue-device-web-installer/manifest.json`, `install.html` (+ docs: este plano, `CHANGELOG.md`, `README.md`).
+- `navblue_website/manifest.json`, `install.html` (+ docs: este plano, `CHANGELOG.md`, `README.md`).
 - `navblue_esp32s3_viewe-smartring-plus/build-web-installer.sh`, `navblue_esp32s3_waveshare-amoled-175C/build-web-installer.sh`.
 
 ## Validação (devices físicos)

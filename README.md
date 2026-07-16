@@ -34,7 +34,7 @@ Firmware flashed with this installer powers the **Navblue** HUD hardware. The **
 ## Project Structure
 
 ```
-navblue-device-web-installer/
+navblue_website/
   index.html            # Landing page do produto (self-contained)
   install.html          # Instalador web de firmware (self-contained, sem CDN)
   demo.html             # Demo cinematográfica da engine (artefato gerado; usa CDNs MapLibre/Fonts)
@@ -71,7 +71,7 @@ This will:
    `pio run -t upload` exactly** (`--flash-mode dio`, `--flash-freq 80m`, and the board's real
    `--flash-size`, derived from the board JSON). A wrong `flash_size` bricks the device — a 16MB chip
    flashed with a 32MB header switches to 4-byte addressing and never boots.
-3. Copy the binary to `../navblue-device-web-installer/firmware/`
+3. Copy the binary to `../navblue_website/firmware/`
 4. **Upsert** this device's entry in `manifest.json` (its `version`, `path` and `detect` block),
    leaving the other devices' entries untouched — builds never clobber each other.
 
@@ -88,7 +88,7 @@ This will:
 Recommended local flow:
 
 ```bash
-cd navblue-device-web-installer
+cd navblue_website
 python3 -m http.server 8080
 ```
 
@@ -115,7 +115,7 @@ cd /path/to/navblue_esp32s3_<device>
 ./build-web-installer.sh
 
 # 2. Commit e push (o .gitignore exclui firmware/*.bin — usar -f)
-cd /path/to/navblue-device-web-installer
+cd /path/to/navblue_website
 git add -A && git add -f firmware/*.bin
 git commit -m "chore: <device> vX.Y.Z"
 git push origin main

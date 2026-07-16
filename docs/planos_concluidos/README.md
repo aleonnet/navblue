@@ -1,4 +1,4 @@
-# Planos concluídos — `navblue-device-web-installer`
+# Planos concluídos — `navblue_website`
 
 Índice dos planos executados neste subprojeto.
 

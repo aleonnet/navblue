@@ -1,6 +1,6 @@
 # Plano: Landing page parallax do NavBlue (raiz do site)
 
-> Concluído em 2026-06-12. Repo `navblue-device-web-installer` vira o **site oficial do NavBlue**: landing na raiz, instalador preservado em `install.html`, demo cinematográfica em `demo.html`.
+> Concluído em 2026-06-12. Repo `navblue_website` vira o **site oficial do NavBlue**: landing na raiz, instalador preservado em `install.html`, demo cinematográfica em `demo.html`.
 
 ## Contexto
 

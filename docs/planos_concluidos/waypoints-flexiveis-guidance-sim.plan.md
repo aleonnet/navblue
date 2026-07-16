@@ -1,6 +1,6 @@
 # Plano: waypoints flexíveis no guidance-sim_cinematic.py + intro-sub responsivo
 
-> Concluído em 2026-07-01. Subprojetos tocados: `navblue_flutter_app` (ferramenta de simulação) e `navblue-device-web-installer` (espelho do fix responsivo + dados da demo).
+> Concluído em 2026-07-01. Subprojetos tocados: `navblue_flutter_app` (ferramenta de simulação) e `navblue_website` (espelho do fix responsivo + dados da demo).
 
 ## Contexto
 
@@ -22,7 +22,7 @@ A rota da visualização cinematográfica era fixa: 5 `WayPoint` hardcoded no `_
 1. **CLI** (`guidance-sim_cinematic.py`): `--route <preset.json>`, `--wp "lat,lon[,Nome]"` repetível (mín. 2; o 1º é a posição inicial) e `--place`. Validação de coordenadas e contagem; resposta OSRM checada (`code == "Ok"` e `routes` não vazio) com `sys.exit` amigável em vez de `IndexError` (caminho comum com coordenadas do usuário, ex.: `NoRoute`).
 2. **Bug real encontrado**: o argparse rejeitava valores iniciados em `-` (toda latitude do hemisfério sul!) como se fossem flags — só passava quando o nome do waypoint continha espaço. Contorno: fusão de `--wp <valor>` em `--wp=<valor>` antes do `parse_args`.
 3. **Injeção do lugar**: placeholder `__PLACE__` no template, substituído com `html.escape(place)`; fallback `--place` → `place` do JSON → nome do último waypoint → "Rio de Janeiro" no default.
-4. **Intro responsivo**: `.intro-sub` virou flex centrado; abaixo de 700px quebra em coluna centralizada e o `·` some. Espelhado manualmente em `navblue-device-web-installer/demo.html`.
+4. **Intro responsivo**: `.intro-sub` virou flex centrado; abaixo de 700px quebra em coluna centralizada e o `·` some. Espelhado manualmente em `navblue_website/demo.html`.
 5. **Presets** em `tools/simulation/routes/`: `rio-zona-sul.json` (rota default, com ajuste fino do waypoint RioSul feito pelo usuário) e `sp-zona-sul.json` (Parque Ibirapuera → Shopping Ibirapuera → Brooklin → Ponte Estaiada, 9.972 m — equivalente aos 12.262 m do Rio).
 6. **Demo do site**: `DATA` do `demo.html` substituído pelo da última geração local (`animation_map_cinematic.html`, rota Rio com RioSul ajustado, 1354 frames) via transplante do blob — preservando as edições manuais da cópia publicada (favicon, link "← NavBlue", código SAT/Mapbox removido), que uma cópia integral do arquivo gerado perderia.
 7. **Doc**: seção "Rotas flexíveis (CLI)" em `ARQUITETURA-guidance-sim-cinematic.md`.
