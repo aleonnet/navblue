@@ -48,7 +48,8 @@ export function initRider(){
   }
 
   onTick((pS, kmh) => {
-    if (innerWidth < 680){ if (visible){ visible = false; el.classList.remove('on'); } return; }
+    /* só cavalga onde existe gutter de verdade para a rota (≥1100px) */
+    if (innerWidth < 1100){ if (visible){ visible = false; el.classList.remove('on'); } return; }
     const s = spineData();
     if (!s) return;
 

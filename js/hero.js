@@ -36,10 +36,10 @@ export function initHero(){
         stage.style.transform = 'translate3d(0,' + ((prog - .5) * -44) + 'px,0)';
       }
     }
-    /* velocímetro: agulha -60°..+60° para 0..120 km/h */
+    /* velocímetro: agulha -90°..+90° (semicírculo do arco) para 0..120 km/h */
     if (kmh !== lastKmh){
       lastKmh = kmh;
-      if (needle) needle.style.transform = 'rotate(' + (kmh - 60) + 'deg)';
+      if (needle) needle.style.transform = 'rotate(' + (kmh * 1.5 - 90) + 'deg)';
       if (speedoV) speedoV.textContent = kmh;
     }
   });

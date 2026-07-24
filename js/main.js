@@ -17,6 +17,28 @@ if (new URLSearchParams(location.search).get('og') === '1'){
   document.documentElement.classList.add('og-shot');
 }
 
+/* ---------- demo viva in-place (facade: iframe só nasce no clique) ---------- */
+const demoCard = document.querySelector('#demo-s .demo-card');
+if (demoCard){
+  demoCard.addEventListener('click', e => {
+    e.preventDefault();
+    const lang = document.documentElement.lang.startsWith('pt') ? 'pt' : 'en';
+    const wrap = document.createElement('div');
+    wrap.className = 'demo-embed';
+    wrap.innerHTML =
+      '<iframe src="demo.html?embed=1&lang=' + lang + '" title="NavBlue Guidance Simulation" allow="fullscreen"></iframe>' +
+      '<button type="button" class="demo-fs" aria-label="' +
+        (lang === 'pt' ? 'Tela cheia' : 'Fullscreen') + '" title="' +
+        (lang === 'pt' ? 'Tela cheia' : 'Fullscreen') + '">⛶</button>';
+    demoCard.replaceWith(wrap);
+    const iframe = wrap.querySelector('iframe');
+    wrap.querySelector('.demo-fs').addEventListener('click', () => {
+      const req = iframe.requestFullscreen || iframe.webkitRequestFullscreen;
+      if (req) req.call(iframe);
+    });
+  });
+}
+
 /* ---------- mini-HUD (ícones de manobra reais do conjunto do firmware) ---------- */
 const HUD_SCRIPT = [
   {icon:'depart',            from:600, spd:[0,38]},

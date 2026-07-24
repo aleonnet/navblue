@@ -28,6 +28,25 @@
 @keyframes silPulse{0%,100%{stroke:#2a3350}50%{stroke:rgba(0,174,239,.75)}}
 @media(max-width:480px){.dev-strip{gap:16px}.dev-sil svg{width:42px;height:42px}}
 
+/* silhuetas viram o seletor em stateReady (proxy p/ os botões reais) */
+.dev-strip.selectable .dev-sil{cursor:pointer}
+.dev-strip.selectable .dev-sil:hover .shell{stroke:rgba(0,174,239,.8)}
+.dev-strip.selectable .dev-sil:hover span{color:var(--dim)}
+.dev-sil:focus-visible{outline:none;border-radius:10px;
+  box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--accent)}
+
+/* a fileira de botões continua no DOM (o script escreve nela) mas some da
+   tela — a seleção visual agora são as silhuetas */
+#deviceSelect{position:absolute !important;width:1px;height:1px;overflow:hidden;
+  clip-path:inset(50%);margin:0 !important;padding:0 !important}
+
+/* nome do device "vivo" enquanto aguarda a confirmação */
+#deviceName.dn-live{color:var(--accent);animation:dnPulse 1.7s ease-in-out infinite}
+@keyframes dnPulse{0%,100%{text-shadow:0 0 0 rgba(0,174,239,0)}50%{text-shadow:0 0 14px rgba(0,174,239,.75)}}
+@media (prefers-reduced-motion: reduce){
+  #deviceName.dn-live{animation:none;text-shadow:0 0 10px rgba(0,174,239,.5)}
+}
+
 /* ---------- rota-progresso do flash ---------- */
 .flash-route{width:100%;max-width:300px;height:48px;margin:2px auto 6px;display:block;overflow:visible}
 .fr-base{fill:none;stroke:#1b2740;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}

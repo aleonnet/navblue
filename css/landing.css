@@ -89,7 +89,7 @@
   stroke-dasharray:2.5 8}
 .speedo-pivot{transform:translate(60px,58px)}
 #speedo-needle{stroke:var(--teal);stroke-width:2.5;stroke-linecap:round;
-  transform:rotate(-60deg);transition:transform .18s var(--ease-out);
+  transform:rotate(-90deg);transition:transform .18s var(--ease-out);
   filter:drop-shadow(0 0 6px rgba(101,235,226,.6))}
 .speedo-read{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;
   color:var(--dim);margin-top:2px;text-transform:uppercase}
@@ -242,6 +242,18 @@ html.perf-lite .stars-b,html.perf-lite .stars-c,html.perf-lite .road-lights{disp
 .demo-overlay .lbl{font-family:var(--disp);font-size:12px;font-weight:700;letter-spacing:.34em;
   text-transform:uppercase;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.8)}
 
+/* ---------- demo embutida (facade → iframe) ---------- */
+.demo-embed{position:relative;border-radius:var(--radius-xl);overflow:hidden;margin-top:46px;
+  border:1px solid var(--border);box-shadow:0 36px 90px rgba(0,0,0,.6);aspect-ratio:16/9;
+  background:#04070d}
+@media(max-width:680px){.demo-embed{aspect-ratio:4/3}}
+.demo-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.demo-fs{position:absolute;right:14px;bottom:14px;z-index:5;width:40px;height:40px;
+  border-radius:10px;border:1px solid rgba(0,174,239,.4);background:rgba(4,7,13,.72);
+  color:var(--text);font-size:18px;cursor:pointer;backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);transition:background .2s,border-color .2s}
+.demo-fs:hover{background:rgba(0,174,239,.2);border-color:var(--accent)}
+
 /* ---------- mapa do brasil ---------- */
 .price-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);
   padding:34px;backdrop-filter:blur(10px)}
@@ -283,6 +295,10 @@ html.perf-lite .spine-glow{display:none}
   .wp-ring{left:-13px;top:-13px;width:26px;height:26px}
   .wp-ic{left:-7px;top:-7px;width:14px;height:14px}
 }
+/* faixa própria do trilho: em larguras médias/estreitas o conteúdo abre
+   espaço à esquerda para a rota e os waypoints nunca serem cobertos */
+@media(max-width:1099px){section[data-km] .wrap{padding-left:32px}}
+@media(max-width:680px){section[data-km] .wrap{padding-left:24px}}
 
 /* ---------- device-rider ---------- */
 .rider{position:fixed;top:0;left:0;width:124px;height:124px;z-index:90;pointer-events:none;
@@ -304,7 +320,7 @@ html.perf-lite .spine-glow{display:none}
 .rd-kmh{font-family:var(--disp);font-weight:700;font-size:12px;color:#2de0e8;line-height:1.1;
   display:flex;align-items:baseline;gap:3px}
 .rd-kmh small{font-size:7px;letter-spacing:.18em;color:#39b9d8}
-@media(max-width:680px){.rider{display:none}}
+@media(max-width:1099px){.rider{display:none}}
 
 /* ---------- chip KM nos kickers ---------- */
 .kicker .km{font-family:var(--mono);font-weight:600;font-style:normal;color:var(--teal);

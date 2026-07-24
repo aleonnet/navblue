@@ -54,7 +54,14 @@ function build(){
 
   const hero = document.getElementById('hero');
   const pts = SECTIONS.map(s => anchorFor(s, vw));
-  const start = {x: vw / 2, y: hero.offsetTop + hero.offsetHeight - 40};
+  /* a spine nasce DENTRO da zona da estrada do hero (onde a rota 3D some
+     no clip) e materializa com fade — lê como continuação da rota em
+     qualquer largura, sem depender de projeção 3D */
+  const heroBottom = hero.offsetTop + hero.offsetHeight;
+  const start = {x: vw / 2, y: heroBottom - 170};
+  const fade = 'linear-gradient(180deg,transparent ' + (start.y + 20) + 'px,#000 ' + (start.y + 230) + 'px)';
+  svg.style.maskImage = fade;
+  svg.style.webkitMaskImage = fade;
   const all = [start, ...pts];
 
   let d = 'M ' + all[0].x + ',' + all[0].y;

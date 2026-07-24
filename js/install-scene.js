@@ -19,22 +19,44 @@ const doneMan = document.getElementById('doneMan');
 
 let curState = 'stateIdle';
 
-/* ---------- silhuetas ---------- */
+/* ---------- silhuetas (também são o seletor de device em stateReady) ---------- */
 function updateSils(){
   const name = (deviceName?.textContent || '').trim();
   const hit = DEV_MAP.find(d => name.includes(d.match));
+  const selectable = curState === 'stateReady';
   sils.forEach(sil => {
     const isHit = hit && sil.dataset.dev === hit.id;
     sil.classList.toggle('lit', !!isHit);
     /* sem device identificado em stateReady → candidatas pulsam até a escolha */
-    sil.classList.toggle('maybe', !hit && curState === 'stateReady');
+    sil.classList.toggle('maybe', !hit && selectable);
+    sil.setAttribute('tabindex', selectable ? '0' : '-1');
+    sil.setAttribute('aria-disabled', String(!selectable));
   });
-  if (strip) strip.classList.toggle('active', curState === 'stateReady' || !!hit);
+  if (strip){
+    strip.classList.toggle('active', selectable || !!hit);
+    strip.classList.toggle('selectable', selectable);
+  }
+  if (deviceName) deviceName.classList.toggle('dn-live', selectable && !!hit);
 }
 
 if (deviceName){
   new MutationObserver(updateSils).observe(deviceName, {childList: true, characterData: true, subtree: true});
 }
+
+/* clique/teclado na silhueta = proxy para o botão real que o script esptool
+   gera em #deviceOptions (data-build-id) — a lógica de seleção roda intacta */
+function selectDev(sil){
+  if (curState !== 'stateReady') return;
+  const btn = document.querySelector('#deviceOptions [data-build-id="' + sil.dataset.dev + '"]');
+  if (btn) btn.click();
+}
+sils.forEach(sil => {
+  sil.setAttribute('role', 'button');
+  sil.addEventListener('click', () => selectDev(sil));
+  sil.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); selectDev(sil); }
+  });
+});
 
 /* ---------- rota-progresso do flash ---------- */
 let frTotal = 0;
