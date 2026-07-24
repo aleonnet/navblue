@@ -61,9 +61,15 @@
 <!-- ================= HERO ================= -->
 <section id="hero">
   <div class="sky" data-depth="0.05"></div>
-  <div class="stars" data-depth="0.12"></div>
+  <div class="stars" data-depth="0.10"></div>
+  <div class="stars stars-b" data-depth="0.16"></div>
+  <div class="stars stars-c" data-depth="0.24"></div>
   <div class="horizon-glow" data-depth="0.2"></div>
   <div class="road-wrap" data-depth="0.3"><div class="road-grid"></div>
+    <div class="road-lights" aria-hidden="true">
+      <span class="beam b1"></span><span class="beam b2"></span>
+      <span class="beam b3"></span><span class="beam b4"></span>
+    </div>
     <svg class="route-mock" viewBox="0 0 1000 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <defs>
         <linearGradient id="mockGrad" x1="0" y1="1" x2="0" y2="0">
@@ -109,6 +115,13 @@
         <span class="store-icon"><svg aria-hidden="true"><use href="#ic-gplay"/></svg></span>
         <span class="store-copy"><small data-i18n="hero.gplay.small">Disponível no</small><strong>Google Play</strong></span></a>
       <a class="btn-demo" href="demo.html"><span class="dot"></span><span data-i18n="hero.demo">Ver demo da engine</span></a>
+    </div>
+    <div class="speedo" aria-hidden="true">
+      <svg viewBox="0 0 120 66">
+        <path class="speedo-arc" d="M14,58 A48,48 0 0 1 106,58" fill="none"/>
+        <g class="speedo-pivot"><line id="speedo-needle" x1="0" y1="0" x2="0" y2="-40"/></g>
+      </svg>
+      <div class="speedo-read"><span id="speedo-v">0</span> km/h</div>
     </div>
   </div>
   <div class="scroll-hint" data-i18n="hero.hint">role para descobrir</div>
@@ -312,90 +325,6 @@
   </div>
 </footer>
 
-<script type="module" src="js/nav.js"></script>
-<script>
-'use strict';
-const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-/* ---------- reveals ---------- */
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-}, {threshold: .18});
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-/* ---------- hero parallax (single rAF) ---------- */
-if (!reduceMotion) {
-  const layers = [...document.querySelectorAll('#hero [data-depth]')];
-  const stage = document.getElementById('device-stage');
-  let ticking = false;
-  function update(){
-    ticking = false;
-    const y = scrollY;
-    if (y < innerHeight * 1.2) {
-      layers.forEach(l => {
-        l.style.transform = 'translate3d(0,' + (y * parseFloat(l.dataset.depth)) + 'px,0)';
-      });
-    }
-    const r = stage.getBoundingClientRect();
-    const p = (innerHeight - r.top) / (innerHeight + r.height);
-    if (p > 0 && p < 1.2) {
-      stage.style.transform = 'translate3d(0,' + ((p - .5) * -44) + 'px,0)';
-    }
-  }
-  addEventListener('scroll', () => { if (!ticking){ ticking = true; requestAnimationFrame(update); } }, {passive:true});
-  update();
-}
-
-/* ---------- mini-HUD (real maneuver icons from the firmware asset set) ---------- */
-const HUD_SCRIPT = [
-  {icon:'depart',            from:600, spd:[0,38]},
-  {icon:'turn_right',        from:350, spd:[38,46]},
-  {icon:'continue_straight', from:900, spd:[46,108]},
-  {icon:'turn_slight_left',  from:450, spd:[108,62]},
-  {icon:'turn_left',         from:280, spd:[62,34]},
-  {icon:'arrive',            from:120, spd:[34,0]}
-];
-const ICONS = {};
-const arrowEl = document.getElementById('hud-arrow');
-const distEl = document.getElementById('hud-dist');
-const speedEl = document.getElementById('hud-speed-v');
-const clockEl = document.getElementById('hud-clock');
-
-function setClock(){
-  const d = new Date();
-  clockEl.textContent = String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
-}
-setClock();
-setInterval(setClock, 30000);
-
-Promise.all(HUD_SCRIPT.map(s =>
-  fetch('assets/man_' + s.icon + '.svg').then(r => r.ok ? r.text() : '').catch(() => '')
-    .then(t => { ICONS[s.icon] = t; })
-)).then(startHud);
-
-function startHud(){
-  let seg = 0, t = 0;
-  const SEG_TICKS = 5;
-  function tick(){
-    const s = HUD_SCRIPT[seg];
-    const u = t / SEG_TICKS;
-    const dist = Math.max(0, Math.round(s.from * (1 - u) / 10) * 10);
-    const spd = Math.round(s.spd[0] + (s.spd[1] - s.spd[0]) * u);
-    if (t === 0) {
-      arrowEl.classList.add('swap');
-      setTimeout(() => {
-        arrowEl.innerHTML = ICONS[s.icon] || '';
-        arrowEl.classList.remove('swap');
-      }, 220);
-    }
-    distEl.innerHTML = dist + '<small>m</small>';
-    speedEl.textContent = spd;
-    t++;
-    if (t > SEG_TICKS) { t = 0; seg = (seg + 1) % HUD_SCRIPT.length; }
-  }
-  tick();
-  setInterval(tick, 1100);
-}
-</script>
+<script type="module" src="js/main.js"></script>
 </body>
 </html>
