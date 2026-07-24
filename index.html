@@ -45,20 +45,20 @@
       <circle cx="72" cy="76" r="16" fill="#0d1119" stroke="#2a3146" stroke-width="2.5"/>
       <line x1="316" y1="150" x2="326" y2="90" stroke="#1a2133" stroke-width="5" stroke-linecap="round"/>
       <circle cx="328" cy="76" r="16" fill="#0d1119" stroke="#2a3146" stroke-width="2.5"/>
-      <!-- tanque -->
-      <path d="M132,302 C138,258 164,228 200,228 C236,228 262,258 268,302 Z" fill="#0c0f16" stroke="#232a3c" stroke-width="2"/>
-      <path d="M158,262 C170,246 184,238 199,237" fill="none" stroke="rgba(140,190,255,.13)" stroke-width="3" stroke-linecap="round"/>
+      <!-- tanque encostado na mesa -->
+      <path d="M136,302 C140,252 166,204 200,204 C234,204 260,252 264,302 Z" fill="#0c0f16" stroke="#232a3c" stroke-width="2"/>
+      <path d="M160,246 C170,226 184,212 199,210" fill="none" stroke="rgba(140,190,255,.13)" stroke-width="3" stroke-linecap="round"/>
+      <!-- tampa do tanque -->
+      <ellipse cx="200" cy="232" rx="14" ry="8" fill="#151a26" stroke="rgba(140,190,255,.2)" stroke-width="2"/>
+      <ellipse cx="200" cy="232" rx="7.5" ry="4" fill="none" stroke="rgba(140,190,255,.14)" stroke-width="1.5"/>
       <!-- mesas/risers -->
-      <line x1="190" y1="180" x2="186" y2="208" stroke="#1a2133" stroke-width="8" stroke-linecap="round"/>
-      <line x1="210" y1="180" x2="214" y2="208" stroke="#1a2133" stroke-width="8" stroke-linecap="round"/>
+      <line x1="190" y1="180" x2="187" y2="203" stroke="#1a2133" stroke-width="8" stroke-linecap="round"/>
+      <line x1="210" y1="180" x2="213" y2="203" stroke="#1a2133" stroke-width="8" stroke-linecap="round"/>
       <!-- guidão "gaivota": sobe suave do centro, aplaina e as pontas CAEM -->
       <path d="M200,178 C164,170 128,152 100,152 C88,152 66,160 48,172" fill="none" stroke="url(#barGrad)" stroke-width="11" stroke-linecap="round"/>
       <path d="M200,178 C236,170 272,152 300,152 C312,152 334,160 352,172" fill="none" stroke="url(#barGrad)" stroke-width="11" stroke-linecap="round"/>
       <path d="M200,175 C164,167 129,149 101,149 C89,149 68,157 51,169" fill="none" stroke="rgba(140,190,255,.24)" stroke-width="2" stroke-linecap="round"/>
       <path d="M200,175 C236,167 271,149 299,149 C311,149 332,157 349,169" fill="none" stroke="rgba(140,190,255,.24)" stroke-width="2" stroke-linecap="round"/>
-      <!-- alavancas apontando para dentro -->
-      <path d="M96,160 L144,169" stroke="#232a3c" stroke-width="3.5" stroke-linecap="round"/>
-      <path d="M304,160 L256,169" stroke="#232a3c" stroke-width="3.5" stroke-linecap="round"/>
       <!-- manoplas nas pontas (caídas) + pesos -->
       <path d="M84,155 L48,170" stroke="#0c0f16" stroke-width="19" stroke-linecap="round"/>
       <path d="M316,155 L352,170" stroke="#0c0f16" stroke-width="19" stroke-linecap="round"/>
@@ -88,10 +88,10 @@
           <path d="M8,52 L62,44"/><path d="M8,84 L62,78"/>
           <path d="M22,14 L26,118"/><path d="M48,14 L44,118"/>
         </g>
-        <path d="M35,118 L36,80 L30,62 L33,38" fill="none" stroke="#1565f0" stroke-width="5"
+        <path d="M25,118 L24,80 L45,77 L44,48" fill="none" stroke="#1565f0" stroke-width="5"
           stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M33,38 C33,30 45,30 45,37 C45,42 39,45 39,50 Z" fill="#00aeef" transform="translate(-6,-8)"/>
-        <circle cx="33" cy="30" r="2.6" fill="#04141d"/>
+        <path d="M44,48 C37,40 36,30 44,27 C52,30 51,40 44,48 Z" fill="#00aeef"/>
+        <circle cx="44" cy="33" r="2.6" fill="#04141d"/>
       </g>
       <rect x="26" y="7" width="18" height="3.5" rx="1.75" fill="#2a3146"/>
     </symbol>
@@ -246,9 +246,9 @@
           <use href="#nb-cockpit"/>
           <!-- braço/palma POR TRÁS do celular, entrando pela esquerda -->
           <g class="hand-b">
-            <path d="M-24,74 C20,70 58,70 90,76 C104,79 112,86 116,94 L116,122 C112,132 102,138 88,141 C52,146 14,142 -24,138 Z"
+            <path d="M-24,68 C24,62 68,58 104,60 C122,61 132,68 134,80 L134,116 C132,128 122,136 104,138 C68,141 24,138 -24,130 Z"
               fill="#0e1219" stroke="rgba(140,190,255,.2)" stroke-width="2" stroke-linejoin="round"/>
-            <line x1="42" y1="72" x2="38" y2="140" stroke="rgba(140,190,255,.13)" stroke-width="3"/>
+            <rect x="50" y="58" width="24" height="82" rx="11" fill="#0e1219" stroke="rgba(140,190,255,.14)" stroke-width="2"/>
           </g>
           <g class="ph-g"><use href="#nb-phone" x="100" y="34" width="60" height="112"/></g>
           <!-- frente da pegada: dorso na borda direita com 4 pontas curtas + polegar -->
