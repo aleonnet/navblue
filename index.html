@@ -250,39 +250,37 @@
       <div class="scene s3">
         <svg class="stage" viewBox="0 0 400 300" aria-hidden="true">
           <use href="#nb-cockpit"/>
-          <!-- braço+punho+palma: ÚNICOS, persistem nas duas poses (mesma largura sempre) -->
+          <!-- manga persistente (a palma vive nos grupos de pose, mesmo path) -->
           <g class="hand-arm">
-            <!-- manga do casaco (tom escuro) -->
             <path d="M-40,78 L64,78 L64,124 L-40,124 Z"
               fill="#10151f" stroke="rgba(140,190,255,.22)" stroke-width="2" stroke-linejoin="round"/>
-            <!-- luva (tom próprio, começa no pulso) -->
-            <path d="M60,77 C86,72 112,68 138,70 C150,71 156,76 157,84 L157,118 C156,126 150,131 138,132 C126,140 118,150 108,153 C98,156 89,149 85,137 C77,132 68,128 60,125 Z"
-              fill="#1c2434" stroke="rgba(140,190,255,.28)" stroke-width="2" stroke-linejoin="round"/>
           </g>
-          <!-- dedos ABERTOS: 4 dedos finos estendidos + polegar aberto abaixo -->
-          <g class="f-open" fill="#1c2434" stroke="rgba(140,190,255,.28)" stroke-width="2">
-            <rect x="140" y="71"  width="58" height="13" rx="6.5" transform="rotate(-4 146 77.5)"/>
-            <rect x="140" y="89"  width="64" height="13" rx="6.5"/>
-            <rect x="140" y="107" width="59" height="13" rx="6.5" transform="rotate(4 146 113.5)"/>
-            <rect x="140" y="124" width="48" height="12" rx="6"   transform="rotate(9 146 130)"/>
-            <rect x="98" y="144" width="52" height="14" rx="7"   transform="rotate(35 102 150)"/>
-            <path d="M60,77 C86,72 112,68 138,70 C150,71 156,76 157,84 L157,118 C156,126 150,131 138,132 C126,140 118,150 108,153 C98,156 89,149 85,137 C77,132 68,128 60,125 Z" fill="#1c2434"/>
-            <rect x="98" y="144" width="52" height="14" rx="7" transform="rotate(35 102 150)" fill="#1c2434"/>
+          <!-- pose ABERTA: dedos estendidos + palma∪polegar em path único -->
+          <g class="f-open">
+            <g fill="#1c2434" stroke="rgba(140,190,255,.28)" stroke-width="2">
+              <rect x="140" y="71"  width="58" height="13" rx="6.5" transform="rotate(-4 146 77.5)"/>
+              <rect x="140" y="89"  width="64" height="13" rx="6.5"/>
+              <rect x="140" y="107" width="59" height="13" rx="6.5" transform="rotate(4 146 113.5)"/>
+              <rect x="140" y="124" width="48" height="12" rx="6"   transform="rotate(9 146 130)"/>
+            </g>
+            <path d="M60,77 C86,72 112,68 138,70 C150,71 156,76 157,84 L157,118 C156,126 150,131 138,132 C128,138 122,144 118,149 C126,152 136,160 144,168 C150,174 147,182 140,182 C131,181 121,172 113,163 C104,158 92,150 85,137 C77,132 68,128 60,125 Z" fill="#1c2434" stroke="rgba(140,190,255,.28)" stroke-width="2" stroke-linejoin="round"/>
           </g>
-          <!-- dedos FECHADOS: os MESMOS 4 dedos encurtados (curl) nas mesmas alturas -->
-          <g class="f-closed" fill="#1c2434" stroke="rgba(140,190,255,.28)" stroke-width="2">
-            <rect x="140" y="71"  width="34" height="13" rx="6.5" transform="rotate(-2 146 77.5)"/>
-            <rect x="140" y="89"  width="36" height="13" rx="6.5"/>
-            <rect x="140" y="107" width="34" height="13" rx="6.5" transform="rotate(2 146 113.5)"/>
-            <rect x="140" y="124" width="30" height="12" rx="6"   transform="rotate(5 146 130)"/>
-            <path d="M60,77 C86,72 112,68 138,70 C150,71 156,76 157,84 L157,118 C156,126 150,131 138,132 C126,140 118,150 108,153 C98,156 89,149 85,137 C77,132 68,128 60,125 Z" fill="#1c2434"/>
+          <!-- pose FECHADA: dedos em curl + palma (mesmo path da aberta, sem o ramo do polegar) -->
+          <g class="f-closed">
+            <g fill="#1c2434" stroke="rgba(140,190,255,.28)" stroke-width="2">
+              <rect x="140" y="71"  width="34" height="13" rx="6.5" transform="rotate(-2 146 77.5)"/>
+              <rect x="140" y="89"  width="36" height="13" rx="6.5"/>
+              <rect x="140" y="107" width="34" height="13" rx="6.5" transform="rotate(2 146 113.5)"/>
+              <rect x="140" y="124" width="30" height="12" rx="6"   transform="rotate(5 146 130)"/>
+            </g>
+            <path d="M60,77 C86,72 112,68 138,70 C150,71 156,76 157,84 L157,118 C156,126 150,131 138,132 C126,140 118,150 108,153 C98,156 89,149 85,137 C77,132 68,128 60,125 Z" fill="#1c2434" stroke="rgba(140,190,255,.28)" stroke-width="2" stroke-linejoin="round"/>
           </g>
           <g class="ph-g"><use href="#nb-phone" x="100" y="34" width="60" height="112"/></g>
-          <!-- polegar fechado: flexionado SOBRE a tela (conforme referência), base no lóbulo -->
+          <!-- polegar fechado flexionado sobre a tela; base funde no lóbulo via elipse -->
           <g class="thumb-front">
             <path d="M104,152 L104,130 C104,122 108,117 114,114 L127,109 C133,107 138,111 139,117 C140,122 136,126 131,127 L119,131 C117,132 116,134 116,138 L116,152 Z"
               fill="#1c2434" stroke="rgba(140,190,255,.28)" stroke-width="2" stroke-linejoin="round"/>
-            <ellipse cx="110" cy="150" rx="13" ry="6" fill="#1c2434"/>
+            <ellipse cx="110" cy="151" rx="15" ry="7" fill="#1c2434"/>
           </g>
         </svg>
         <div class="cap" data-i18n-html="problem.cap3">Exposto, <b>vira alvo</b></div>
