@@ -172,9 +172,12 @@ html.perf-lite .stars-b,html.perf-lite .stars-c,html.perf-lite .road-lights{disp
 .amoled::after{content:'';position:absolute;inset:0;border-radius:50%;pointer-events:none;
   background:linear-gradient(135deg,rgba(255,255,255,.07) 0%,transparent 32%)}
 .amoled-screen{position:absolute;inset:14px;border-radius:50%;background:#000;overflow:hidden}
-.dh-map{position:absolute;inset:0;width:100%;height:100%;
+.dh-map{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;
   -webkit-mask-image:radial-gradient(circle closest-side at 50% 50%,#000 52%,transparent 96%);
   mask-image:radial-gradient(circle closest-side at 50% 50%,#000 52%,transparent 96%)}
+.dh-mapsvg{position:absolute;left:-22%;top:-26%;width:144%;height:144%;
+  transform:perspective(300px) rotateX(32deg);transform-origin:50% 70%}
+#dh-world{transition:opacity .5s ease}
 .route-flow{animation:routeflow 1.1s linear infinite}
 @keyframes routeflow{to{stroke-dashoffset:-32}}
 .dh-top{position:absolute;top:8%;left:0;right:0;display:flex;flex-direction:column;
@@ -182,6 +185,10 @@ html.perf-lite .stars-b,html.perf-lite .stars-c,html.perf-lite .road-lights{disp
 .dh-batt{font-family:var(--disp);font-size:11px;font-weight:700;color:#43d675;
   border:1.5px solid #43d675;border-radius:5px;padding:1px 9px;letter-spacing:.08em}
 .dh-clock{font-family:var(--disp);font-size:11px;font-weight:700;color:var(--amber);letter-spacing:.12em}
+.dh-street{font-family:var(--disp);font-size:8.5px;font-weight:700;color:#ffe14d;
+  border:1.2px solid rgba(255,225,77,.75);border-radius:4px;padding:1px 7px;
+  letter-spacing:.06em;background:rgba(20,16,2,.55);max-width:70%;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
 .dh-man{position:absolute;left:12%;bottom:21%;width:25%;aspect-ratio:1;color:#fff;z-index:3;
   filter:drop-shadow(0 0 9px rgba(255,255,255,.3));transition:opacity .25s}
 .dh-man.swap{opacity:0}

@@ -183,24 +183,30 @@
     <div class="device-stage reveal d2" id="device-stage" style="margin-top:54px">
       <div class="amoled">
         <div class="amoled-screen">
-          <svg class="dh-map" viewBox="0 0 200 200" aria-hidden="true">
-            <defs>
-              <g id="dh-roads" fill="none">
-                <path d="M0,102 L94,96 L200,83"/>
-                <path d="M0,152 L99,143 L200,131"/>
-                <path d="M50,0 L56,98 L62,200"/>
-                <path d="M150,0 L146,84 L141,200"/>
-                <path d="M178,18 L174,86"/>
+          <div class="dh-map" aria-hidden="true">
+            <svg class="dh-mapsvg" viewBox="0 0 200 200">
+              <g id="dh-world">
+                <g fill="none" stroke="#9aa1ad" stroke-width="4" opacity=".5">
+                  <path d="M-30,-90 L-30,420"/><path d="M15,-90 L15,420"/>
+                  <path d="M60,-90 L60,420"/><path d="M105,-90 L105,420"/>
+                  <path d="M150,-90 L150,420"/><path d="M195,-90 L195,420"/>
+                  <path d="M240,-90 L240,420"/>
+                  <path d="M-90,-30 L330,-30"/><path d="M-90,15 L330,15"/>
+                  <path d="M-90,60 L330,60"/><path d="M-90,105 L330,105"/>
+                  <path d="M-90,150 L330,150"/><path d="M-90,195 L330,195"/>
+                  <path d="M-90,240 L330,240"/><path d="M-90,285 L330,285"/>
+                  <path d="M-90,330 L330,330"/><path d="M-90,375 L330,375"/>
+                  <path d="M285,195 L15,-75"/>
+                </g>
+                <path d="M105,375 L105,240 L195,240 L195,105 L150,60 L105,15" fill="none" stroke="#1565f0"
+                  stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+                <path class="route-flow" d="M105,375 L105,240 L195,240 L195,105 L150,60 L105,15" fill="none"
+                  stroke="#6db1ff" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="7 9"/>
               </g>
-            </defs>
-            <use href="#dh-roads" stroke="#aab0bb" stroke-width="4.4" opacity=".55"/>
-            <path d="M121,12 L94,88 L99,106 L99,194" fill="none" stroke="#1565f0"
-              stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
-            <path class="route-flow" d="M121,12 L94,88 L99,106 L99,194" fill="none" stroke="#6db1ff"
-              stroke-width="3.5" stroke-linecap="round" stroke-dasharray="7 9"/>
-            <polygon points="99,112 108,134 99,128 90,134" fill="#3ae3ea" stroke="#063a44" stroke-width="1"/>
-          </svg>
-          <div class="dh-top"><span class="dh-batt">86%</span><span class="dh-clock" id="hud-clock">10:01</span></div>
+              <polygon points="99,116 108,138 99,132 90,138" fill="#3ae3ea" stroke="#063a44" stroke-width="1"/>
+            </svg>
+          </div>
+          <div class="dh-top"><span class="dh-batt">86%</span><span class="dh-street" id="hud-street">Av. Atlântica</span><span class="dh-clock" id="hud-clock">10:01</span></div>
           <div class="dh-man" id="hud-arrow" aria-hidden="true"></div>
           <div class="dh-speed"><small>KMH</small><span id="hud-speed-v">0</span></div>
           <div class="dh-distwrap">
