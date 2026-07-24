@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR" data-page="install">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="icon" type="image/png" href="assets/navblue_512.png">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-    <title>NavBlue — Device Web Installer</title>
-    <meta name="description" content="Flash NavBlue firmware to your Waveshare ESP32-S3 AMOLED 1.75C directly from the browser.">
+    <title>NavBlue — Instalador Web do Device</title>
+    <meta name="description" content="Grave o firmware NavBlue nos devices VIEWE e Waveshare (ESP32-S3) direto do navegador, via Web Serial.">
     <link rel="stylesheet" href="css/tokens.css">
+    <script>(function(){try{var q=new URLSearchParams(location.search).get('lang');if(q==='pt'||q==='en')localStorage.setItem('navblue.lang',q);var l=localStorage.getItem('navblue.lang')||((navigator.language||'').toLowerCase().indexOf('pt')===0?'pt':'en');document.documentElement.lang=l==='pt'?'pt-BR':'en';}catch(e){}})();</script>
+    <script type="module" src="js/i18n.js"></script>
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -518,7 +520,8 @@
     </style>
 </head>
 <body>
-    <a class="back-home" href="./" title="Voltar à página inicial">&larr; Nav<b>Blue</b></a>
+    <a class="back-home" href="./" title="Voltar à página inicial" data-i18n-attr="title:inst.back">&larr; Nav<b>Blue</b></a>
+    <button id="lang-toggle" class="lang-float" aria-pressed="false" title="English">EN</button>
     <canvas id="particleCanvas"></canvas>
 
     <div class="overlay">
@@ -536,7 +539,7 @@
             </div>
 
             <h1 class="brand">Nav<span class="brand-blue">Blue</span></h1>
-            <p class="subtitle">Device Web Installer</p>
+            <p class="subtitle" data-i18n="inst.subtitle">Instalador Web do Device</p>
 
             <div class="card">
                 <div class="card-glow"></div>
@@ -544,20 +547,20 @@
                     <div style="display:flex;justify-content:center;margin-bottom:18px;">
                         <div class="status-badge" id="statusBadge">
                             <div class="dot"></div>
-                            <span id="statusText">Ready to install</span>
+                            <span id="statusText" data-i18n="inst.js.ready">Pronto para instalar</span>
                         </div>
                     </div>
 
                     <div class="info-row">
-                        <span class="info-label">Target</span>
+                        <span class="info-label" data-i18n="inst.target">Device</span>
                         <span class="info-value" id="deviceName">—</span>
                     </div>
                     <div class="info-row">
-                        <span class="info-label">Chip</span>
+                        <span class="info-label" data-i18n="inst.chip">Chip</span>
                         <span class="info-value" id="chipName">ESP32-S3</span>
                     </div>
                     <div class="info-row">
-                        <span class="info-label">Firmware</span>
+                        <span class="info-label" data-i18n="inst.firmware">Firmware</span>
                         <span class="info-value accent" id="fwVersion">—</span>
                     </div>
 
@@ -567,36 +570,36 @@
                     <div class="card-state active" id="stateIdle">
                         <button class="install-btn" id="installBtn" onclick="startInstall()">
                             <svg viewBox="0 0 24 24"><path d="M15 7.5V2H9v5.5l3 3 3-3zM7.5 9H2v6h5.5l3-3-3-3zM9 16.5V22h6v-5.5l-3-3-3 3zM16.5 9l-3 3 3 3H22V9h-5.5z"/></svg>
-                            Connect Device
+                            <span data-i18n="inst.connect">Conectar device</span>
                         </button>
-                        <p class="erase-note">First install will erase the device. Connect via USB-C.</p>
-                        <button class="secondary-btn" id="syncClockBtn" onclick="syncClockStandalone()" style="margin-top:10px;">Sync device clock</button>
+                        <p class="erase-note" data-i18n="inst.eraseNote">A primeira instalação apaga o device. Conecte via USB-C.</p>
+                        <button class="secondary-btn" id="syncClockBtn" onclick="syncClockStandalone()" style="margin-top:10px;" data-i18n="inst.syncClock">Sincronizar relógio</button>
                         <p class="erase-note" id="clockIdleStatus" style="display:none;"></p>
                     </div>
 
                     <!-- STATE: connecting -->
                     <div class="card-state" id="stateConnecting">
                         <div class="spinner-wrap"><div class="spinner"></div></div>
-                        <p class="state-text accent" id="connectText">Connecting to device...</p>
+                        <p class="state-text accent" id="connectText" data-i18n="inst.js.connectingText">Conectando ao device...</p>
                     </div>
 
                     <!-- STATE: ready (chip detected, waiting user confirmation) -->
                     <div class="card-state" id="stateReady">
-                        <p class="state-text" style="margin-bottom:4px;">Device detected and ready.</p>
+                        <p class="state-text" style="margin-bottom:4px;" data-i18n="inst.readyText">Device detectado e pronto.</p>
                         <p class="erase-note" id="detectNote" style="margin-bottom:10px;"></p>
                         <div id="deviceSelect" style="display:none;margin-bottom:14px;">
                             <div id="deviceOptions" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;"></div>
                         </div>
                         <button class="install-btn" id="startFlashBtn" onclick="startFlash()">
                             <svg viewBox="0 0 24 24"><path d="M11 21h-1l1-7H7.5c-.88 0-.33-.75-.31-.78C8.48 10.94 10.42 7.54 13.01 3h1l-1 7h3.51c.4 0 .62.19.4.66C12.97 17.55 11 21 11 21z"/></svg>
-                            Install Firmware
+                            <span data-i18n="inst.installFw">Instalar firmware</span>
                         </button>
-                        <p class="erase-note">This will erase and reprogram the device.</p>
+                        <p class="erase-note" data-i18n="inst.reprogramNote">Isso apaga e regrava o device.</p>
                     </div>
 
                     <!-- STATE: flashing (erase + write) -->
                     <div class="card-state" id="stateFlashing">
-                        <p class="state-text accent" id="flashText">Preparing flash...</p>
+                        <p class="state-text accent" id="flashText">Preparando...</p>
                         <div class="progress-wrap">
                             <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
                         </div>
@@ -609,10 +612,10 @@
                             <circle cx="26" cy="26" r="25" fill="none" stroke="var(--success)" stroke-width="2"/>
                             <path fill="none" stroke="var(--success)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
                         </svg>
-                        <p class="state-detail success">Installation complete</p>
-                        <p class="state-text">Device will restart automatically.</p>
+                        <p class="state-detail success" data-i18n="inst.doneTitle">Instalação concluída</p>
+                        <p class="state-text" data-i18n="inst.doneText">O device vai reiniciar automaticamente.</p>
                         <p class="state-text" id="clockStatus" style="display:none;"></p>
-                        <button class="secondary-btn" onclick="resetToIdle()">Flash Again</button>
+                        <button class="secondary-btn" onclick="resetToIdle()" data-i18n="inst.flashAgain">Gravar de novo</button>
                     </div>
 
                     <!-- STATE: error -->
@@ -622,62 +625,62 @@
                             <line x1="16" y1="16" x2="36" y2="36" stroke="var(--error)" stroke-width="3" stroke-linecap="round"/>
                             <line x1="36" y1="16" x2="16" y2="36" stroke="var(--error)" stroke-width="3" stroke-linecap="round"/>
                         </svg>
-                        <p class="state-detail error" id="errorTitle">Connection failed</p>
-                        <p class="state-text" id="errorDetail">Check USB connection and try again.</p>
-                        <button class="secondary-btn" onclick="resetToIdle()">Try Again</button>
+                        <p class="state-detail error" id="errorTitle">Falha na conexão</p>
+                        <p class="state-text" id="errorDetail">Confira a conexão USB e tente de novo.</p>
+                        <button class="secondary-btn" onclick="resetToIdle()" data-i18n="inst.tryAgain">Tentar de novo</button>
                     </div>
 
                     <!-- STATE: no port selected (NotFoundError) — content aligned with esp-web-tools openNoPortPickedDialog -->
                     <div class="card-state" id="stateNoPortHelp">
                         <div class="no-port-help-wrap">
-                            <p class="no-port-title">No port selected</p>
-                            <p>If you didn&apos;t select a port because you didn&apos;t see your device listed, try the following steps:</p>
+                            <p class="no-port-title" data-i18n="inst.noport.title">Nenhuma porta selecionada</p>
+                            <p data-i18n="inst.noport.intro">Se você não selecionou uma porta porque o seu device não apareceu na lista, tente os passos abaixo:</p>
                             <ol>
-                                <li>Make sure that the device is connected to this computer (the one that runs the browser that shows this website).</li>
-                                <li>Most devices have a tiny light when it is powered on. If yours has one, make sure it is on.</li>
-                                <li>Make sure that the USB cable you use can be used for data and is not a power-only cable.</li>
+                                <li data-i18n="inst.noport.s1">Confira se o device está conectado a este computador (o que roda o navegador com esta página).</li>
+                                <li data-i18n="inst.noport.s2">A maioria dos devices tem um LED aceso quando ligado. Se o seu tiver, confira se está aceso.</li>
+                                <li data-i18n="inst.noport.s3">Confira se o cabo USB transmite dados — não é um cabo só de energia.</li>
                                 <li id="noPortLinuxHint" hidden>
-                                    If you are using a Linux flavor, make sure that your user is part of the <code>dialout</code> group so it has permission to access the device.
-                                    <code class="block">sudo usermod -a -G dialout YourUserName</code>
-                                    You may need to log out &amp; back in or reboot to activate the new group access.
+                                    <span data-i18n="inst.noport.linux1">No Linux, garanta que o seu usuário está no grupo </span><code>dialout</code><span data-i18n="inst.noport.linux2"> para ter permissão de acesso ao device.</span>
+                                    <code class="block">sudo usermod -a -G dialout SeuUsuario</code>
+                                    <span data-i18n="inst.noport.linux3">Pode ser preciso sair e entrar de novo (ou reiniciar) para ativar o novo grupo.</span>
                                 </li>
                                 <li>
-                                    Make sure you have the right drivers installed. Below are the drivers for common chips used in ESP devices:
+                                    <span data-i18n="inst.noport.drivers">Confira se os drivers corretos estão instalados. Abaixo, os drivers dos chips mais comuns em devices ESP:</span>
                                     <ul>
                                         <li>
                                             CP2102 drivers:
-                                            <a href="https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers" target="_blank" rel="noopener">Windows &amp; Mac</a>
+                                            <a href="https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers" target="_blank" rel="noopener" data-i18n="inst.noport.winmac">Windows e Mac</a>
                                         </li>
                                         <li>
                                             CH342, CH343, CH9102 drivers:
                                             <a href="https://www.wch.cn/downloads/CH343SER_ZIP.html" target="_blank" rel="noopener">Windows</a>,
                                             <a href="https://www.wch.cn/downloads/CH34XSER_MAC_ZIP.html" target="_blank" rel="noopener">Mac</a>
-                                            (download via the blue cloud icon on the vendor page)
+                                            <span data-i18n="inst.noport.cloudnote">(baixe pelo ícone de nuvem azul na página do fabricante)</span>
                                         </li>
                                         <li>
                                             CH340, CH341 drivers:
                                             <a href="https://www.wch.cn/downloads/CH341SER_ZIP.html" target="_blank" rel="noopener">Windows</a>,
                                             <a href="https://www.wch.cn/downloads/CH341SER_MAC_ZIP.html" target="_blank" rel="noopener">Mac</a>
-                                            (download via the blue cloud icon on the vendor page)
+                                            <span data-i18n="inst.noport.cloudnote">(baixe pelo ícone de nuvem azul na página do fabricante)</span>
                                         </li>
                                     </ul>
                                 </li>
                             </ol>
                         </div>
                         <div class="no-port-btn-row">
-                            <button type="button" class="secondary-btn" onclick="resetToIdle()">Cancel</button>
-                            <button type="button" class="install-btn" onclick="startInstall()">Try Again</button>
+                            <button type="button" class="secondary-btn" onclick="resetToIdle()" data-i18n="inst.cancel">Cancelar</button>
+                            <button type="button" class="install-btn" onclick="startInstall()" data-i18n="inst.tryAgain">Tentar de novo</button>
                         </div>
                     </div>
 
                     <!-- STATE: unsupported browser -->
                     <div class="card-state" id="stateUnsupported">
-                        <p class="state-detail error">Browser not supported</p>
-                        <p class="state-text">Web Serial API is required.<br>Use Google Chrome or Microsoft Edge on desktop.</p>
+                        <p class="state-detail error" data-i18n="inst.unsupportedTitle">Navegador não suportado</p>
+                        <p class="state-text" data-i18n="inst.unsupportedText">A API Web Serial é necessária. Use Google Chrome ou Microsoft Edge no desktop.</p>
                     </div>
 
                     <!-- Console log toggle -->
-                    <button class="console-toggle" id="consoleToggle" onclick="toggleConsole()" style="display:none">Show log</button>
+                    <button class="console-toggle" id="consoleToggle" onclick="toggleConsole()" style="display:none" data-i18n="inst.js.showLog">Mostrar log</button>
                     <div class="console-area" id="consoleArea"></div>
                 </div>
             </div>
@@ -685,7 +688,7 @@
     </div>
 
     <footer>
-        <p>Connect your Waveshare board via USB-C &middot; Chrome or Edge required</p>
+        <p data-i18n="inst.footer">Conecte seu device VIEWE ou Waveshare via USB-C &middot; Chrome ou Edge</p>
         <a href="https://github.com/aleonnet" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
             aleonnet
@@ -694,6 +697,8 @@
 
     <script type="module">
     import { ESPLoader, Transport } from './lib/esptool-bundle.js';
+    // REDESIGN HOOK: i18n dos literais de UI (window.NB_I18N vem de js/i18n.js)
+    const tr = (k, v) => (window.NB_I18N ? window.NB_I18N.t(k, v) : k);
 
     /* ====================================================================
        PARTICLE SYSTEM — Canvas 2D with network connections (identical)
@@ -931,7 +936,7 @@
         currentTransport = null; currentLoader = null; currentPort = null;
         animState = 'idle';
         showCardState('stateIdle');
-        setBadge('Ready to install', '');
+        setBadge(tr('inst.js.ready'), '');
         selectedBuild = null;
         document.getElementById('deviceName').textContent = '—';
         document.getElementById('fwVersion').textContent = '—';
@@ -960,7 +965,7 @@
     function toggleConsole() {
         consoleArea.classList.toggle('open');
         document.getElementById('consoleToggle').textContent =
-            consoleArea.classList.contains('open') ? 'Hide log' : 'Show log';
+            consoleArea.classList.contains('open') ? tr('inst.js.hideLog') : tr('inst.js.showLog');
     }
 
     /* ====================================================================
@@ -1007,7 +1012,7 @@
     async function startInstall() {
         if (!('serial' in navigator)) {
             showCardState('stateUnsupported');
-            setBadge('Unsupported', 'error');
+            setBadge(tr('inst.js.unsupported'), 'error');
             animState = 'error';
             return;
         }
@@ -1019,18 +1024,18 @@
             if (e.name === 'NotFoundError') {
                 animState = 'error';
                 showCardState('stateNoPortHelp');
-                setBadge('No port selected', 'error');
+                setBadge(tr('inst.js.noPort'), 'error');
                 return;
             }
-            showError('Port selection failed', e.message);
+            showError(tr('inst.js.errPortSel'), e.message);
             return;
         }
 
         try {
             showCardState('stateConnecting');
-            setBadge('Connecting...', 'flashing');
+            setBadge(tr('inst.js.connecting'), 'flashing');
             animState = 'flashing';
-            document.getElementById('connectText').textContent = 'Connecting to device...';
+            document.getElementById('connectText').textContent = tr('inst.js.connectingText');
             document.getElementById('consoleToggle').style.display = 'inline';
             logLines = [];
 
@@ -1050,7 +1055,7 @@
                 enableTracing: false
             });
 
-            document.getElementById('connectText').textContent = 'Detecting chip...';
+            document.getElementById('connectText').textContent = tr('inst.js.detecting');
             const chip = await currentLoader.main();
             const chipName = chip || 'Unknown';
 
@@ -1080,7 +1085,7 @@
             const chipOk = manifestData.builds.some(b => detectedNorm.startsWith(normalize(b.chipFamily)));
             if (!chipOk) {
                 const expected = [...new Set(manifestData.builds.map(b => b.chipFamily))].join(', ');
-                showError('Incompatible device', 'Detected ' + chipName + '. Expected: ' + expected + '.');
+                showError(tr('inst.js.errIncompatible'), tr('inst.js.errIncompatibleDetail', {chip: chipName, expected: expected}));
                 try {
                     await currentTransport.setRTS(true);
                     await sleep(100);
@@ -1106,18 +1111,18 @@
             setSelectedBuild(match);   // null → no pre-selection, user must pick
             const note = document.getElementById('detectNote');
             if (note) note.textContent = match
-                ? 'Auto-detected: ' + match.name + '. Wrong device? Pick it below.'
+                ? tr('inst.js.autoDetected', {name: match.name})
                 : (matches.length > 1
-                    ? 'This hardware matches: ' + matches.map(b => b.name).join(' or ') + ' — pick yours below.'
-                    : 'Could not auto-detect this device — select it below before installing.');
+                    ? tr('inst.js.ambiguous', {names: matches.map(b => b.name).join(' / ')})
+                    : tr('inst.js.noDetect'));
 
-            setBadge(chipName + ' detected', 'success');
+            setBadge(tr('inst.js.detected', {chip: chipName}), 'success');
             animState = 'idle';
             showCardState('stateReady');
 
         } catch (e) {
             console.error('Connect error:', e);
-            showError('Connection failed', e.message || String(e));
+            showError(tr('inst.js.errConnection'), e.message || String(e));
             try {
                 if (currentTransport && currentLoader) {
                     await currentTransport.setRTS(true);
@@ -1132,23 +1137,23 @@
 
     async function startFlash() {
         if (!currentTransport || !currentLoader) {
-            showError('No device connected', 'Please connect a device first.');
+            showError(tr('inst.js.errNoDevice'), tr('inst.js.errNoDeviceDetail'));
             return;
         }
         if (!selectedBuild) {
-            showError('No device selected', 'Pick the device (VIEWE or Waveshare) before installing.');
+            showError(tr('inst.js.errNoSelection'), tr('inst.js.errNoSelectionDetail'));
             return;
         }
 
         try {
-            setBadge('Downloading...', 'flashing');
+            setBadge(tr('inst.js.downloading'), 'flashing');
             animState = 'flashing';
             showCardState('stateConnecting');
-            document.getElementById('connectText').textContent = 'Downloading firmware...';
+            document.getElementById('connectText').textContent = tr('inst.js.downloadingText');
 
             const fwPath = selectedBuild.parts[0].path;
             const fwResponse = await fetch(fwPath);
-            if (!fwResponse.ok) throw new Error('Firmware file not found: ' + fwPath);
+            if (!fwResponse.ok) throw new Error(tr('inst.js.errFwNotFound', {path: fwPath}));
             const fwBytes = new Uint8Array(await fwResponse.arrayBuffer());
             const CHUNK = 0x8000;
             let fwData = '';
@@ -1157,8 +1162,8 @@
             }
 
             showCardState('stateFlashing');
-            setBadge('Flashing...', 'flashing');
-            document.getElementById('flashText').textContent = 'Erasing flash memory...';
+            setBadge(tr('inst.js.flashing'), 'flashing');
+            document.getElementById('flashText').textContent = tr('inst.js.erasing');
             document.getElementById('progressFill').style.width = '0%';
             document.getElementById('progressPct').textContent = '0%';
 
@@ -1173,7 +1178,7 @@
                 eraseAll: false,
                 reportProgress: function(fileIndex, written, total) {
                     if (firstProgress) {
-                        document.getElementById('flashText').textContent = 'Writing firmware...';
+                        document.getElementById('flashText').textContent = tr('inst.js.writing');
                         firstProgress = false;
                     }
                     const pct = Math.round((written / total) * 100);
@@ -1182,7 +1187,7 @@
                 }
             });
 
-            document.getElementById('flashText').textContent = 'Resetting device...';
+            document.getElementById('flashText').textContent = tr('inst.js.resetting');
             document.getElementById('progressFill').style.width = '100%';
             document.getElementById('progressPct').textContent = '100%';
 
@@ -1196,7 +1201,7 @@
 
             animState = 'done';
             showCardState('stateDone');
-            setBadge('Installation complete', 'success');
+            setBadge(tr('inst.js.complete'), 'success');
 
             // Non-fatal: set the device RTC from the browser's clock while
             // the port is still ours (firmware boots and starts listening).
@@ -1204,7 +1209,7 @@
 
         } catch (e) {
             console.error('Flash error:', e);
-            showError('Installation failed', e.message || String(e));
+            showError(tr('inst.js.errInstall'), e.message || String(e));
 
             try {
                 if (currentTransport && currentLoader) {
@@ -1260,15 +1265,15 @@
     async function syncClockAfterFlash(port) {
         const el = document.getElementById('clockStatus');
         el.style.display = 'block';
-        el.textContent = 'Setting device clock…';
+        el.textContent = tr('inst.js.clockSetting');
         try {
             // Device boots in ~7s (audio/SD init) before reading serial — keep retrying.
             const t = await syncClockOnPort(port, 25, 600);
             el.textContent = t
-                ? 'Device clock set: ' + t
-                : 'Clock not set (firmware without clock support) — install is complete.';
+                ? tr('inst.js.clockSet', {time: t})
+                : tr('inst.js.clockNotSetNoFw');
         } catch (e) {
-            el.textContent = 'Clock not set: ' + (e.message || e);
+            el.textContent = tr('inst.js.clockNotSet', {err: e.message || e});
         }
     }
 
@@ -1279,29 +1284,29 @@
             port = await navigator.serial.requestPort();
         } catch (_) { return; }   // user cancelled the picker
         el.style.display = 'block';
-        el.textContent = 'Syncing clock…';
-        setBadge('Syncing clock...', 'flashing');
+        el.textContent = tr('inst.js.clockSyncing');
+        setBadge(tr('inst.js.clockSyncing'), 'flashing');
         try {
             const t = await syncClockOnPort(port, 8, 600);
             if (t) {
-                el.textContent = 'Device clock set: ' + t;
-                setBadge('Clock synced', 'success');
+                el.textContent = tr('inst.js.clockSet', {time: t});
+                setBadge(tr('inst.js.clockSynced'), 'success');
             } else {
-                el.textContent = 'No response — device needs firmware with clock support (216 ≥ 1.2.0).';
-                setBadge('Ready to install', '');
+                el.textContent = tr('inst.js.clockNoResponse');
+                setBadge(tr('inst.js.ready'), '');
             }
         } catch (e) {
-            el.textContent = 'Clock sync failed: ' + (e.message || e);
-            setBadge('Ready to install', '');
+            el.textContent = tr('inst.js.clockFailed', {err: e.message || e});
+            setBadge(tr('inst.js.ready'), '');
         }
     };
 
     function showError(title, detail) {
         animState = 'error';
         showCardState('stateError');
-        setBadge('Error', 'error');
+        setBadge(tr('inst.js.error'), 'error');
         document.getElementById('errorTitle').textContent = title;
-        document.getElementById('errorDetail').textContent = detail || 'Check USB connection and try again.';
+        document.getElementById('errorDetail').textContent = detail || tr('inst.js.errConnectionDetail');
     }
 
     function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }

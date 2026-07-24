@@ -19,6 +19,8 @@
 <link rel="stylesheet" href="css/tokens.css">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/landing.css">
+<script>(function(){try{var q=new URLSearchParams(location.search).get('lang');if(q==='pt'||q==='en')localStorage.setItem('navblue.lang',q);var l=localStorage.getItem('navblue.lang')||((navigator.language||'').toLowerCase().indexOf('pt')===0?'pt':'en');document.documentElement.lang=l==='pt'?'pt-BR':'en';}catch(e){}})();</script>
+<script type="module" src="js/i18n.js"></script>
 </head>
 <body>
 
@@ -37,21 +39,22 @@
   </defs>
 </svg>
 
-<a class="skip-link" href="#hero">Pular para o conteúdo</a>
+<a class="skip-link" href="#hero" data-i18n="nav.skip">Pular para o conteúdo</a>
 
 <header id="nav">
   <a class="brand" href="#hero" aria-label="NavBlue">
     <svg viewBox="0 0 404 532" aria-hidden="true"><use href="#nb-pin"/></svg>
     <span>Nav<b>Blue</b></span>
   </a>
-  <button class="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-links">
+  <button class="burger" aria-label="Abrir menu" data-i18n-attr="aria-label:nav.menu" aria-expanded="false" aria-controls="nav-links">
     <span></span><span></span><span></span>
   </button>
   <nav class="links" id="nav-links">
-    <a href="#how">Como funciona</a>
-    <a href="#demo-s">Demo</a>
-    <a href="install.html">Instalar firmware</a>
-    <a class="cta" href="#download">Baixar o app</a>
+    <a href="#how" data-i18n="nav.how">Como funciona</a>
+    <a href="#demo-s" data-i18n="nav.demo">Demo</a>
+    <a href="install.html" data-i18n="nav.install">Instalar firmware</a>
+    <button id="lang-toggle" class="lang" aria-pressed="false" title="English">EN</button>
+    <a class="cta" href="#download" data-i18n="nav.cta">Baixar o app</a>
   </nav>
 </header>
 
@@ -95,52 +98,52 @@
 
   <div class="hero-inner">
     <svg class="hero-logo" viewBox="0 0 404 532" aria-hidden="true"><use href="#nb-pin"/></svg>
-    <h1>O caminho à frente.<br><span class="blue">O celular guardado.</span></h1>
-    <p class="hero-sub">NavBlue é o HUD de navegação para motociclistas: instruções curva a curva
+    <h1><span data-i18n="hero.title1">O caminho à frente.</span><br><span class="blue" data-i18n="hero.title2">O celular guardado.</span></h1>
+    <p class="hero-sub" data-i18n="hero.sub">NavBlue é o HUD de navegação para motociclistas: instruções curva a curva
       num display dedicado — e o seu celular protegido, longe da chuva, da vibração e dos olhares.</p>
     <div class="hero-ctas">
       <a class="store-button" href="https://apps.apple.com/br/app/navblue/id6651858865" target="_blank" rel="noopener">
         <span class="store-icon"><svg aria-hidden="true"><use href="#ic-apple"/></svg></span>
-        <span class="store-copy"><small>Baixar na</small><strong>App Store</strong></span></a>
+        <span class="store-copy"><small data-i18n="hero.apple.small">Baixar na</small><strong>App Store</strong></span></a>
       <a class="store-button" href="https://play.google.com/store/apps/details?id=com.energuide.navblue" target="_blank" rel="noopener">
         <span class="store-icon"><svg aria-hidden="true"><use href="#ic-gplay"/></svg></span>
-        <span class="store-copy"><small>Disponível no</small><strong>Google Play</strong></span></a>
-      <a class="btn-demo" href="demo.html"><span class="dot"></span>Ver demo da engine</a>
+        <span class="store-copy"><small data-i18n="hero.gplay.small">Disponível no</small><strong>Google Play</strong></span></a>
+      <a class="btn-demo" href="demo.html"><span class="dot"></span><span data-i18n="hero.demo">Ver demo da engine</span></a>
     </div>
   </div>
-  <div class="scroll-hint">role para descobrir</div>
+  <div class="scroll-hint" data-i18n="hero.hint">role para descobrir</div>
 </section>
 
 <!-- ================= PROBLEMA ================= -->
 <section id="problem">
   <div class="wrap split">
     <div class="reveal">
-      <span class="kicker">O problema</span>
-      <h2>Seu celular <b>não pertence</b> ao guidão</h2>
-      <p class="lead">Suporte no guidão significa tela na chuva, câmera destruída pela vibração
+      <span class="kicker" data-i18n="problem.kicker">O problema</span>
+      <h2 data-i18n-html="problem.title">Seu celular <b>não pertence</b> ao guidão</h2>
+      <p class="lead" data-i18n="problem.lead">Suporte no guidão significa tela na chuva, câmera destruída pela vibração
         e um convite ao furto em cada semáforo. A navegação que você precisa não exige sacrificar
         o aparelho que você carrega.</p>
       <ul class="bullets">
-        <li><span class="ic">&#9889;</span>A vibração da moto danifica a estabilização da câmera do celular</li>
-        <li><span class="ic">&#127783;</span>Chuva e sol direto castigam a tela — e a bateria</li>
-        <li><span class="ic">&#128274;</span>Celular exposto é alvo: no NavBlue ele fica no bolso, conectado por Bluetooth</li>
+        <li><span class="ic">&#9889;</span><span data-i18n="problem.b1">A vibração da moto danifica a estabilização da câmera do celular</span></li>
+        <li><span class="ic">&#127783;</span><span data-i18n="problem.b2">Chuva e sol direto castigam a tela — e a bateria</span></li>
+        <li><span class="ic">&#128274;</span><span data-i18n="problem.b3">Celular exposto é alvo: no NavBlue ele fica no bolso, conectado por Bluetooth</span></li>
       </ul>
     </div>
-    <div class="clip-stage reveal d1" role="img" aria-label="Animação: celular no guidão vibrando e caindo, sob chuva e sendo furtado">
+    <div class="clip-stage reveal d1" role="img" aria-label="Animação: celular no guidão vibrando e caindo, sob chuva e sendo furtado" data-i18n-attr="aria-label:problem.aria">
       <div class="scene s1">
         <div class="bar"></div>
         <div class="ph"><div class="scr"></div></div>
-        <div class="cap">Vibração <b>destrói</b> a câmera</div>
+        <div class="cap" data-i18n-html="problem.cap1">Vibração <b>destrói</b> a câmera</div>
       </div>
       <div class="scene s2">
         <div class="ph"><div class="scr">&#9888;</div></div>
         <div class="rain"></div>
-        <div class="cap">Chuva e sol <b>castigam</b> a tela</div>
+        <div class="cap" data-i18n-html="problem.cap2">Chuva e sol <b>castigam</b> a tela</div>
       </div>
       <div class="scene s3">
         <div class="ph"><div class="scr"></div></div>
         <div class="arm"></div>
-        <div class="cap">Exposto, <b>vira alvo</b></div>
+        <div class="cap" data-i18n-html="problem.cap3">Exposto, <b>vira alvo</b></div>
       </div>
     </div>
   </div>
@@ -150,9 +153,9 @@
 <section id="device">
   <div class="device-glow"></div>
   <div class="wrap" style="text-align:center">
-    <span class="kicker reveal">O hardware</span>
-    <h2 class="reveal d1">Um display feito <b>para a estrada</b></h2>
-    <p class="lead reveal d2" style="margin:0 auto">AMOLED circular de 1.75&Prime; — preto absoluto de noite,
+    <span class="kicker reveal" data-i18n="device.kicker">O hardware</span>
+    <h2 class="reveal d1" data-i18n-html="device.title">Um display feito <b>para a estrada</b></h2>
+    <p class="lead reveal d2" style="margin:0 auto" data-i18n="device.lead">AMOLED circular de 1.75&Prime; — preto absoluto de noite,
       legível sob sol — mostrando exatamente o que importa: a próxima curva, a distância e a sua velocidade.</p>
 
     <div class="device-stage reveal d2" id="device-stage" style="margin-top:54px">
@@ -193,8 +196,8 @@
     <div class="spec-strip reveal d3">
       <div class="spec"><div class="v">1.75&Prime;</div><div class="k">AMOLED 466&times;466</div></div>
       <div class="spec"><div class="v">ESP32-S3</div><div class="k">dual-core 240 MHz</div></div>
-      <div class="spec"><div class="v">BLE 5</div><div class="k">conexão com o app</div></div>
-      <div class="spec"><div class="v">Bateria</div><div class="k">USB-C para recarga</div></div>
+      <div class="spec"><div class="v">BLE 5</div><div class="k" data-i18n="device.spec3k">conexão com o app</div></div>
+      <div class="spec"><div class="v" data-i18n="device.spec4v">Bateria</div><div class="k" data-i18n="device.spec4k">USB-C para recarga</div></div>
     </div>
   </div>
 </section>
@@ -202,26 +205,26 @@
 <!-- ================= COMO FUNCIONA ================= -->
 <section id="how">
   <div class="wrap">
-    <span class="kicker reveal">Como funciona</span>
-    <h2 class="reveal d1">Três passos e <b>boa estrada</b></h2>
+    <span class="kicker reveal" data-i18n="how.kicker">Como funciona</span>
+    <h2 class="reveal d1" data-i18n-html="how.title">Três passos e <b>boa estrada</b></h2>
     <div class="steps">
       <div class="step reveal d1">
-        <div class="step-shot"><picture><source srcset="assets/tela-tutorial.webp" type="image/webp"><img src="assets/tela-tutorial.jpg" alt="Guia de boas-vindas do app NavBlue" loading="lazy" width="644" height="1396"></picture></div>
+        <div class="step-shot"><picture><source srcset="assets/tela-tutorial.webp" type="image/webp"><img src="assets/tela-tutorial.jpg" alt="Guia de boas-vindas do app NavBlue" data-i18n-attr="alt:how.s1.alt" loading="lazy" width="644" height="1396"></picture></div>
         <div class="num">01</div>
-        <h3>Baixe e configure</h3>
-        <p>Instale o app e siga o guia de boas-vindas: localização, Bluetooth e notificações — pronto em poucos minutos.</p>
+        <h3 data-i18n="how.s1.title">Baixe e configure</h3>
+        <p data-i18n="how.s1.body">Instale o app e siga o guia de boas-vindas: localização, Bluetooth e notificações — pronto em poucos minutos.</p>
       </div>
       <div class="step reveal d2">
-        <div class="step-shot"><picture><source srcset="assets/tela-ble.webp" type="image/webp"><img src="assets/tela-ble.jpg" alt="Pareamento Bluetooth com o NAV HUD no app" loading="lazy" width="644" height="1396"></picture></div>
+        <div class="step-shot"><picture><source srcset="assets/tela-ble.webp" type="image/webp"><img src="assets/tela-ble.jpg" alt="Pareamento Bluetooth com o NAV HUD no app" data-i18n-attr="alt:how.s2.alt" loading="lazy" width="644" height="1396"></picture></div>
         <div class="num">02</div>
-        <h3>Conecte por Bluetooth</h3>
-        <p>Uma varredura encontra o seu NAV HUD e o app passa a transmitir navegação, rota e mapa por BLE. O celular vai para o bolso.</p>
+        <h3 data-i18n="how.s2.title">Conecte por Bluetooth</h3>
+        <p data-i18n="how.s2.body">Uma varredura encontra o seu NAV HUD e o app passa a transmitir navegação, rota e mapa por BLE. O celular vai para o bolso.</p>
       </div>
       <div class="step reveal d3">
-        <div class="step-shot shot-device"><img src="assets/device-rota.webp" alt="Device NavBlue exibindo rota, manobra e velocidade" loading="lazy" width="640" height="640"></div>
+        <div class="step-shot shot-device"><img src="assets/device-rota.webp" alt="Device NavBlue exibindo rota, manobra e velocidade" data-i18n-attr="alt:how.s3.alt" loading="lazy" width="640" height="640"></div>
         <div class="num">03</div>
-        <h3>Trace a rota e siga o HUD</h3>
-        <p>Pesquise endereços via Mapbox ou Google, monte paradas e vá: setas, distância e velocidade no guidão até o destino.</p>
+        <h3 data-i18n="how.s3.title">Trace a rota e siga o HUD</h3>
+        <p data-i18n="how.s3.body">Pesquise endereços via Mapbox ou Google, monte paradas e vá: setas, distância e velocidade no guidão até o destino.</p>
       </div>
     </div>
   </div>
@@ -230,12 +233,12 @@
 <!-- ================= DEMO ================= -->
 <section id="demo-s" style="background:linear-gradient(180deg,var(--bg),#0b1322 60%,var(--bg))">
   <div class="wrap">
-    <span class="kicker reveal">Demo interativa</span>
-    <h2 class="reveal d1">Veja a engine <b>em ação</b></h2>
-    <p class="lead reveal d2">Um replay cinematográfico gerado pela engine usada na navegação do NavBlue:
+    <span class="kicker reveal" data-i18n="demo.kicker">Demo interativa</span>
+    <h2 class="reveal d1" data-i18n-html="demo.title">Veja a engine <b>em ação</b></h2>
+    <p class="lead reveal d2" data-i18n="demo.lead">Um replay cinematográfico gerado pela engine usada na navegação do NavBlue:
       câmera de perseguição, do alto, da rota e telemetria.</p>
-    <a class="demo-card reveal d2" href="demo.html" aria-label="Abrir demo interativa">
-      <picture><source srcset="assets/demo-chase.webp" type="image/webp"><img src="assets/demo-chase.jpg" alt="Demo cinematográfica da navegação NavBlue no Rio de Janeiro" loading="lazy" width="1600" height="1509"></picture>
+    <a class="demo-card reveal d2" href="demo.html" aria-label="Abrir demo interativa" data-i18n-attr="aria-label:demo.aria">
+      <picture><source srcset="assets/demo-chase.webp" type="image/webp"><img src="assets/demo-chase.jpg" alt="Demo cinematográfica da navegação NavBlue no Rio de Janeiro" data-i18n-attr="alt:demo.alt" loading="lazy" width="1600" height="1509"></picture>
       <div class="demo-overlay">
         <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="lbl">Rio de Janeiro &middot; Botafogo &rarr; Leblon</div>
@@ -248,16 +251,16 @@
 <section id="mapa">
   <div class="wrap split">
     <div class="shotframe reveal" style="order:0;max-width:380px;justify-self:center">
-      <picture><source srcset="assets/tela-rota.webp" type="image/webp"><img src="assets/tela-rota.jpg" alt="Rota do Local Atual até a Praia do Leblon via Shopping RioSul no app NavBlue" loading="lazy" width="644" height="1396"></picture>
+      <picture><source srcset="assets/tela-rota.webp" type="image/webp"><img src="assets/tela-rota.jpg" alt="Rota do Local Atual até a Praia do Leblon via Shopping RioSul no app NavBlue" data-i18n-attr="alt:mapa.alt" loading="lazy" width="644" height="1396"></picture>
     </div>
     <div class="reveal d1">
-      <span class="kicker">Mapa do Brasil</span>
-      <h2>Mapas, <b>no seu device</b></h2>
-      <p class="lead">Com a assinatura Mapa do Brasil, o app transmite os mapas vetoriais para o
+      <span class="kicker" data-i18n="mapa.kicker">Mapa do Brasil</span>
+      <h2 data-i18n-html="mapa.title">Mapas, <b>no seu device</b></h2>
+      <p class="lead" data-i18n="mapa.lead">Com a assinatura Mapa do Brasil, o app transmite os mapas vetoriais para o
         device NavBlue — as vias aparecem no HUD — e libera a busca de endereços pelo Google.</p>
       <div class="price-card" style="margin-top:26px">
-        <div class="price">R$ 4,90<small> /mês</small></div>
-        <p style="color:var(--dim);font-size:14px;margin-top:8px">Assinatura opcional, direto no app. A navegação básica é gratuita.</p>
+        <div class="price">R$ 4,90<small data-i18n="mapa.per"> /mês</small></div>
+        <p style="color:var(--dim);font-size:14px;margin-top:8px" data-i18n="mapa.note">Assinatura opcional, direto no app. A navegação básica é gratuita.</p>
       </div>
     </div>
   </div>
@@ -266,13 +269,13 @@
 <!-- ================= INSTALAR ================= -->
 <section id="install-s">
   <div class="wrap">
-    <span class="kicker reveal">Para quem já tem o device</span>
-    <h2 class="reveal d1">Atualize o firmware <b>pelo navegador</b></h2>
+    <span class="kicker reveal" data-i18n="installs.kicker">Para quem já tem o device</span>
+    <h2 class="reveal d1" data-i18n-html="installs.title">Atualize o firmware <b>pelo navegador</b></h2>
     <div class="install-card reveal d2">
-      <p class="lead" style="max-width:none">Conecte o NavBlue via USB e instale a versão mais recente
+      <p class="lead" style="max-width:none" data-i18n="installs.lead">Conecte o NavBlue via USB e instale a versão mais recente
         do firmware sem instalar nada no computador — direto pelo Chrome ou Edge, via Web Serial.</p>
-      <a class="btn-install" href="install.html">&#9889; Abrir instalador web</a>
-      <p class="install-note">Requer Chrome ou Edge no desktop &middot; device Waveshare AMOLED 1.75&Prime;</p>
+      <a class="btn-install" href="install.html" data-i18n="installs.btn">&#9889; Abrir instalador web</a>
+      <p class="install-note" data-i18n="installs.note">Requer Chrome ou Edge no desktop &middot; devices VIEWE SmartRing-Plus e Waveshare AMOLED 1.75C / 2.16</p>
     </div>
   </div>
 </section>
@@ -280,15 +283,15 @@
 <!-- ================= DOWNLOAD / FOOTER ================= -->
 <section id="download" style="padding-bottom:70px">
   <div class="wrap" style="text-align:center">
-    <h2 class="reveal">Pronto para <b>rodar</b>?</h2>
-    <p class="lead reveal d1" style="margin:0 auto">Baixe o app, conecte seu device e deixe o celular onde ele deve estar.</p>
+    <h2 class="reveal" data-i18n-html="download.title">Pronto para <b>rodar</b>?</h2>
+    <p class="lead reveal d1" style="margin:0 auto" data-i18n="download.lead">Baixe o app, conecte seu device e deixe o celular onde ele deve estar.</p>
     <div class="hero-ctas reveal d2" style="margin-top:30px">
       <a class="store-button" href="https://apps.apple.com/br/app/navblue/id6651858865" target="_blank" rel="noopener">
         <span class="store-icon"><svg aria-hidden="true"><use href="#ic-apple"/></svg></span>
-        <span class="store-copy"><small>Baixar na</small><strong>App Store</strong></span></a>
+        <span class="store-copy"><small data-i18n="hero.apple.small">Baixar na</small><strong>App Store</strong></span></a>
       <a class="store-button" href="https://play.google.com/store/apps/details?id=com.energuide.navblue" target="_blank" rel="noopener">
         <span class="store-icon"><svg aria-hidden="true"><use href="#ic-gplay"/></svg></span>
-        <span class="store-copy"><small>Disponível no</small><strong>Google Play</strong></span></a>
+        <span class="store-copy"><small data-i18n="hero.gplay.small">Disponível no</small><strong>Google Play</strong></span></a>
     </div>
   </div>
 </section>
@@ -300,12 +303,12 @@
       <span>Nav<b>Blue</b></span>
     </div>
     <nav>
-      <a href="demo.html">Demo</a>
-      <a href="install.html">Instalador</a>
+      <a href="demo.html" data-i18n="foot.demo">Demo</a>
+      <a href="install.html" data-i18n="foot.installer">Instalador</a>
       <a href="https://apps.apple.com/br/app/navblue/id6651858865" target="_blank" rel="noopener">App Store</a>
       <a href="https://play.google.com/store/apps/details?id=com.energuide.navblue" target="_blank" rel="noopener">Google Play</a>
     </nav>
-    <div class="fineprint">NavBlue &middot; Navegação para motociclistas. Apple e o logotipo da App Store são marcas da Apple Inc. Google Play e o logotipo do Google Play são marcas da Google LLC.</div>
+    <div class="fineprint" data-i18n="foot.fineprint">NavBlue &middot; Navegação para motociclistas. Apple e o logotipo da App Store são marcas da Apple Inc. Google Play e o logotipo do Google Play são marcas da Google LLC.</div>
   </div>
 </footer>
 

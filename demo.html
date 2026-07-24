@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR" data-page="demo">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +8,8 @@
 <link rel="icon" type="image/png" href="assets/navblue_512.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="stylesheet" href="css/tokens.css">
+<script>(function(){try{var q=new URLSearchParams(location.search).get('lang');if(q==='pt'||q==='en')localStorage.setItem('navblue.lang',q);var l=localStorage.getItem('navblue.lang')||((navigator.language||'').toLowerCase().indexOf('pt')===0?'pt':'en');document.documentElement.lang=l==='pt'?'pt-BR':'en';}catch(e){}})();</script>
+<script type="module" src="js/i18n.js"></script>
 <!-- ABSOLUTE-URL: MapLibre via CDN — os tiles CARTO já são remotos; self-hostar o JS não tornaria a demo offline -->
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
@@ -295,7 +297,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);font-family:var(--dis
   <div class="intro-brand">Nav<b>Blue</b></div>
   <div class="intro-sub"><span>Guidance Simulation</span><span class="intro-dot">&middot;</span><span>Rio de Janeiro</span></div>
   <div class="intro-rule"></div>
-  <div class="intro-skip">Click or press space to skip</div>
+  <div class="intro-skip" data-i18n="dm.skip">Clique ou aperte espaço para pular</div>
 </div>
 
 <script>
