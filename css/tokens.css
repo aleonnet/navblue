@@ -1,0 +1,49 @@
+/* NavBlue — design tokens (fonte única das 3 páginas)
+   Dark é O tema, não o default: a marca é o rolê noturno — "céu é céu" vale
+   para o site inteiro. Sem [data-theme], sem toggle, por decisão de arte. */
+
+@font-face{font-family:'Orbitron';font-style:normal;font-weight:400 900;font-display:swap;
+  src:url(../fonts/orbitron-latin.woff2) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400 700;font-display:swap;
+  src:url(../fonts/dm-sans-latin.woff2) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400 700;font-display:swap;
+  src:url(../fonts/dm-sans-latin-ext.woff2) format('woff2');
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:400;font-display:swap;
+  src:url(../fonts/ibm-plex-mono-latin-400.woff2) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:500;font-display:swap;
+  src:url(../fonts/ibm-plex-mono-latin-500.woff2) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:600;font-display:swap;
+  src:url(../fonts/ibm-plex-mono-latin-600.woff2) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+:root{
+  /* superfícies */
+  --bg:#0a0a0f; --bg2:#0d1018;
+  --card:rgba(14,16,24,.72);
+  --border:rgba(0,174,239,.12);
+
+  /* marca */
+  --accent:#00aeef; --accent-soft:rgba(0,174,239,.14);
+  --teal:#65ebe2;
+
+  /* texto */
+  --text:#eef0f6; --dim:#6b7394; --faint:#3a4060;
+
+  /* estados (installer / HUD) */
+  --success:#00e676; --error:#ff5252; --amber:#ffb454;
+
+  /* tipografia */
+  --disp:'Orbitron',sans-serif;
+  --body:'DM Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SF Mono',Menlo,monospace;
+
+  /* forma & movimento */
+  --radius-sm:8px; --radius-md:12px; --radius-lg:18px; --radius-xl:20px;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --focus-ring:0 0 0 2px var(--bg),0 0 0 4px var(--accent);
+}

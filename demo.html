@@ -7,11 +7,13 @@
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="icon" type="image/png" href="assets/navblue_512.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tokens.css">
+<!-- ABSOLUTE-URL: MapLibre via CDN — os tiles CARTO já são remotos; self-hostar o JS não tornaria a demo offline -->
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
 <style>
+/* paleta cinematográfica própria da demo — sobrescreve tokens compartilhados;
+   fontes (@font-face) vêm de css/tokens.css, self-hosted */
 :root{
   --bg:#04070d; --panel:rgba(7,12,22,.78); --line:rgba(95,170,255,.14);
   --ink:#dbe7f4; --dim:#54667e; --faint:#2c3a4e;

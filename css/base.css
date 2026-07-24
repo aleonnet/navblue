@@ -1,0 +1,79 @@
+/* NavBlue — base compartilhada: reset, tipografia, nav, footer, reveals, a11y */
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--body);overflow-x:hidden;
+  -webkit-font-smoothing:antialiased}
+::selection{background:rgba(0,174,239,.35);color:#fff}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--accent);text-decoration:none}
+section{position:relative;padding:110px 24px}
+.wrap{max-width:1080px;margin:0 auto;position:relative;z-index:2}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(26px,4.4vw,42px);line-height:1.15;
+  letter-spacing:.02em;margin-bottom:18px}
+h2 b{color:var(--accent)}
+.lead{font-size:clamp(16px,2vw,19px);color:var(--dim);line-height:1.65;max-width:640px}
+.kicker{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.42em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:block}
+
+/* ---------- a11y ---------- */
+.skip-link{position:absolute;left:-9999px;top:0;z-index:200;background:var(--accent);
+  color:#04141d;font-weight:700;padding:10px 18px;border-radius:0 0 8px 0}
+.skip-link:focus{left:0}
+:focus-visible{outline:none;box-shadow:var(--focus-ring);border-radius:4px}
+
+/* ---------- reveals ---------- */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .8s var(--ease-out),transform .8s var(--ease-out)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.12s}.reveal.d2{transition-delay:.24s}.reveal.d3{transition-delay:.36s}
+
+/* ---------- nav ---------- */
+#nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;
+  gap:26px;padding:14px 26px;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+#nav.solid,#nav.open{background:rgba(10,10,15,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom-color:var(--border)}
+#nav .brand{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-weight:700;
+  font-size:16px;letter-spacing:.06em;color:var(--text)}
+#nav .brand svg{width:20px;height:26px}
+#nav .brand b{color:var(--accent)}
+#nav .links{margin-left:auto;display:flex;gap:24px;align-items:center}
+#nav .links a{color:var(--dim);font-size:14px;font-weight:500;transition:color .2s}
+#nav .links a:hover{color:var(--text)}
+#nav .links a.cta{color:#04141d;background:var(--accent);padding:8px 18px;border-radius:var(--radius-sm);
+  font-weight:700;transition:filter .2s}
+#nav .links a.cta:hover{filter:brightness(1.15)}
+#nav .burger{display:none;margin-left:auto;width:44px;height:44px;background:none;border:none;
+  cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:5px}
+#nav .burger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;
+  transition:transform .25s var(--ease-out),opacity .2s}
+#nav.open .burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+#nav.open .burger span:nth-child(2){opacity:0}
+#nav.open .burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media(max-width:680px){
+  #nav{flex-wrap:wrap;gap:0}
+  #nav .burger{display:flex}
+  #nav .links{display:none;order:3;flex-basis:100%;flex-direction:column;align-items:flex-start;
+    gap:4px;padding:14px 4px 10px;margin-left:0}
+  #nav.open .links{display:flex}
+  #nav .links a{padding:10px 8px;font-size:16px;width:100%}
+  #nav .links a.cta{width:auto;margin-top:8px}
+}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid rgba(0,174,239,.1);padding:46px 24px;background:#08080c}
+.foot{max-width:1080px;margin:0 auto;display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.foot .brand{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-weight:700;
+  letter-spacing:.06em;font-size:14px}
+.foot .brand svg{width:16px;height:21px}
+.foot .brand b{color:var(--accent)}
+.foot nav{display:flex;gap:22px;margin-left:auto;flex-wrap:wrap}
+.foot nav a{color:var(--dim);font-size:13px;transition:color .2s}
+.foot nav a:hover{color:var(--text)}
+.foot .fineprint{width:100%;color:var(--faint);font-size:12px;margin-top:8px}
+
+/* ---------- reduced motion (base) ---------- */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+}
+html.force-reduce-motion .reveal{opacity:1;transform:none;transition:none}
