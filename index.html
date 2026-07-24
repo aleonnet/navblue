@@ -244,14 +244,13 @@
       <div class="scene s3">
         <svg class="stage" viewBox="0 0 400 300" aria-hidden="true">
           <use href="#nb-cockpit"/>
-          <!-- braço/palma POR TRÁS do celular, entrando pela esquerda -->
+          <!-- pose FECHADA (aparece no bote): braço por trás + pegada na frente -->
           <g class="hand-b">
             <path d="M-24,68 C24,62 68,58 104,60 C122,61 132,68 134,80 L134,116 C132,128 122,136 104,138 C68,141 24,138 -24,130 Z"
               fill="#0e1219" stroke="rgba(140,190,255,.2)" stroke-width="2" stroke-linejoin="round"/>
             <rect x="50" y="58" width="24" height="82" rx="11" fill="#0e1219" stroke="rgba(140,190,255,.14)" stroke-width="2"/>
           </g>
           <g class="ph-g"><use href="#nb-phone" x="100" y="34" width="60" height="112"/></g>
-          <!-- frente da pegada: dorso na borda direita com 4 pontas curtas + polegar -->
           <g class="hand-f">
             <path d="M163,50
               C154,50 148,55 148,62
@@ -260,12 +259,30 @@
               C141,94 141,104 149,107
               C143,109 143,119 150,122
               C147,130 152,136 160,137
-              C170,138 177,132 177,122
-              L177,64
-              C177,55 171,50 163,50 Z"
+              C170,138 176,133 176,124
+              C181,108 181,80 176,64
+              C176,55 170,50 163,50 Z"
               fill="#0e1219" stroke="rgba(140,190,255,.26)" stroke-width="2" stroke-linejoin="round"/>
             <rect x="88" y="118" width="44" height="17" rx="8.5" transform="rotate(-38 110 126)"
               fill="#0e1219" stroke="rgba(140,190,255,.26)" stroke-width="2"/>
+          </g>
+          <!-- pose ABERTA (aproximação): dedos estendidos em leque sobre o celular -->
+          <g class="hand-open">
+            <path d="M-24,76 C0,72 16,72 32,74 L32,126 C16,128 0,128 -24,124 Z"
+              fill="#0e1219" stroke="rgba(140,190,255,.2)" stroke-width="2" stroke-linejoin="round"/>
+            <rect x="24" y="72" width="26" height="56" rx="12" fill="#0e1219" stroke="rgba(140,190,255,.14)" stroke-width="2"/>
+            <path d="M44,78 C70,66 96,62 114,66 L112,134 C88,142 62,134 44,122 Z"
+              fill="#0e1219" stroke="rgba(140,190,255,.22)" stroke-width="2" stroke-linejoin="round"/>
+            <rect x="64" y="122" width="52" height="15" rx="7.5" transform="rotate(42 70 130)"
+              fill="#0e1219" stroke="rgba(140,190,255,.24)" stroke-width="2"/>
+            <rect x="102" y="124" width="48" height="13" rx="6.5" transform="rotate(18 106 130)"
+              fill="#0e1219" stroke="rgba(140,190,255,.24)" stroke-width="2"/>
+            <rect x="108" y="106" width="62" height="14" rx="7" transform="rotate(7 112 113)"
+              fill="#0e1219" stroke="rgba(140,190,255,.24)" stroke-width="2"/>
+            <rect x="110" y="85" width="68" height="14.5" rx="7.2" transform="rotate(-4 114 92)"
+              fill="#0e1219" stroke="rgba(140,190,255,.24)" stroke-width="2"/>
+            <rect x="106" y="63" width="58" height="14" rx="7" transform="rotate(-17 110 70)"
+              fill="#0e1219" stroke="rgba(140,190,255,.24)" stroke-width="2"/>
           </g>
         </svg>
         <div class="cap" data-i18n-html="problem.cap3">Exposto, <b>vira alvo</b></div>
