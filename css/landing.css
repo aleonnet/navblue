@@ -121,51 +121,43 @@ html.perf-lite .stars-b,html.perf-lite .stars-c,html.perf-lite .road-lights{disp
   font-family:var(--disp);font-size:11.5px;font-weight:700;letter-spacing:.22em;
   text-transform:uppercase;color:#aeb6cf}
 .scene .cap b{color:var(--accent)}
-.ph{position:relative;width:84px;height:170px;border-radius:16px;background:#10131c;
-  border:2px solid #2a3146;box-shadow:0 10px 30px rgba(0,0,0,.6);z-index:1}
-.ph::before{content:'';position:absolute;left:50%;top:7px;transform:translateX(-50%);
-  width:26px;height:4px;border-radius:3px;background:#2a3146}
-.ph .scr{position:absolute;inset:16px 6px 10px;border-radius:9px;
-  background:linear-gradient(160deg,#142747,#0c1530)}
-.s1 .bar{position:absolute;top:42%;left:12%;right:12%;height:7px;border-radius:4px;
-  background:linear-gradient(90deg,#161c2c,#222a40,#161c2c)}
-.s1 .ph{animation:shakeDrop 13.5s infinite}
-@keyframes shakeDrop{
-  0%,3%{transform:translateY(-40px) rotate(0)}
-  5%{transform:translateY(-40px) rotate(2.4deg)}
-  7%{transform:translateY(-40px) rotate(-2.6deg)}
-  9%{transform:translateY(-40px) rotate(2.8deg)}
-  11%{transform:translateY(-40px) rotate(-3.2deg)}
-  13%{transform:translateY(-39px) rotate(3.6deg)}
-  15%{transform:translateY(-37px) rotate(-5deg)}
-  17%{transform:translateY(40px) rotate(-28deg)}
-  21%,100%{transform:translateY(230px) rotate(-62deg)}}
+/* palco das cenas: cockpit de moto + celular no suporte (SVG symbols) */
+.stage{position:absolute;inset:0;width:100%;height:100%}
+.ph-g,.hand,.warn{transform-box:fill-box;transform-origin:center}
+
+/* s1 — vibração: o celular chacoalha no suporte e despenca */
+.s1 .ph-g{animation:phRattle 13.5s infinite}
+@keyframes phRattle{
+  0%,3%{transform:none}
+  5%{transform:rotate(2.4deg)}
+  7%{transform:rotate(-2.6deg)}
+  9%{transform:rotate(2.8deg)}
+  11%{transform:rotate(-3.2deg)}
+  13%{transform:translateY(2px) rotate(3.6deg)}
+  15%{transform:translateY(4px) rotate(-5deg)}
+  17%{transform:translateY(84px) rotate(-26deg)}
+  21%,100%{transform:translateY(300px) rotate(-58deg)}}
+
+/* s2 — chuva: alerta pisca na tela (a chuva HTML cai por cima) */
 .s2 .rain{position:absolute;inset:0;pointer-events:none;
   background-image:repeating-linear-gradient(112deg,transparent 0 16px,rgba(120,180,255,.16) 16px 17.5px);
   animation:rainfall .42s linear infinite}
 @keyframes rainfall{to{background-position:-26px 58px}}
-.s2 .scr{display:flex;align-items:center;justify-content:center;color:var(--amber);font-size:26px;
-  animation:scrFlicker 2.2s infinite}
-@keyframes scrFlicker{0%,100%{filter:brightness(1)}46%{filter:brightness(1)}50%{filter:brightness(.4)}54%{filter:brightness(1)}}
-/* "vira alvo": retícula HUD trava no celular (único vermelho da página),
-   dá o lock e o celular some — furtado */
-.s3 .reticle{position:absolute;left:calc(50% - 105px);top:calc(50% - 105px);
-  width:210px;height:210px;color:var(--error);opacity:0;z-index:2;
-  filter:drop-shadow(0 0 10px rgba(255,82,82,.35));
-  animation:retLock 13.5s infinite}
-@keyframes retLock{
-  0%,67%{opacity:0;transform:scale(1.7) rotate(0deg)}
-  70%{opacity:1;transform:scale(1.15) rotate(12deg)}
-  80%{transform:scale(1) rotate(30deg)}
-  85%{opacity:1;transform:scale(.94) rotate(37deg)}
-  87%{opacity:.35;transform:scale(1.02) rotate(39deg)}
-  89%{opacity:1;transform:scale(.96) rotate(41deg)}
-  96%{opacity:1;transform:scale(.96) rotate(44deg)}
-  100%{opacity:0;transform:scale(.96) rotate(46deg)}}
-.s3 .ph{animation:phTaken 13.5s infinite}
+.s2 .warn{animation:warnFlick 2.2s infinite;filter:drop-shadow(0 0 6px rgba(255,180,84,.45))}
+@keyframes warnFlick{0%,46%,54%,100%{opacity:1}50%{opacity:.25}}
+
+/* s3 — furto: a mão de luva entra, fecha no celular e leva */
+.s3 .hand{transform:translateX(290px);animation:handGrab 13.5s infinite;
+  filter:drop-shadow(-8px 6px 16px rgba(0,0,0,.55))}
+@keyframes handGrab{
+  0%,70%{transform:translateX(290px)}
+  77%{transform:translateX(0)}
+  81%{transform:translateX(-4px)}
+  90%,100%{transform:translateX(340px)}}
+.s3 .ph-g{animation:phTaken 13.5s infinite}
 @keyframes phTaken{
-  0%,89%{transform:none;opacity:1}
-  94%,100%{transform:translateX(190px) rotate(16deg) scale(.7);opacity:0}}
+  0%,81%{transform:none;opacity:1}
+  90%,100%{transform:translateX(344px) rotate(9deg);opacity:1}}
 .bullets{list-style:none;margin-top:26px;display:flex;flex-direction:column;gap:16px}
 .bullets li{display:flex;gap:14px;align-items:flex-start;color:#c6cbe0;font-size:16px;line-height:1.55}
 .bullets .ic{flex-shrink:0;width:34px;height:34px;border-radius:9px;background:var(--accent-soft);
@@ -362,8 +354,7 @@ html.og-shot::-webkit-scrollbar{display:none}
   .road-lights{display:none}
   .speedo{display:none}
   .play-btn{animation:none}
-  .scene,.s1 .ph,.s3 .ph,.s3 .reticle,.s2 .rain,.s2 .scr{animation:none}
+  .scene,.s1 .ph-g,.s3 .ph-g,.s3 .hand,.s2 .rain,.s2 .warn{animation:none}
   .scene{opacity:0}
   .scene.s1{opacity:1}
-  .s1 .ph{transform:translateY(-40px)}
 }

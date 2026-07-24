@@ -27,6 +27,38 @@
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <symbol id="nb-pin" viewBox="0 0 404 532"><g transform="translate(10,10)"><path d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0z" fill="#00aeef"/><path d="M192.758 291.697c60.082 0 108.787-48.536 108.787-108.41S252.84 74.88 192.758 74.88 83.97 123.415 83.97 183.288s48.705 108.409 108.788 108.409z" fill="#fff"/><path d="M224.121 267c27.029 0 48.94-22.759 48.94-50.833s-21.911-50.834-48.94-50.834-48.94 22.759-48.94 50.834S197.094 267 224.122 267z" fill="#0a0a0f"/></g></symbol>
+    <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2c3348"/><stop offset=".5" stop-color="#171c2a"/><stop offset="1" stop-color="#0b0e16"/>
+    </linearGradient>
+    <linearGradient id="scrGrad" x1="0" y1="0" x2=".6" y2="1">
+      <stop offset="0" stop-color="#142747"/><stop offset="1" stop-color="#0c1530"/>
+    </linearGradient>
+    <symbol id="nb-cockpit" viewBox="0 0 400 300">
+      <!-- espelhos -->
+      <line x1="88" y1="212" x2="62" y2="168" stroke="#1a2133" stroke-width="5" stroke-linecap="round"/>
+      <ellipse cx="56" cy="160" rx="17" ry="11" fill="#0d1119" stroke="#2a3146" stroke-width="2.5" transform="rotate(-24 56 160)"/>
+      <line x1="312" y1="212" x2="338" y2="168" stroke="#1a2133" stroke-width="5" stroke-linecap="round"/>
+      <ellipse cx="344" cy="160" rx="17" ry="11" fill="#0d1119" stroke="#2a3146" stroke-width="2.5" transform="rotate(24 344 160)"/>
+      <!-- guidão -->
+      <path d="M14,246 C90,196 150,184 200,184 C250,184 310,196 386,246" fill="none" stroke="url(#barGrad)" stroke-width="12" stroke-linecap="round"/>
+      <path d="M14,243 C90,193 150,181 200,181 C250,181 310,193 386,243" fill="none" stroke="rgba(140,190,255,.26)" stroke-width="2.2" stroke-linecap="round"/>
+      <!-- manoplas -->
+      <path d="M16,245 C38,231 52,222 68,214" stroke="#0c0f16" stroke-width="21" stroke-linecap="round" fill="none"/>
+      <path d="M384,245 C362,231 348,222 332,214" stroke="#0c0f16" stroke-width="21" stroke-linecap="round" fill="none"/>
+      <g stroke="rgba(140,190,255,.09)" stroke-width="2">
+        <line x1="30" y1="228" x2="38" y2="243"/><line x1="42" y1="221" x2="50" y2="236"/><line x1="54" y1="214" x2="62" y2="229"/>
+        <line x1="370" y1="228" x2="362" y2="243"/><line x1="358" y1="221" x2="350" y2="236"/><line x1="346" y1="214" x2="338" y2="229"/>
+      </g>
+      <!-- suporte central -->
+      <line x1="200" y1="184" x2="200" y2="156" stroke="#1a2133" stroke-width="7"/>
+      <circle cx="200" cy="184" r="7.5" fill="#1a2133" stroke="rgba(140,190,255,.18)" stroke-width="1.5"/>
+      <rect x="176" y="148" width="48" height="11" rx="5.5" fill="#151a26"/>
+    </symbol>
+    <symbol id="nb-phone" viewBox="0 0 70 130">
+      <rect x="2" y="2" width="66" height="126" rx="12" fill="#10131c" stroke="#2a3146" stroke-width="2.5"/>
+      <rect x="8" y="14" width="54" height="104" rx="7" fill="url(#scrGrad)"/>
+      <rect x="26" y="7" width="18" height="3.5" rx="1.75" fill="#2a3146"/>
+    </symbol>
     <symbol id="ic-apple" viewBox="0 0 640 640">
       <path fill="#fff" d="M494.782 340.02c-.803-81.025 66.084-119.907 69.072-121.832-37.595-54.993-96.167-62.552-117.037-63.402-49.843-5.032-97.242 29.362-122.565 29.362-25.253 0-64.277-28.607-105.604-27.85-54.32.803-104.4 31.594-132.403 80.245C29.81 334.457 71.81 479.58 126.816 558.976c26.87 38.882 58.914 82.56 100.997 81 40.512-1.594 55.843-26.244 104.848-26.244 48.993 0 62.753 26.245 105.64 25.406 43.606-.803 71.232-39.638 97.925-78.65 30.887-45.12 43.548-88.75 44.316-90.994-.969-.437-85.029-32.634-85.879-129.439l.118-.035zM414.23 102.178C436.553 75.095 451.636 37.5 447.514-.024c-32.162 1.311-71.163 21.437-94.253 48.485-20.729 24.012-38.836 62.28-33.993 99.036 35.918 2.8 72.591-18.248 94.926-45.272l.036-.047z"/>
     </symbol>
@@ -153,30 +185,37 @@
     </div>
     <div class="clip-stage reveal d1" role="img" aria-label="Animação: celular no guidão vibrando e caindo, sob chuva e sendo furtado" data-i18n-attr="aria-label:problem.aria">
       <div class="scene s1">
-        <div class="bar"></div>
-        <div class="ph"><div class="scr"></div></div>
+        <svg class="stage" viewBox="0 0 400 300" aria-hidden="true">
+          <use href="#nb-cockpit"/>
+          <g class="ph-g"><use href="#nb-phone" x="165" y="26" width="70" height="130"/></g>
+        </svg>
         <div class="cap" data-i18n-html="problem.cap1">Vibração <b>destrói</b> a câmera</div>
       </div>
       <div class="scene s2">
-        <div class="ph"><div class="scr">&#9888;</div></div>
+        <svg class="stage" viewBox="0 0 400 300" aria-hidden="true">
+          <use href="#nb-cockpit"/>
+          <g class="ph-g"><use href="#nb-phone" x="165" y="26" width="70" height="130"/></g>
+          <g class="warn">
+            <path d="M200,72 L217,102 L183,102 Z" fill="none" stroke="#ffb454" stroke-width="3.2" stroke-linejoin="round"/>
+            <line x1="200" y1="82" x2="200" y2="92" stroke="#ffb454" stroke-width="3.2" stroke-linecap="round"/>
+            <circle cx="200" cy="97.5" r="1.8" fill="#ffb454"/>
+          </g>
+        </svg>
         <div class="rain"></div>
         <div class="cap" data-i18n-html="problem.cap2">Chuva e sol <b>castigam</b> a tela</div>
       </div>
       <div class="scene s3">
-        <div class="ph"><div class="scr"></div></div>
-        <svg class="reticle" viewBox="0 0 120 120" aria-hidden="true">
-          <circle cx="60" cy="60" r="40" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-dasharray="8 12" stroke-linecap="round" opacity=".9"/>
-          <g stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none">
-            <path d="M22,34 L22,22 L34,22"/>
-            <path d="M86,22 L98,22 L98,34"/>
-            <path d="M98,86 L98,98 L86,98"/>
-            <path d="M34,98 L22,98 L22,86"/>
+        <svg class="stage" viewBox="0 0 400 300" aria-hidden="true">
+          <use href="#nb-cockpit"/>
+          <g class="ph-g"><use href="#nb-phone" x="165" y="26" width="70" height="130"/></g>
+          <g class="hand">
+            <path d="M424,58 L306,64 C284,66 264,74 250,86 C240,95 235,104 236,113 C237,124 246,132 259,134 L286,135 C293,148 306,156 320,154 C331,152 337,143 335,133 L424,138 Z"
+              fill="#0e1219" stroke="rgba(140,190,255,.22)" stroke-width="2"/>
+            <path d="M258,90 C251,99 248,108 250,118" stroke="rgba(140,190,255,.10)" fill="none" stroke-width="2"/>
+            <path d="M274,84 C267,96 265,108 267,122" stroke="rgba(140,190,255,.10)" fill="none" stroke-width="2"/>
+            <path d="M290,80 C283,94 281,108 283,127" stroke="rgba(140,190,255,.10)" fill="none" stroke-width="2"/>
+            <line x1="342" y1="62" x2="346" y2="137" stroke="rgba(140,190,255,.14)" stroke-width="3"/>
           </g>
-          <line x1="60" y1="8" x2="60" y2="18" stroke="currentColor" stroke-width="2"/>
-          <line x1="60" y1="102" x2="60" y2="112" stroke="currentColor" stroke-width="2"/>
-          <line x1="8" y1="60" x2="18" y2="60" stroke="currentColor" stroke-width="2"/>
-          <line x1="102" y1="60" x2="112" y2="60" stroke="currentColor" stroke-width="2"/>
         </svg>
         <div class="cap" data-i18n-html="problem.cap3">Exposto, <b>vira alvo</b></div>
       </div>
