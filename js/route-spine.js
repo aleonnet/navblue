@@ -14,7 +14,7 @@ let table = [];          // amostras {len, y} — y é monotônico crescente
 let total = 0;
 
 const iconCache = {};
-function loadIcon(name){
+export function loadIcon(name){
   if (!iconCache[name]) iconCache[name] =
     fetch('assets/man_' + name + '.svg').then(r => r.ok ? r.text() : '').catch(() => '');
   return iconCache[name];
@@ -90,6 +90,12 @@ function build(){
   } else {
     wake();
   }
+  document.dispatchEvent(new CustomEvent('navblue:spine'));
+}
+
+/* dados vivos da rota para o rider */
+export function spineData(){
+  return total ? {path: progPath, markers, lenAtY, total} : null;
 }
 
 let debounceId = null;
@@ -149,8 +155,8 @@ export async function initSpine(){
 
   if (reduceMotion) return;
   onTick(() => {
-    const yHead = scrollY + innerHeight * .55;
-    const len = lenAtY(yHead);
+    const atEnd = scrollY + innerHeight >= document.documentElement.scrollHeight - 2;
+    const len = atEnd ? total : lenAtY(scrollY + innerHeight * .55);
     progPath.style.strokeDashoffset = Math.max(0, total - len);
     for (const m of markers){
       const reached = len >= m.len - 2;
