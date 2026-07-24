@@ -40,7 +40,6 @@
       <path d="M340,300 L204,120" stroke="rgba(140,190,255,.10)" stroke-width="2" fill="none"/>
       <path d="M200,290 L200,130" stroke="rgba(140,190,255,.14)" stroke-width="2.5"
         stroke-dasharray="14 18" fill="none"/>
-      <ellipse cx="200" cy="119" rx="120" ry="14" fill="rgba(0,174,239,.07)"/>
       <!-- espelhos (hastes sobem das pontas) -->
       <line x1="96" y1="138" x2="80" y2="84" stroke="#1a2133" stroke-width="5" stroke-linecap="round"/>
       <ellipse cx="76" cy="72" rx="19" ry="13" fill="#0d1119" stroke="#2a3146" stroke-width="2.5" transform="rotate(-16 76 72)"/>
@@ -49,17 +48,21 @@
       <!-- tanque -->
       <path d="M116,302 C124,252 154,222 200,222 C246,222 276,252 284,302 Z" fill="#0c0f16" stroke="#232a3c" stroke-width="2"/>
       <path d="M146,260 C162,241 179,232 199,231" fill="none" stroke="rgba(140,190,255,.13)" stroke-width="3" stroke-linecap="round"/>
-      <!-- painel central -->
-      <circle cx="200" cy="196" r="23" fill="#0d1119" stroke="#2a3146" stroke-width="3"/>
-      <path d="M186,186 A19,19 0 0 1 214,186" fill="none" stroke="rgba(140,190,255,.2)" stroke-width="2.5" stroke-linecap="round"/>
       <!-- mesas/risers -->
-      <line x1="186" y1="216" x2="182" y2="186" stroke="#1a2133" stroke-width="8" stroke-linecap="round"/>
-      <line x1="214" y1="216" x2="218" y2="186" stroke="#1a2133" stroke-width="8" stroke-linecap="round"/>
+      <line x1="186" y1="216" x2="182" y2="188" stroke="#1a2133" stroke-width="8" stroke-linecap="round"/>
+      <line x1="214" y1="216" x2="218" y2="188" stroke="#1a2133" stroke-width="8" stroke-linecap="round"/>
       <!-- guidão: sobe do centro, abre e ergue as pontas -->
       <path d="M200,184 C168,182 132,172 104,154 C88,144 74,134 60,122" fill="none" stroke="url(#barGrad)" stroke-width="11" stroke-linecap="round"/>
       <path d="M200,184 C232,182 268,172 296,154 C312,144 326,134 340,122" fill="none" stroke="url(#barGrad)" stroke-width="11" stroke-linecap="round"/>
       <path d="M200,181 C168,179 133,169 106,151 C90,141 76,131 63,119" fill="none" stroke="rgba(140,190,255,.24)" stroke-width="2" stroke-linecap="round"/>
       <path d="M200,181 C232,179 267,169 294,151 C310,141 324,131 337,119" fill="none" stroke="rgba(140,190,255,.24)" stroke-width="2" stroke-linecap="round"/>
+      <!-- gauge central em cima da barra -->
+      <line x1="200" y1="182" x2="200" y2="174" stroke="#1a2133" stroke-width="7"/>
+      <circle cx="200" cy="158" r="19" fill="#0d1119" stroke="#2a3146" stroke-width="3"/>
+      <circle cx="200" cy="158" r="12.5" fill="#090c12" stroke="rgba(140,190,255,.14)" stroke-width="1.5"/>
+      <path d="M189,149 A15,15 0 0 1 211,149" fill="none" stroke="rgba(140,190,255,.22)" stroke-width="2" stroke-linecap="round"/>
+      <line x1="200" y1="158" x2="192" y2="150" stroke="rgba(101,235,226,.75)" stroke-width="2.2" stroke-linecap="round"/>
+      <circle cx="200" cy="158" r="2" fill="rgba(140,190,255,.5)"/>
       <!-- alavancas -->
       <path d="M88,156 C70,164 52,164 38,154" fill="none" stroke="#232a3c" stroke-width="4" stroke-linecap="round"/>
       <path d="M312,156 C330,164 348,164 362,154" fill="none" stroke="#232a3c" stroke-width="4" stroke-linecap="round"/>
@@ -70,10 +73,10 @@
         <line x1="66" y1="120" x2="78" y2="136"/><line x1="76" y1="127" x2="88" y2="143"/>
         <line x1="334" y1="120" x2="322" y2="136"/><line x1="324" y1="127" x2="312" y2="143"/>
       </g>
-      <!-- suporte do celular -->
-      <line x1="200" y1="182" x2="200" y2="158" stroke="#1a2133" stroke-width="7"/>
-      <circle cx="200" cy="182" r="7" fill="#1a2133" stroke="rgba(140,190,255,.18)" stroke-width="1.5"/>
-      <rect x="176" y="147" width="48" height="11" rx="5.5" fill="#151a26"/>
+      <!-- suporte do celular na barra esquerda -->
+      <circle cx="130" cy="171" r="6.5" fill="#1a2133" stroke="rgba(140,190,255,.18)" stroke-width="1.5"/>
+      <line x1="130" y1="171" x2="130" y2="148" stroke="#1a2133" stroke-width="6"/>
+      <rect x="106" y="138" width="48" height="10" rx="5" fill="#151a26"/>
     </symbol>
     <symbol id="nb-phone" viewBox="0 0 70 130">
       <rect x="2" y="2" width="66" height="126" rx="12" fill="#10131c" stroke="#2a3146" stroke-width="2.5"/>
@@ -219,18 +222,18 @@
       <div class="scene s1">
         <svg class="stage" viewBox="0 0 400 300" aria-hidden="true">
           <use href="#nb-cockpit"/>
-          <g class="ph-g"><use href="#nb-phone" x="165" y="26" width="70" height="130"/></g>
+          <g class="ph-g"><use href="#nb-phone" x="100" y="34" width="60" height="112"/></g>
         </svg>
         <div class="cap" data-i18n-html="problem.cap1">Vibração <b>destrói</b> a câmera</div>
       </div>
       <div class="scene s2">
         <svg class="stage" viewBox="0 0 400 300" aria-hidden="true">
           <use href="#nb-cockpit"/>
-          <g class="ph-g"><use href="#nb-phone" x="165" y="26" width="70" height="130"/></g>
+          <g class="ph-g"><use href="#nb-phone" x="100" y="34" width="60" height="112"/></g>
           <g class="warn">
-            <path d="M200,72 L217,102 L183,102 Z" fill="none" stroke="#ffb454" stroke-width="3.2" stroke-linejoin="round"/>
-            <line x1="200" y1="82" x2="200" y2="92" stroke="#ffb454" stroke-width="3.2" stroke-linecap="round"/>
-            <circle cx="200" cy="97.5" r="1.8" fill="#ffb454"/>
+            <path d="M130,68 L145,94 L115,94 Z" fill="none" stroke="#ffb454" stroke-width="3" stroke-linejoin="round"/>
+            <line x1="130" y1="77" x2="130" y2="85" stroke="#ffb454" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="130" cy="90" r="1.7" fill="#ffb454"/>
           </g>
         </svg>
         <div class="rain"></div>
@@ -239,19 +242,22 @@
       <div class="scene s3">
         <svg class="stage" viewBox="0 0 400 300" aria-hidden="true">
           <use href="#nb-cockpit"/>
-          <!-- palma/braço POR TRÁS do celular (a pegada envolve) -->
+          <!-- palma/braço POR TRÁS do celular, entrando pela esquerda -->
           <g class="hand-b">
-            <path d="M424,60 L316,64 C292,66 268,74 248,88 C230,100 220,114 221,128 C222,142 234,152 254,155 C276,158 298,153 312,142 L424,138 Z"
+            <path d="M-24,64 L84,60 C110,58 136,64 152,76 C166,86 174,98 173,112 C172,128 162,140 144,146 C124,152 100,148 86,138 L-24,140 Z"
               fill="#0e1219" stroke="rgba(140,190,255,.2)" stroke-width="2" stroke-linejoin="round"/>
-            <line x1="348" y1="62" x2="352" y2="138" stroke="rgba(140,190,255,.14)" stroke-width="3"/>
+            <line x1="50" y1="60" x2="46" y2="138" stroke="rgba(140,190,255,.14)" stroke-width="3"/>
           </g>
-          <g class="ph-g"><use href="#nb-phone" x="165" y="26" width="70" height="130"/></g>
-          <!-- pontas dos dedos NA FRENTE, dobrando sobre a borda esquerda -->
-          <g class="hand-f" fill="#0e1219" stroke="rgba(140,190,255,.28)" stroke-width="2">
-            <rect x="152" y="66"  width="34" height="17" rx="8.5" transform="rotate(-4 169 74)"/>
-            <rect x="148" y="88"  width="38" height="17" rx="8.5" transform="rotate(-2 167 96)"/>
-            <rect x="149" y="110" width="37" height="17" rx="8.5" transform="rotate(1 167 118)"/>
-            <rect x="153" y="132" width="33" height="17" rx="8.5" transform="rotate(4 169 140)"/>
+          <g class="ph-g"><use href="#nb-phone" x="100" y="34" width="60" height="112"/></g>
+          <!-- frente da pegada: dedos + banda dos nós, uma peça só -->
+          <g class="hand-f">
+            <g fill="#0e1219" stroke="rgba(140,190,255,.28)" stroke-width="2">
+              <rect x="112" y="56"  width="52" height="17" rx="8.5" transform="rotate(3 138 64)"/>
+              <rect x="108" y="78"  width="56" height="17" rx="8.5" transform="rotate(1 136 86)"/>
+              <rect x="109" y="100" width="55" height="17" rx="8.5" transform="rotate(-1 136 108)"/>
+              <rect x="113" y="122" width="51" height="17" rx="8.5" transform="rotate(-3 138 130)"/>
+            </g>
+            <rect x="152" y="48" width="26" height="98" rx="13" fill="#0e1219" stroke="rgba(140,190,255,.24)" stroke-width="2"/>
           </g>
         </svg>
         <div class="cap" data-i18n-html="problem.cap3">Exposto, <b>vira alvo</b></div>

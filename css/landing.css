@@ -147,17 +147,17 @@ html.perf-lite .stars-b,html.perf-lite .stars-c,html.perf-lite .road-lights{disp
 @keyframes warnFlick{0%,46%,54%,100%{opacity:1}50%{opacity:.25}}
 
 /* s3 — furto: a pegada envolve o celular (palma atrás, dedos na frente) */
-.s3 .hand-b,.s3 .hand-f{transform:translateX(290px);animation:handGrab 13.5s infinite}
+.s3 .hand-b,.s3 .hand-f{transform:translateX(-290px);animation:handGrab 13.5s infinite}
 .s3 .hand-b{filter:drop-shadow(-8px 6px 16px rgba(0,0,0,.55))}
 @keyframes handGrab{
-  0%,70%{transform:translateX(290px) rotate(-6deg)}
-  77%{transform:translateX(0) rotate(-3deg)}
-  81%{transform:translateX(-5px) rotate(0deg)}
-  90%,100%{transform:translateX(340px) rotate(5deg)}}
+  0%,70%{transform:translateX(-290px) rotate(6deg)}
+  77%{transform:translateX(0) rotate(3deg)}
+  81%{transform:translateX(5px) rotate(0deg)}
+  90%,100%{transform:translateX(-340px) rotate(-5deg)}}
 .s3 .ph-g{animation:phTaken 13.5s infinite}
 @keyframes phTaken{
   0%,81%{transform:none;opacity:1}
-  90%,100%{transform:translateX(344px) rotate(9deg);opacity:1}}
+  90%,100%{transform:translateX(-344px) rotate(-9deg);opacity:1}}
 .bullets{list-style:none;margin-top:26px;display:flex;flex-direction:column;gap:16px}
 .bullets li{display:flex;gap:14px;align-items:flex-start;color:#c6cbe0;font-size:16px;line-height:1.55}
 .bullets .ic{flex-shrink:0;width:34px;height:34px;border-radius:9px;background:var(--accent-soft);
