@@ -26,13 +26,21 @@ export function initRider(){
   const distEl = el.querySelector('.rd-dist');
   const kmhEl = el.querySelector('.rd-kmh span');
 
-  let showFromY = Infinity;
+  let showFromY = Infinity, embTop = -1, embBottom = -1;
   function measure(){
     const dev = document.getElementById('device');
     showFromY = dev ? dev.offsetTop + dev.offsetHeight * .8 : Infinity;
+    const emb = document.querySelector('.demo-embed');
+    if (emb){
+      /* offsetTop seria relativo ao .wrap (position:relative) — usar coords de documento */
+      const r = emb.getBoundingClientRect();
+      embTop = r.top + scrollY - 70;
+      embBottom = r.top + scrollY + r.height + 70;
+    } else { embTop = -1; embBottom = -1; }
   }
   measure();
   document.addEventListener('navblue:spine', measure);
+  document.addEventListener('navblue:embed', measure);
 
   let visible = false, curMan = null, lastDist = -1, lastKmh = -1, swapping = false;
 
@@ -64,6 +72,8 @@ export function initRider(){
     const x = Math.min(innerWidth - SIZE - 10, Math.max(10, pt.x - SIZE / 2));
     el.style.transform = 'translate3d(' + x + 'px,' +
       (pt.y - scrollY - SIZE / 2) + 'px,0)';
+    /* fantasma enquanto cruza a demo embutida — não atropelar o replay */
+    el.classList.toggle('ghost', embTop >= 0 && pt.y > embTop && pt.y < embBottom);
 
     /* próxima manobra = primeiro waypoint à frente */
     let next = null;

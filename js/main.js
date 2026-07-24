@@ -31,6 +31,7 @@ if (demoCard){
         (lang === 'pt' ? 'Tela cheia' : 'Fullscreen') + '" title="' +
         (lang === 'pt' ? 'Tela cheia' : 'Fullscreen') + '">⛶</button>';
     demoCard.replaceWith(wrap);
+    document.dispatchEvent(new CustomEvent('navblue:embed'));
     const iframe = wrap.querySelector('iframe');
     wrap.querySelector('.demo-fs').addEventListener('click', () => {
       const req = iframe.requestFullscreen || iframe.webkitRequestFullscreen;

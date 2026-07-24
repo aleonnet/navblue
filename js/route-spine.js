@@ -8,7 +8,7 @@ import { onTick, reduceMotion, wake } from './scroll.js';
 const SECTIONS = [...document.querySelectorAll('section[data-km]')];
 const NS = 'http://www.w3.org/2000/svg';
 
-let overlay, svg, glowPath, basePath, progPath, grad;
+let overlay, svg, glowPath, basePath, pulsePath, progPath, grad;
 let markers = [];        // {el, sec, len, reached}
 let table = [];          // amostras {len, y} — y é monotônico crescente
 let total = 0;
@@ -70,7 +70,7 @@ function build(){
     const dy = (b.y - a.y) * .5;          // controles verticais → y monotônico
     d += ' C ' + a.x + ',' + (a.y + dy) + ' ' + b.x + ',' + (b.y - dy) + ' ' + b.x + ',' + b.y;
   }
-  for (const path of [glowPath, basePath, progPath]) path.setAttribute('d', d);
+  for (const path of [glowPath, basePath, pulsePath, progPath]) path.setAttribute('d', d);
 
   grad.setAttribute('y1', start.y);
   grad.setAttribute('y2', docH);
@@ -139,9 +139,11 @@ export async function initSpine(){
   glowPath.setAttribute('class', 'spine-glow');
   basePath = document.createElementNS(NS, 'path');
   basePath.setAttribute('class', 'spine-base');
+  pulsePath = document.createElementNS(NS, 'path');
+  pulsePath.setAttribute('class', 'spine-pulse');
   progPath = document.createElementNS(NS, 'path');
   progPath.setAttribute('class', 'spine-progress');
-  svg.append(glowPath, basePath, progPath);
+  svg.append(glowPath, basePath, pulsePath, progPath);
   overlay.appendChild(svg);
 
   for (const sec of SECTIONS){
