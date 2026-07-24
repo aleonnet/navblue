@@ -311,6 +311,12 @@ html.perf-lite .spine-glow{display:none}
   border:1px solid rgba(101,235,226,.35);border-radius:5px;padding:2px 8px;margin-right:12px;
   letter-spacing:.18em;font-size:10px;vertical-align:1px;background:rgba(101,235,226,.06)}
 
+/* ---------- ?og=1: composição limpa para card social ---------- */
+html.og-shot #nav,html.og-shot .scroll-hint,html.og-shot .speedo,
+html.og-shot .skip-link{display:none}
+html.og-shot{scrollbar-width:none}
+html.og-shot::-webkit-scrollbar{display:none}
+
 /* ---------- reduced motion (landing) ---------- */
 @media (prefers-reduced-motion: reduce){
   .road-grid{animation:none}

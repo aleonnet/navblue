@@ -8,7 +8,7 @@ Site estático do **NavBlue** (HUD de navegação para motociclistas), hospedado
 | `install.html` | `/install.html` | **Instalador web de firmware** para os devices NavBlue ESP32-S3 (VIEWE SmartRing-Plus, Waveshare AMOLED 1.75C e Waveshare AMOLED 2.16), via Web Serial ([esptool-js](https://github.com/espressif/esptool-js)) com **auto-detecção do device** |
 | `demo.html` | `/demo.html` | **Demo cinematográfica** da engine de navegação (replay interativo gerado por `navblue_flutter_app/tools/simulation/guidance-sim_cinematic.py`) |
 
-**Firmware publicado** (trem de release alinhado ao app Navblue — todos os firmwares seguem o MAJOR.MINOR do app): VIEWE SmartRing-Plus `1.11.0`, Waveshare AMOLED 1.75C `1.11.0` e Waveshare AMOLED 2.16 `1.11.0` (`firmware/navblue_<device>_v<versão>.bin`). O instalador **detecta automaticamente** qual device está conectado e seleciona o binário certo (com override manual sempre disponível).
+**Firmware publicado** (trem de release alinhado ao app Navblue — todos os firmwares seguem o MAJOR.MINOR do app): ver `manifest.json` (fonte de verdade; hoje todos em `1.15.0`, com `1.14.1` mantido em `firmware/` como rollback). O instalador **detecta automaticamente** qual device está conectado e seleciona o binário certo (com override manual sempre disponível).
 
 > O Waveshare AMOLED **1.75B** não é listado no instalador: o fingerprint JEDEC da flash dele é idêntico ao do 2.16 (fab `0x20`, 16MB), o que quebraria a auto-detecção. Flash do 1.75B é feito via PlatformIO (`pio run -t upload`).
 
@@ -31,29 +31,63 @@ Firmware flashed with this installer powers the **Navblue** HUD hardware. The **
 
 > Safari and iOS are **not supported** (Web Serial API unavailable).
 
+## Arquitetura ("A página é um rolê")
+
+O redesign 2026 tem uma ideia central: **scroll = pilotar uma rota noturna**. Uma
+polyline SVG contínua (a *rota-espinha*) conecta as seções como waypoints de
+navegação — cada uma numerada como um quilômetro (`KM 01…07`) com o ícone de
+manobra real do firmware — e um mini-device AMOLED (*rider*) cavalga a rota
+mostrando a manobra da próxima seção, a distância até ela e a velocidade real do
+scroll em km/h. No instalador, a detecção JEDEC acende a silhueta do device e o
+progresso do flash percorre uma rota até a chegada.
+
+Decisões de arte documentadas:
+- **Dark-only é o tema** (a marca é o rolê noturno) — sem `[data-theme]`, sem toggle.
+- **Zero build, zero CDN** — ES modules nativos e assets self-hosted. Exceção
+  única: MapLibre no `demo.html` (comentário `ABSOLUTE-URL` no head; os tiles
+  CARTO já são remotos, self-hostar o JS não tornaria a demo offline).
+- **Bilíngue PT-BR/EN** — PT canônico no HTML, EN via dicionário (`js/i18n.js`,
+  `data-i18n`); persistência em localStorage, primeira visita por
+  `navigator.language`.
+- **Motor único de scroll** (`js/scroll.js`) — um rAF que dorme quando assentado;
+  todos os sistemas (spine, rider, hero, velocímetro) são subscribers.
+- **`prefers-reduced-motion`** em toda animação: rota 100% desenhada, waypoints
+  acesos, rider/velocímetro ocultos — "versão estática digna".
+
+### Hooks de teste determinísticos (querystring)
+
+| Hook | Página | Efeito |
+|---|---|---|
+| `?lang=pt\|en` | todas | força e persiste o idioma |
+| `?progress=0..1` | index | congela o scroll no ponto (screenshots estáveis) |
+| `?motion=reduce` | index | força reduced-motion |
+| `?debug=fps` | index | contador de FPS |
+| `?og=1` | index | composição limpa p/ card social (sem nav/hints) |
+| `?state=stateX&pct=N` | install | renderiza qualquer um dos 8 estados sem hardware |
+
 ## Project Structure
 
 ```
 navblue_website/
-  index.html            # Landing page do produto (self-contained)
-  install.html          # Instalador web de firmware (self-contained, sem CDN)
-  demo.html             # Demo cinematográfica da engine (artefato gerado; usa CDNs MapLibre/Fonts)
-  index-v2.html         # esptool-js via CDN (referência histórica)
-  index-v1.html         # versão ESP Web Tools (referência histórica)
-  manifest.json         # Manifesto do firmware (versão, chip, caminho do binário)
-  assets/               # Logo, favicon, badges, telas do app, recorte do device, ícones de manobra
-  lib/
-    esptool-bundle.js   # bundle local do esptool-js 0.5.7
-  fonts/
-    orbitron-latin.woff2
-    dm-sans-latin.woff2
-    dm-sans-latin-ext.woff2
-  firmware/
-    navblue_viewe-smartring-plus_v*.bin    # Binário mesclado VIEWE (gerado pelo build script)
-    navblue_waveshare-amoled-175C_v*.bin   # Binário mesclado 1.75C (gerado pelo build script)
-    navblue_waveshare-amoled-216_v*.bin    # Binário mesclado 2.16 (gerado pelo build script)
-  .gitignore
-  README.md
+  index.html            # Landing (markup + data-i18n; CSS/JS em css/ e js/)
+  install.html          # Instalador (script esptool inline intocado + cena via módulos)
+  demo.html             # Demo cinematográfica (artefato gerado; exceção MapLibre CDN)
+  manifest.json         # Manifesto do firmware (versão, chip, caminho, detect JEDEC)
+  css/
+    tokens.css          # design tokens (dark-only) + @font-face self-hosted
+    base.css            # reset, nav+hamburger, footer, reveals, a11y
+    landing.css         # hero night-ride, seções, spine, rider, waypoints
+    install.css         # silhuetas dos devices, rota-progresso, chegada
+  js/
+    i18n.js             # PT/EN vanilla (data-i18n, ?lang=, NB_I18N p/ installer)
+    scroll.js           # motor único (pSmooth, km/h, ?progress/?motion/?debug)
+    route-spine.js      # rota-espinha medida por seção (resize/fonts/idioma)
+    rider.js            # device que cavalga a rota (HUD por waypoints)
+    hero.js  reveals.js  nav.js  main.js  install-scene.js
+  assets/               # logo/favicons, og-image, telas (JPEG+WebP), man_*.svg
+  lib/esptool-bundle.js # bundle local do esptool-js 0.5.7
+  fonts/                # Orbitron, DM Sans, IBM Plex Mono (woff2)
+  firmware/             # binários mesclados navblue_<device>_v*.bin
 ```
 
 ## Building the Firmware
@@ -149,14 +183,7 @@ If the device isn't detected, the user may need to enter **Download Mode**:
 ## Technology
 
 - **esptool-js** 0.5.7 — Web Serial flashing (local bundle, no CDN dependency)
-- **Canvas 2D** — Interactive particle background with network connections
-- **Orbitron + DM Sans** — Typography (self-hosted woff2)
-- Single HTML file, zero build step, fully self-contained
-
-## Version History
-
-| File | Description |
-|---|---|
-| `index.html` | **Current** — esptool-js self-contained (all assets local) |
-| `index-v2.html` | esptool-js via unpkg CDN (reference) |
-| `index-v1.html` | ESP Web Tools with external modals (reference) |
+- **Canvas 2D** — partículas do instalador reagindo ao estado do flash
+- **SVG dirigido por scroll** — rota-espinha com `stroke-dashoffset` (1 escrita/frame)
+- **Orbitron + DM Sans + IBM Plex Mono** — tipografia self-hosted (woff2)
+- Zero build step; ES modules nativos servidos direto pelo GitHub Pages

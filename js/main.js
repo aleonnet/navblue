@@ -12,6 +12,11 @@ initHero();
 initSpine();
 initRider();
 
+/* ?og=1 — composição limpa para o card social (screenshot do hero) */
+if (new URLSearchParams(location.search).get('og') === '1'){
+  document.documentElement.classList.add('og-shot');
+}
+
 /* ---------- mini-HUD (ícones de manobra reais do conjunto do firmware) ---------- */
 const HUD_SCRIPT = [
   {icon:'depart',            from:600, spd:[0,38]},
