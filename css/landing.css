@@ -147,12 +147,25 @@ html.perf-lite .stars-b,html.perf-lite .stars-c,html.perf-lite .road-lights{disp
 .s2 .scr{display:flex;align-items:center;justify-content:center;color:var(--amber);font-size:26px;
   animation:scrFlicker 2.2s infinite}
 @keyframes scrFlicker{0%,100%{filter:brightness(1)}46%{filter:brightness(1)}50%{filter:brightness(.4)}54%{filter:brightness(1)}}
-.s3 .arm{position:absolute;width:210px;height:52px;border-radius:30px;
-  background:linear-gradient(90deg,#10141f,#1a2133);right:-230px;top:calc(50% - 26px);
-  animation:armIn 13.5s infinite;z-index:2}
-.s3 .ph{animation:steal 13.5s infinite}
-@keyframes armIn{0%,70%{transform:translateX(0)}76%{transform:translateX(-250px)}84%,100%{transform:translateX(80px)}}
-@keyframes steal{0%,74%{transform:none}78%{transform:translateX(10px) rotate(5deg)}86%,100%{transform:translateX(320px) rotate(20deg)}}
+/* "vira alvo": retícula HUD trava no celular (único vermelho da página),
+   dá o lock e o celular some — furtado */
+.s3 .reticle{position:absolute;left:calc(50% - 105px);top:calc(50% - 105px);
+  width:210px;height:210px;color:var(--error);opacity:0;z-index:2;
+  filter:drop-shadow(0 0 10px rgba(255,82,82,.35));
+  animation:retLock 13.5s infinite}
+@keyframes retLock{
+  0%,67%{opacity:0;transform:scale(1.7) rotate(0deg)}
+  70%{opacity:1;transform:scale(1.15) rotate(12deg)}
+  80%{transform:scale(1) rotate(30deg)}
+  85%{opacity:1;transform:scale(.94) rotate(37deg)}
+  87%{opacity:.35;transform:scale(1.02) rotate(39deg)}
+  89%{opacity:1;transform:scale(.96) rotate(41deg)}
+  96%{opacity:1;transform:scale(.96) rotate(44deg)}
+  100%{opacity:0;transform:scale(.96) rotate(46deg)}}
+.s3 .ph{animation:phTaken 13.5s infinite}
+@keyframes phTaken{
+  0%,89%{transform:none;opacity:1}
+  94%,100%{transform:translateX(190px) rotate(16deg) scale(.7);opacity:0}}
 .bullets{list-style:none;margin-top:26px;display:flex;flex-direction:column;gap:16px}
 .bullets li{display:flex;gap:14px;align-items:flex-start;color:#c6cbe0;font-size:16px;line-height:1.55}
 .bullets .ic{flex-shrink:0;width:34px;height:34px;border-radius:9px;background:var(--accent-soft);
@@ -349,7 +362,7 @@ html.og-shot::-webkit-scrollbar{display:none}
   .road-lights{display:none}
   .speedo{display:none}
   .play-btn{animation:none}
-  .scene,.s1 .ph,.s3 .ph,.s3 .arm,.s2 .rain,.s2 .scr{animation:none}
+  .scene,.s1 .ph,.s3 .ph,.s3 .reticle,.s2 .rain,.s2 .scr{animation:none}
   .scene{opacity:0}
   .scene.s1{opacity:1}
   .s1 .ph{transform:translateY(-40px)}
