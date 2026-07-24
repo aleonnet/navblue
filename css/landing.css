@@ -146,14 +146,14 @@ html.perf-lite .stars-b,html.perf-lite .stars-c,html.perf-lite .road-lights{disp
 .s2 .warn{animation:warnFlick 2.2s infinite;filter:drop-shadow(0 0 6px rgba(255,180,84,.45))}
 @keyframes warnFlick{0%,46%,54%,100%{opacity:1}50%{opacity:.25}}
 
-/* s3 — furto: a mão de luva entra, fecha no celular e leva */
-.s3 .hand{transform:translateX(290px);animation:handGrab 13.5s infinite;
-  filter:drop-shadow(-8px 6px 16px rgba(0,0,0,.55))}
+/* s3 — furto: a pegada envolve o celular (palma atrás, dedos na frente) */
+.s3 .hand-b,.s3 .hand-f{transform:translateX(290px);animation:handGrab 13.5s infinite}
+.s3 .hand-b{filter:drop-shadow(-8px 6px 16px rgba(0,0,0,.55))}
 @keyframes handGrab{
-  0%,70%{transform:translateX(290px)}
-  77%{transform:translateX(0)}
-  81%{transform:translateX(-4px)}
-  90%,100%{transform:translateX(340px)}}
+  0%,70%{transform:translateX(290px) rotate(-6deg)}
+  77%{transform:translateX(0) rotate(-3deg)}
+  81%{transform:translateX(-5px) rotate(0deg)}
+  90%,100%{transform:translateX(340px) rotate(5deg)}}
 .s3 .ph-g{animation:phTaken 13.5s infinite}
 @keyframes phTaken{
   0%,81%{transform:none;opacity:1}
@@ -354,7 +354,7 @@ html.og-shot::-webkit-scrollbar{display:none}
   .road-lights{display:none}
   .speedo{display:none}
   .play-btn{animation:none}
-  .scene,.s1 .ph-g,.s3 .ph-g,.s3 .hand,.s2 .rain,.s2 .warn{animation:none}
+  .scene,.s1 .ph-g,.s3 .ph-g,.s3 .hand-b,.s3 .hand-f,.s2 .rain,.s2 .warn{animation:none}
   .scene{opacity:0}
   .scene.s1{opacity:1}
 }

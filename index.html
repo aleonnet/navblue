@@ -34,31 +34,63 @@
       <stop offset="0" stop-color="#142747"/><stop offset="1" stop-color="#0c1530"/>
     </linearGradient>
     <symbol id="nb-cockpit" viewBox="0 0 400 300">
-      <!-- espelhos -->
-      <line x1="88" y1="212" x2="62" y2="168" stroke="#1a2133" stroke-width="5" stroke-linecap="round"/>
-      <ellipse cx="56" cy="160" rx="17" ry="11" fill="#0d1119" stroke="#2a3146" stroke-width="2.5" transform="rotate(-24 56 160)"/>
-      <line x1="312" y1="212" x2="338" y2="168" stroke="#1a2133" stroke-width="5" stroke-linecap="round"/>
-      <ellipse cx="344" cy="160" rx="17" ry="11" fill="#0d1119" stroke="#2a3146" stroke-width="2.5" transform="rotate(24 344 160)"/>
-      <!-- guidão -->
-      <path d="M14,246 C90,196 150,184 200,184 C250,184 310,196 386,246" fill="none" stroke="url(#barGrad)" stroke-width="12" stroke-linecap="round"/>
-      <path d="M14,243 C90,193 150,181 200,181 C250,181 310,193 386,243" fill="none" stroke="rgba(140,190,255,.26)" stroke-width="2.2" stroke-linecap="round"/>
-      <!-- manoplas -->
-      <path d="M16,245 C38,231 52,222 68,214" stroke="#0c0f16" stroke-width="21" stroke-linecap="round" fill="none"/>
-      <path d="M384,245 C362,231 348,222 332,214" stroke="#0c0f16" stroke-width="21" stroke-linecap="round" fill="none"/>
+      <!-- estrada noturna ao horizonte -->
+      <line x1="0" y1="118" x2="400" y2="118" stroke="rgba(140,190,255,.10)" stroke-width="1.5"/>
+      <path d="M60,300 L196,120" stroke="rgba(140,190,255,.10)" stroke-width="2" fill="none"/>
+      <path d="M340,300 L204,120" stroke="rgba(140,190,255,.10)" stroke-width="2" fill="none"/>
+      <path d="M200,290 L200,130" stroke="rgba(140,190,255,.14)" stroke-width="2.5"
+        stroke-dasharray="14 18" fill="none"/>
+      <ellipse cx="200" cy="119" rx="120" ry="14" fill="rgba(0,174,239,.07)"/>
+      <!-- espelhos (hastes sobem das pontas) -->
+      <line x1="96" y1="138" x2="80" y2="84" stroke="#1a2133" stroke-width="5" stroke-linecap="round"/>
+      <ellipse cx="76" cy="72" rx="19" ry="13" fill="#0d1119" stroke="#2a3146" stroke-width="2.5" transform="rotate(-16 76 72)"/>
+      <line x1="304" y1="138" x2="320" y2="84" stroke="#1a2133" stroke-width="5" stroke-linecap="round"/>
+      <ellipse cx="324" cy="72" rx="19" ry="13" fill="#0d1119" stroke="#2a3146" stroke-width="2.5" transform="rotate(16 324 72)"/>
+      <!-- tanque -->
+      <path d="M116,302 C124,252 154,222 200,222 C246,222 276,252 284,302 Z" fill="#0c0f16" stroke="#232a3c" stroke-width="2"/>
+      <path d="M146,260 C162,241 179,232 199,231" fill="none" stroke="rgba(140,190,255,.13)" stroke-width="3" stroke-linecap="round"/>
+      <!-- painel central -->
+      <circle cx="200" cy="196" r="23" fill="#0d1119" stroke="#2a3146" stroke-width="3"/>
+      <path d="M186,186 A19,19 0 0 1 214,186" fill="none" stroke="rgba(140,190,255,.2)" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- mesas/risers -->
+      <line x1="186" y1="216" x2="182" y2="186" stroke="#1a2133" stroke-width="8" stroke-linecap="round"/>
+      <line x1="214" y1="216" x2="218" y2="186" stroke="#1a2133" stroke-width="8" stroke-linecap="round"/>
+      <!-- guidão: sobe do centro, abre e ergue as pontas -->
+      <path d="M200,184 C168,182 132,172 104,154 C88,144 74,134 60,122" fill="none" stroke="url(#barGrad)" stroke-width="11" stroke-linecap="round"/>
+      <path d="M200,184 C232,182 268,172 296,154 C312,144 326,134 340,122" fill="none" stroke="url(#barGrad)" stroke-width="11" stroke-linecap="round"/>
+      <path d="M200,181 C168,179 133,169 106,151 C90,141 76,131 63,119" fill="none" stroke="rgba(140,190,255,.24)" stroke-width="2" stroke-linecap="round"/>
+      <path d="M200,181 C232,179 267,169 294,151 C310,141 324,131 337,119" fill="none" stroke="rgba(140,190,255,.24)" stroke-width="2" stroke-linecap="round"/>
+      <!-- alavancas -->
+      <path d="M88,156 C70,164 52,164 38,154" fill="none" stroke="#232a3c" stroke-width="4" stroke-linecap="round"/>
+      <path d="M312,156 C330,164 348,164 362,154" fill="none" stroke="#232a3c" stroke-width="4" stroke-linecap="round"/>
+      <!-- manoplas nas pontas altas -->
+      <path d="M94,147 L56,119" stroke="#0c0f16" stroke-width="20" stroke-linecap="round"/>
+      <path d="M306,147 L344,119" stroke="#0c0f16" stroke-width="20" stroke-linecap="round"/>
       <g stroke="rgba(140,190,255,.09)" stroke-width="2">
-        <line x1="30" y1="228" x2="38" y2="243"/><line x1="42" y1="221" x2="50" y2="236"/><line x1="54" y1="214" x2="62" y2="229"/>
-        <line x1="370" y1="228" x2="362" y2="243"/><line x1="358" y1="221" x2="350" y2="236"/><line x1="346" y1="214" x2="338" y2="229"/>
+        <line x1="66" y1="120" x2="78" y2="136"/><line x1="76" y1="127" x2="88" y2="143"/>
+        <line x1="334" y1="120" x2="322" y2="136"/><line x1="324" y1="127" x2="312" y2="143"/>
       </g>
-      <!-- suporte central -->
-      <line x1="200" y1="184" x2="200" y2="156" stroke="#1a2133" stroke-width="7"/>
-      <circle cx="200" cy="184" r="7.5" fill="#1a2133" stroke="rgba(140,190,255,.18)" stroke-width="1.5"/>
-      <rect x="176" y="148" width="48" height="11" rx="5.5" fill="#151a26"/>
+      <!-- suporte do celular -->
+      <line x1="200" y1="182" x2="200" y2="158" stroke="#1a2133" stroke-width="7"/>
+      <circle cx="200" cy="182" r="7" fill="#1a2133" stroke="rgba(140,190,255,.18)" stroke-width="1.5"/>
+      <rect x="176" y="147" width="48" height="11" rx="5.5" fill="#151a26"/>
     </symbol>
     <symbol id="nb-phone" viewBox="0 0 70 130">
       <rect x="2" y="2" width="66" height="126" rx="12" fill="#10131c" stroke="#2a3146" stroke-width="2.5"/>
-      <rect x="8" y="14" width="54" height="104" rx="7" fill="url(#scrGrad)"/>
+      <g clip-path="url(#phoneScr)">
+        <rect x="8" y="14" width="54" height="104" fill="url(#scrGrad)"/>
+        <g stroke="rgba(190,215,255,.22)" stroke-width="2.5" fill="none">
+          <path d="M8,52 L62,44"/><path d="M8,84 L62,78"/>
+          <path d="M22,14 L26,118"/><path d="M48,14 L44,118"/>
+        </g>
+        <path d="M35,118 L36,80 L30,62 L33,38" fill="none" stroke="#1565f0" stroke-width="5"
+          stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M33,38 C33,30 45,30 45,37 C45,42 39,45 39,50 Z" fill="#00aeef" transform="translate(-6,-8)"/>
+        <circle cx="33" cy="30" r="2.6" fill="#04141d"/>
+      </g>
       <rect x="26" y="7" width="18" height="3.5" rx="1.75" fill="#2a3146"/>
     </symbol>
+    <clipPath id="phoneScr"><rect x="8" y="14" width="54" height="104" rx="7"/></clipPath>
     <symbol id="ic-apple" viewBox="0 0 640 640">
       <path fill="#fff" d="M494.782 340.02c-.803-81.025 66.084-119.907 69.072-121.832-37.595-54.993-96.167-62.552-117.037-63.402-49.843-5.032-97.242 29.362-122.565 29.362-25.253 0-64.277-28.607-105.604-27.85-54.32.803-104.4 31.594-132.403 80.245C29.81 334.457 71.81 479.58 126.816 558.976c26.87 38.882 58.914 82.56 100.997 81 40.512-1.594 55.843-26.244 104.848-26.244 48.993 0 62.753 26.245 105.64 25.406 43.606-.803 71.232-39.638 97.925-78.65 30.887-45.12 43.548-88.75 44.316-90.994-.969-.437-85.029-32.634-85.879-129.439l.118-.035zM414.23 102.178C436.553 75.095 451.636 37.5 447.514-.024c-32.162 1.311-71.163 21.437-94.253 48.485-20.729 24.012-38.836 62.28-33.993 99.036 35.918 2.8 72.591-18.248 94.926-45.272l.036-.047z"/>
     </symbol>
@@ -207,14 +239,19 @@
       <div class="scene s3">
         <svg class="stage" viewBox="0 0 400 300" aria-hidden="true">
           <use href="#nb-cockpit"/>
+          <!-- palma/braço POR TRÁS do celular (a pegada envolve) -->
+          <g class="hand-b">
+            <path d="M424,60 L316,64 C292,66 268,74 248,88 C230,100 220,114 221,128 C222,142 234,152 254,155 C276,158 298,153 312,142 L424,138 Z"
+              fill="#0e1219" stroke="rgba(140,190,255,.2)" stroke-width="2" stroke-linejoin="round"/>
+            <line x1="348" y1="62" x2="352" y2="138" stroke="rgba(140,190,255,.14)" stroke-width="3"/>
+          </g>
           <g class="ph-g"><use href="#nb-phone" x="165" y="26" width="70" height="130"/></g>
-          <g class="hand">
-            <path d="M424,58 L306,64 C284,66 264,74 250,86 C240,95 235,104 236,113 C237,124 246,132 259,134 L286,135 C293,148 306,156 320,154 C331,152 337,143 335,133 L424,138 Z"
-              fill="#0e1219" stroke="rgba(140,190,255,.22)" stroke-width="2"/>
-            <path d="M258,90 C251,99 248,108 250,118" stroke="rgba(140,190,255,.10)" fill="none" stroke-width="2"/>
-            <path d="M274,84 C267,96 265,108 267,122" stroke="rgba(140,190,255,.10)" fill="none" stroke-width="2"/>
-            <path d="M290,80 C283,94 281,108 283,127" stroke="rgba(140,190,255,.10)" fill="none" stroke-width="2"/>
-            <line x1="342" y1="62" x2="346" y2="137" stroke="rgba(140,190,255,.14)" stroke-width="3"/>
+          <!-- pontas dos dedos NA FRENTE, dobrando sobre a borda esquerda -->
+          <g class="hand-f" fill="#0e1219" stroke="rgba(140,190,255,.28)" stroke-width="2">
+            <rect x="152" y="66"  width="34" height="17" rx="8.5" transform="rotate(-4 169 74)"/>
+            <rect x="148" y="88"  width="38" height="17" rx="8.5" transform="rotate(-2 167 96)"/>
+            <rect x="149" y="110" width="37" height="17" rx="8.5" transform="rotate(1 167 118)"/>
+            <rect x="153" y="132" width="33" height="17" rx="8.5" transform="rotate(4 169 140)"/>
           </g>
         </svg>
         <div class="cap" data-i18n-html="problem.cap3">Exposto, <b>vira alvo</b></div>
