@@ -7,10 +7,13 @@
 <meta name="description" content="NavBlue é o HUD de navegação para motociclistas: instruções curva a curva num display dedicado, com o celular protegido no bolso.">
 <meta property="og:title" content="NavBlue — Navegação para Motociclistas">
 <meta property="og:description" content="Instruções curva a curva num display dedicado. O celular guardado. O caminho à frente.">
-<meta property="og:image" content="https://aleonnet.github.io/navblue-installer/assets/og-image.jpg">
+<!-- ABSOLUTE-URL: og:image exige URL absoluta (scrapers sociais não resolvem relativas) -->
+<meta property="og:image" content="https://aleonnet.github.io/navblue/assets/og-image.jpg">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="icon" type="image/png" href="assets/navblue_512.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <style>
 @font-face{font-family:'Orbitron';font-style:normal;font-weight:400 900;font-display:swap;
   src:url(fonts/orbitron-latin.woff2) format('woff2');
@@ -491,13 +494,13 @@ footer{border-top:1px solid rgba(0,174,239,.1);padding:46px 24px;background:#080
     <h2 class="reveal d1">Três passos e <b>boa estrada</b></h2>
     <div class="steps">
       <div class="step reveal d1">
-        <div class="step-shot"><img src="assets/tela-tutorial.jpg" alt="Guia de boas-vindas do app NavBlue" loading="lazy" width="644" height="1396"></div>
+        <div class="step-shot"><picture><source srcset="assets/tela-tutorial.webp" type="image/webp"><img src="assets/tela-tutorial.jpg" alt="Guia de boas-vindas do app NavBlue" loading="lazy" width="644" height="1396"></picture></div>
         <div class="num">01</div>
         <h3>Baixe e configure</h3>
         <p>Instale o app e siga o guia de boas-vindas: localização, Bluetooth e notificações — pronto em poucos minutos.</p>
       </div>
       <div class="step reveal d2">
-        <div class="step-shot"><img src="assets/tela-ble.jpg" alt="Pareamento Bluetooth com o NAV HUD no app" loading="lazy" width="644" height="1396"></div>
+        <div class="step-shot"><picture><source srcset="assets/tela-ble.webp" type="image/webp"><img src="assets/tela-ble.jpg" alt="Pareamento Bluetooth com o NAV HUD no app" loading="lazy" width="644" height="1396"></picture></div>
         <div class="num">02</div>
         <h3>Conecte por Bluetooth</h3>
         <p>Uma varredura encontra o seu NAV HUD e o app passa a transmitir navegação, rota e mapa por BLE. O celular vai para o bolso.</p>
@@ -520,7 +523,7 @@ footer{border-top:1px solid rgba(0,174,239,.1);padding:46px 24px;background:#080
     <p class="lead reveal d2">Um replay cinematográfico gerado pela engine usada na navegação do NavBlue:
       câmera de perseguição, do alto, da rota e telemetria.</p>
     <a class="demo-card reveal d2" href="demo.html" aria-label="Abrir demo interativa">
-      <img src="assets/demo-chase.jpg" alt="Demo cinematográfica da navegação NavBlue no Rio de Janeiro" loading="lazy" width="1600" height="1509">
+      <picture><source srcset="assets/demo-chase.webp" type="image/webp"><img src="assets/demo-chase.jpg" alt="Demo cinematográfica da navegação NavBlue no Rio de Janeiro" loading="lazy" width="1600" height="1509"></picture>
       <div class="demo-overlay">
         <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="lbl">Rio de Janeiro &middot; Botafogo &rarr; Leblon</div>
@@ -533,7 +536,7 @@ footer{border-top:1px solid rgba(0,174,239,.1);padding:46px 24px;background:#080
 <section id="mapa">
   <div class="wrap split">
     <div class="shotframe reveal" style="order:0;max-width:380px;justify-self:center">
-      <img src="assets/tela-rota.jpg" alt="Rota do Local Atual até a Praia do Leblon via Shopping RioSul no app NavBlue" loading="lazy" width="644" height="1396">
+      <picture><source srcset="assets/tela-rota.webp" type="image/webp"><img src="assets/tela-rota.jpg" alt="Rota do Local Atual até a Praia do Leblon via Shopping RioSul no app NavBlue" loading="lazy" width="644" height="1396"></picture>
     </div>
     <div class="reveal d1">
       <span class="kicker">Mapa do Brasil</span>
