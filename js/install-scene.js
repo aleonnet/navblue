@@ -13,8 +13,6 @@ const strip = document.getElementById('devStrip');
 const sils = strip ? [...strip.querySelectorAll('.dev-sil')] : [];
 const deviceName = document.getElementById('deviceName');
 const progressPct = document.getElementById('progressPct');
-const frProg = document.getElementById('frProg');
-const frDot = document.getElementById('frDot');
 const doneMan = document.getElementById('doneMan');
 
 let curState = 'stateIdle';
@@ -58,26 +56,6 @@ sils.forEach(sil => {
   });
 });
 
-/* ---------- rota-progresso do flash ---------- */
-let frTotal = 0;
-function updateFlashRoute(){
-  if (!frProg) return;
-  if (!frTotal){
-    frTotal = frProg.getTotalLength();
-    frProg.style.strokeDasharray = frTotal + ' ' + frTotal;
-  }
-  const pct = parseInt(progressPct?.textContent, 10) || 0;
-  const len = frTotal * Math.min(100, Math.max(0, pct)) / 100;
-  frProg.style.strokeDashoffset = frTotal - len;
-  const pt = frProg.getPointAtLength(len);
-  frDot.setAttribute('cx', pt.x);
-  frDot.setAttribute('cy', pt.y);
-}
-
-if (progressPct){
-  new MutationObserver(updateFlashRoute).observe(progressPct, {childList: true, characterData: true, subtree: true});
-}
-
 /* ---------- ícone de chegada no done ---------- */
 if (doneMan){
   fetch('assets/man_arrive.svg').then(r => r.ok ? r.text() : '').catch(() => '')
@@ -88,7 +66,6 @@ if (doneMan){
 document.addEventListener('installer:state', e => {
   curState = e.detail;
   updateSils();
-  if (curState === 'stateFlashing'){ frTotal = 0; updateFlashRoute(); }
 });
 
 /* ---------- hooks de teste ?state= / ?pct= (nunca usados no fluxo real) ---------- */
@@ -103,7 +80,6 @@ if (qState){
         progressPct.textContent = pct + '%';
         const fill = document.getElementById('progressFill');
         if (fill) fill.style.width = pct + '%';
-        updateFlashRoute();
       }
     } else setTimeout(apply, 60);
   };
