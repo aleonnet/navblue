@@ -2,6 +2,12 @@
 
 Todas as alterações notáveis deste repositório (instalador web + firmware publicado) serão documentadas aqui.
 
+## [Site 1.2.2] — 2026-07-24
+
+### Demo
+
+- **Fix: HUD cobria o marcador no embed mobile** — no iframe 4/3 da landing em iPhone (~353×258), o card fixo do topo-direita ficava exatamente sobre o marcador centralizado pela câmera. Novo `HudOcclusion` em `demo.html`: quando o card invade a região central, a câmera (chase, top e skip da intro) reserva `padding.right` medido do retângulo real do `#device-hud` e enquadra o rider na faixa livre à esquerda (padrão de puck deslocado dos apps de navegação). Cap de 60% da largura protege o `jumpTo` do MapLibre em telas minúsculas; recálculo no resize; desktop inalterado (padding 0 quando o card não cruza o centro).
+
 ## [Site 1.2.1] — 2026-07-24
 
 ### Site

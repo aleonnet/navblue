@@ -612,6 +612,37 @@ const Vehicle = (() => {
 })();
 
 // =========================================================================
+// Oclusão do HUD (campo 2026-07-24): no embed da landing o iframe 4/3 é
+// estreito e o card fixo do topo-direita cobria o marcador centralizado
+// pela câmera. Quando o #device-hud invade a região central, a câmera
+// reserva padding à direita e enquadra o rider na faixa livre à esquerda
+// do card — o mesmo padrão do app (puck deslocado da UI). O rect é
+// medido do DOM (getBoundingClientRect é pós-transform, cobre as escalas
+// .72/.58 das media queries) e recacheado no resize.
+// =========================================================================
+const HudOcclusion = (() => {
+  let padRight = 0;
+  function measure(){
+    const hud = document.getElementById('device-hud');
+    if (!hud) { padRight = 0; return; }
+    const w = window.innerWidth;
+    const left = hud.getBoundingClientRect().left;
+    // Marcador (46px + glow) fica no centro: só desloca quando o card
+    // cruza o centro com folga; no desktop o enquadramento não muda.
+    if (left < w / 2 + 40) {
+      // Cap em 60% da largura: padding maior que o viewport quebra o
+      // jumpTo do MapLibre em telas minúsculas.
+      padRight = Math.min(Math.round(w - left) + 10, Math.round(w * 0.6));
+    } else {
+      padRight = 0;
+    }
+  }
+  window.addEventListener('resize', measure);
+  measure();
+  return { get right(){ return padRight; } };
+})();
+
+// =========================================================================
 // Camera - CHASE / TOP / OVERVIEW / FREE (+intro lock)
 // =========================================================================
 const Camera = (() => {
@@ -655,12 +686,13 @@ const Camera = (() => {
       camZoom = Util.lerp(camZoom, zTarget, 1 - Math.exp(-dt * 1.4));
       map.jumpTo({
         center: [s.lng, s.lat], bearing: camBrg, pitch: 62, zoom: camZoom,
-        padding: { top: 0, bottom: Math.round(window.innerHeight * 0.28), left: 0, right: 0 }
+        padding: { top: 0, bottom: Math.round(window.innerHeight * 0.28), left: 0,
+          right: HudOcclusion.right }
       });
     } else if (mode === 'top') {
       map.jumpTo({
         center: [s.lng, s.lat], bearing: camBrg, pitch: 0, zoom: 16.2,
-        padding: { top: 0, bottom: 0, left: 0, right: 0 }
+        padding: { top: 0, bottom: 0, left: 0, right: HudOcclusion.right }
       });
     }
   }
@@ -704,7 +736,8 @@ const Intro = (() => {
     map.jumpTo({
       center: [DATA.frames[0].lng, DATA.frames[0].lat],
       zoom: 17.5, pitch: 62, bearing: DATA.frames[0].brg,
-      padding: { top: 0, bottom: Math.round(window.innerHeight * 0.28), left: 0, right: 0 }
+      padding: { top: 0, bottom: Math.round(window.innerHeight * 0.28), left: 0,
+        right: HudOcclusion.right }
     });
     finish();
   }
