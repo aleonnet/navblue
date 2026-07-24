@@ -149,12 +149,12 @@ html.perf-lite .stars-b,html.perf-lite .stars-c,html.perf-lite .road-lights{disp
 /* s3 — furto: UMA mão (braço/palma persistentes, largura constante);
    entra aberta, no bote só os DEDOS trocam (abertos→curl), sai rígida
    com o celular na pegada */
-.s3 .hand-arm,.s3 .f-open,.s3 .f-closed{
+.s3 .hand-arm,.s3 .f-open,.s3 .f-closed,.s3 .thumb-front{
   transform:translateX(-352px);
   filter:drop-shadow(0 7px 14px rgba(0,0,0,.55))}
 .s3 .hand-arm{animation:handMove 13.5s infinite}
 .s3 .f-open{animation:handMove 13.5s infinite,fOpen 13.5s infinite}
-.s3 .f-closed{opacity:0;animation:handMove 13.5s infinite,fClosed 13.5s infinite}
+.s3 .f-closed,.s3 .thumb-front{opacity:0;animation:handMove 13.5s infinite,fClosed 13.5s infinite}
 @keyframes handMove{
   0%,70%{transform:translateX(-352px)}
   77%{transform:translateX(0)}
@@ -362,7 +362,7 @@ html.og-shot::-webkit-scrollbar{display:none}
   .road-lights{display:none}
   .speedo{display:none}
   .play-btn{animation:none}
-  .scene,.s1 .ph-g,.s3 .ph-g,.s3 .hand-arm,.s3 .f-open,.s3 .f-closed,.s2 .rain,.s2 .warn{animation:none}
+  .scene,.s1 .ph-g,.s3 .ph-g,.s3 .hand-arm,.s3 .f-open,.s3 .f-closed,.s3 .thumb-front,.s2 .rain,.s2 .warn{animation:none}
   .scene{opacity:0}
   .scene.s1{opacity:1}
 }
