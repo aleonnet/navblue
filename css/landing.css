@@ -258,6 +258,37 @@ html.perf-lite .stars-b,html.perf-lite .stars-c,html.perf-lite .road-lights{disp
 .btn-install:hover{filter:brightness(1.15);box-shadow:0 0 30px rgba(0,174,239,.4)}
 .install-note{margin-top:16px;font-size:13px;color:var(--faint)}
 
+/* ---------- rota-espinha ---------- */
+.spine-overlay{position:absolute;top:0;left:0;width:100%;z-index:1;pointer-events:none;overflow:hidden}
+.spine{position:absolute;inset:0;width:100%;height:100%;display:block}
+.spine-glow{fill:none;stroke:rgba(0,174,239,.10);stroke-width:12;stroke-linecap:round}
+.spine-base{fill:none;stroke:#1b2740;stroke-width:3;stroke-linecap:round}
+.spine-progress{fill:none;stroke:url(#spineGrad);stroke-width:3.5;stroke-linecap:round}
+html.perf-lite .spine-glow{display:none}
+.km-marker{position:absolute;top:0;left:0;width:0;height:0;will-change:transform}
+.wp-ring{position:absolute;left:-17px;top:-17px;width:34px;height:34px;border-radius:50%;
+  background:#0b1220;border:2px solid rgba(0,174,239,.35);
+  transition:border-color .4s,box-shadow .4s}
+.wp-ic{position:absolute;left:-9px;top:-9px;width:18px;height:18px;color:#5b6787;
+  transition:color .4s}
+.wp-ic svg{width:100%;height:100%;display:block}
+.wp-ic svg path{fill:currentColor}
+.km-marker.reached .wp-ring{border-color:var(--teal);
+  box-shadow:0 0 14px rgba(101,235,226,.45),inset 0 0 8px rgba(0,174,239,.25)}
+.km-marker.reached .wp-ic{color:#fff}
+.km-marker.reached .wp-ring::after{content:'';position:absolute;inset:-2px;border-radius:50%;
+  border:2px solid rgba(101,235,226,.6);animation:wpPulse .9s var(--ease-out) 1 forwards}
+@keyframes wpPulse{from{transform:scale(1);opacity:1}to{transform:scale(2.1);opacity:0}}
+@media(max-width:680px){
+  .wp-ring{left:-13px;top:-13px;width:26px;height:26px}
+  .wp-ic{left:-7px;top:-7px;width:14px;height:14px}
+}
+
+/* ---------- chip KM nos kickers ---------- */
+.kicker .km{font-family:var(--mono);font-weight:600;font-style:normal;color:var(--teal);
+  border:1px solid rgba(101,235,226,.35);border-radius:5px;padding:2px 8px;margin-right:12px;
+  letter-spacing:.18em;font-size:10px;vertical-align:1px;background:rgba(101,235,226,.06)}
+
 /* ---------- reduced motion (landing) ---------- */
 @media (prefers-reduced-motion: reduce){
   .road-grid{animation:none}

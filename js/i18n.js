@@ -75,6 +75,7 @@ const STRINGS = {
     'installs.btn': '⚡ Abrir instalador web',
     'installs.note': 'Requer Chrome ou Edge no desktop · devices VIEWE SmartRing-Plus e Waveshare AMOLED 1.75C / 2.16',
 
+    'download.kicker': 'Chegada',
     'download.title': 'Pronto para <b>rodar</b>?',
     'download.lead': 'Baixe o app, conecte seu device e deixe o celular onde ele deve estar.',
 
@@ -229,6 +230,7 @@ const STRINGS = {
     'installs.btn': '⚡ Open web installer',
     'installs.note': 'Requires Chrome or Edge on desktop · VIEWE SmartRing-Plus and Waveshare AMOLED 1.75C / 2.16 devices',
 
+    'download.kicker': 'Arrival',
     'download.title': 'Ready to <b>ride</b>?',
     'download.lead': 'Get the app, connect your device and leave the phone where it belongs.',
 

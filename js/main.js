@@ -4,9 +4,11 @@ import './nav.js';
 import { reduceMotion } from './scroll.js';
 import { initReveals } from './reveals.js';
 import { initHero } from './hero.js';
+import { initSpine } from './route-spine.js';
 
 initReveals();
 initHero();
+initSpine();
 
 /* ---------- mini-HUD (ícones de manobra reais do conjunto do firmware) ---------- */
 const HUD_SCRIPT = [
