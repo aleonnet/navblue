@@ -2,6 +2,12 @@
 
 Todas as alterações notáveis deste repositório (instalador web + firmware publicado) serão documentadas aqui.
 
+## [Site 1.2.1] — 2026-07-24
+
+### Site
+
+- **Página 404 "fora da rota"**: a rota percorrida se parte num rasgo com o marcador pulsando no fim, "404" em Orbitron gradiente, status "Recalculando rota…" piscando e CTA "Voltar à rota". 100% autocontida (o GitHub Pages a serve em qualquer profundidade de path — CSS inline, fontes/favicon via URL absoluta do próprio site com fallback de sistema), bilíngue via o mesmo `localStorage` do site, `prefers-reduced-motion` e `noindex`.
+
 ## [Site 1.2.0] — 2026-07-24
 
 Redesign completo **"Rota Noturna — a página é um rolê"** (plano em `docs/planos_concluidos/redesign-rota-noturna.plan.md`).

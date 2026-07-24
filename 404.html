@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 — fora da rota</title>
+<meta name="robots" content="noindex">
+<!-- ABSOLUTE-URL: favicon do próprio site -->
+<link rel="icon" type="image/svg+xml" href="https://aleonnet.github.io/navblue/assets/favicon.svg">
+<link rel="apple-touch-icon" href="https://aleonnet.github.io/navblue/assets/apple-touch-icon.png">
+<!-- Autocontido de propósito: o GH Pages serve este arquivo em qualquer
+     profundidade de path, então nada de assets relativos. -->
+<!-- ABSOLUTE-URL: fontes do próprio site (fallback de sistema se offline) -->
+<style>
+@font-face{font-family:'Orbitron';font-style:normal;font-weight:400 900;font-display:swap;
+  src:url(https://aleonnet.github.io/navblue/fonts/orbitron-latin.woff2) format('woff2')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400 700;font-display:swap;
+  src:url(https://aleonnet.github.io/navblue/fonts/dm-sans-latin.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+body{min-height:100svh;display:grid;place-items:center;text-align:center;padding:24px;
+  background:radial-gradient(ellipse 120% 70% at 50% -10%,#101a30 0%,#0a0e1a 45%,#0a0a0f 80%);
+  color:#eef0f6;font-family:'DM Sans',system-ui,sans-serif;overflow:hidden}
+.stars{position:fixed;inset:0;pointer-events:none;opacity:.6;
+  background-image:radial-gradient(1px 1px at 12% 22%,rgba(255,255,255,.7) 50%,transparent 51%),
+   radial-gradient(1.5px 1.5px at 41% 8%,rgba(160,220,255,.8) 50%,transparent 51%),
+   radial-gradient(1px 1px at 88% 31%,rgba(255,255,255,.45) 50%,transparent 51%),
+   radial-gradient(1px 1px at 25% 68%,rgba(255,255,255,.35) 50%,transparent 51%),
+   radial-gradient(1.5px 1.5px at 60% 26%,rgba(120,210,255,.6) 50%,transparent 51%),
+   radial-gradient(1px 1px at 74% 78%,rgba(255,255,255,.4) 50%,transparent 51%),
+   radial-gradient(1px 1px at 8% 85%,rgba(190,230,255,.5) 50%,transparent 51%)}
+.scene{width:min(300px,70vw);margin:0 auto 6px}
+.scene svg{width:100%;height:auto;overflow:visible}
+.ring{transform-box:fill-box;transform-origin:center;animation:ping 2.2s ease-out infinite}
+@keyframes ping{from{transform:scale(1);opacity:.8}to{transform:scale(2.6);opacity:0}}
+h1{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(64px,16vw,110px);
+  line-height:1;letter-spacing:.04em;
+  background:linear-gradient(92deg,#00aeef 10%,#2fd4f5 55%,#65ebe2 95%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 30px rgba(0,174,239,.3))}
+.status{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:.4em;
+  text-transform:uppercase;color:#65ebe2;margin:16px 0 12px;animation:blink 1.6s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+p{color:#6b7394;font-size:clamp(15px,2vw,18px);line-height:1.6;max-width:420px;margin:0 auto 30px}
+.btn{display:inline-flex;align-items:center;gap:12px;height:54px;padding:0 30px;
+  background:#00aeef;color:#04141d;border-radius:10px;text-decoration:none;
+  font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;transition:filter .2s,box-shadow .2s}
+.btn:hover{filter:brightness(1.15);box-shadow:0 0 30px rgba(0,174,239,.4)}
+.btn svg{width:20px;height:20px;fill:#04141d}
+@media (prefers-reduced-motion: reduce){.ring{animation:none;opacity:0}.status{animation:none}}
+</style>
+</head>
+<body>
+<div class="stars" aria-hidden="true"></div>
+<main>
+  <div class="scene" aria-hidden="true">
+    <svg viewBox="0 0 300 150">
+      <!-- rota percorrida chega… -->
+      <path d="M10,140 L70,120 L96,86 L138,74" fill="none" stroke="#00aeef" stroke-width="5"
+        stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- …se parte num rasgo… -->
+      <path d="M150,70 L166,65" fill="none" stroke="#1b2740" stroke-width="5"
+        stroke-linecap="round" stroke-dasharray="2 10"/>
+      <!-- …e o resto do mapa não existe -->
+      <path d="M178,62 L232,48 L290,44" fill="none" stroke="#1b2740" stroke-width="5"
+        stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1 14" opacity=".5"/>
+      <!-- marcador perdido no fim da rota -->
+      <circle class="ring" cx="138" cy="74" r="12" fill="none" stroke="rgba(101,235,226,.5)" stroke-width="2.5"/>
+      <polygon points="130,66 152,73 133,83 137,74" fill="#65ebe2" stroke="#02060c" stroke-width="2" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <h1>404</h1>
+  <div class="status" id="s404">Recalculando rota…</div>
+  <p id="p404">Esta página não existe no mapa. Faça o retorno e siga para o início.</p>
+  <!-- ABSOLUTE-URL: atualizar em caso de domínio custom -->
+  <a class="btn" href="https://aleonnet.github.io/navblue/" id="b404">
+    <svg viewBox="0 0 24 24"><path d="M12 5V1L4 9l8 8v-4c3.9 0 7 3.1 7 7 0 .7-.1 1.4-.3 2H21c.6-1.2 1-2.6 1-4 0-5.5-4.5-10-10-10z" transform="translate(0,-1)"/></svg>
+    <span id="c404">Voltar à rota</span>
+  </a>
+</main>
+<script>
+(function(){
+  try{
+    var q=new URLSearchParams(location.search).get('lang');
+    if(q==='pt'||q==='en')localStorage.setItem('navblue.lang',q);
+    var l=localStorage.getItem('navblue.lang')||((navigator.language||'').toLowerCase().indexOf('pt')===0?'pt':'en');
+    if(l==='en'){
+      document.documentElement.lang='en';
+      document.title='404 — off route';
+      document.getElementById('s404').textContent='Recalculating route…';
+      document.getElementById('p404').textContent="This page isn't on the map. Make a U-turn and head back to the start.";
+      document.getElementById('c404').textContent='Back on route';
+    }
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
