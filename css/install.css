@@ -1,0 +1,53 @@
+/* NavBlue — cena "abastecer o device" (install.html): silhuetas dos 3
+   devices, rota-progresso do flash e chegada. Aditivo à pele existente. */
+
+/* botão de idioma flutuante (install/demo não carregam base.css) */
+.lang-float{position:fixed;top:18px;right:20px;z-index:110;
+  font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.08em;
+  color:var(--dim);background:rgba(10,10,15,.6);border:1px solid var(--border);
+  border-radius:8px;padding:6px 12px;cursor:pointer;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  transition:color .2s,border-color .2s}
+.lang-float:hover{color:var(--text);border-color:rgba(0,174,239,.45)}
+
+/* ---------- strip de silhuetas ---------- */
+.dev-strip{display:flex;gap:26px;justify-content:center;align-items:flex-end;
+  margin:6px 0 18px;opacity:.75;transition:opacity .4s}
+.dev-strip.active{opacity:1}
+.dev-sil{display:flex;flex-direction:column;align-items:center;gap:6px}
+.dev-sil svg{width:52px;height:52px;overflow:visible}
+.dev-sil .shell{fill:none;stroke:#2a3350;stroke-width:2.5;transition:stroke .4s,filter .4s}
+.dev-sil .scr{fill:rgba(10,14,22,.9);stroke:none;transition:fill .4s}
+.dev-sil span{font-family:var(--mono);font-size:8.5px;font-weight:500;letter-spacing:.14em;
+  color:var(--faint);text-transform:uppercase;transition:color .4s}
+.dev-sil.lit .shell{stroke:var(--accent);
+  filter:drop-shadow(0 0 8px rgba(0,174,239,.55))}
+.dev-sil.lit .scr{fill:rgba(0,174,239,.16)}
+.dev-sil.lit span{color:var(--accent)}
+.dev-sil.maybe .shell{animation:silPulse 1.4s ease-in-out infinite}
+@keyframes silPulse{0%,100%{stroke:#2a3350}50%{stroke:rgba(0,174,239,.75)}}
+@media(max-width:480px){.dev-strip{gap:16px}.dev-sil svg{width:42px;height:42px}}
+
+/* ---------- rota-progresso do flash ---------- */
+.flash-route{width:100%;max-width:300px;height:48px;margin:2px auto 6px;display:block;overflow:visible}
+.fr-base{fill:none;stroke:#1b2740;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.fr-prog{fill:none;stroke:var(--accent);stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round;
+  filter:drop-shadow(0 0 6px rgba(0,174,239,.5))}
+.fr-dot{fill:#fff;stroke:var(--accent);stroke-width:2.5;
+  filter:drop-shadow(0 0 8px rgba(0,174,239,.8))}
+
+/* porcentagem grande em Orbitron */
+.progress-pct{font-family:var(--disp) !important;font-size:38px !important;
+  font-weight:700 !important;color:var(--text) !important;letter-spacing:.04em}
+
+/* ---------- chegada ---------- */
+.done-man{width:40px;height:40px;margin:0 auto 8px;color:var(--success);
+  filter:drop-shadow(0 0 10px rgba(0,230,118,.5));animation:doneManIn .6s var(--ease-out)}
+.done-man svg{width:100%;height:100%;display:block}
+.done-man svg path{fill:currentColor}
+@keyframes doneManIn{from{transform:translateY(10px) scale(.7);opacity:0}to{transform:none;opacity:1}}
+
+@media (prefers-reduced-motion: reduce){
+  .dev-sil.maybe .shell{animation:none;stroke:rgba(0,174,239,.6)}
+  .done-man{animation:none}
+}

@@ -9,6 +9,7 @@
     <title>NavBlue — Instalador Web do Device</title>
     <meta name="description" content="Grave o firmware NavBlue nos devices VIEWE e Waveshare (ESP32-S3) direto do navegador, via Web Serial.">
     <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/install.css">
     <script>(function(){try{var q=new URLSearchParams(location.search).get('lang');if(q==='pt'||q==='en')localStorage.setItem('navblue.lang',q);var l=localStorage.getItem('navblue.lang')||((navigator.language||'').toLowerCase().indexOf('pt')===0?'pt':'en');document.documentElement.lang=l==='pt'?'pt-BR':'en';}catch(e){}})();</script>
     <script type="module" src="js/i18n.js"></script>
     <style>
@@ -541,6 +542,21 @@
             <h1 class="brand">Nav<span class="brand-blue">Blue</span></h1>
             <p class="subtitle" data-i18n="inst.subtitle">Instalador Web do Device</p>
 
+            <div class="dev-strip" id="devStrip" aria-hidden="true">
+                <div class="dev-sil" data-dev="viewe-smartring-plus">
+                    <svg viewBox="0 0 64 64"><circle class="shell" cx="32" cy="32" r="24"/><circle class="scr" cx="32" cy="32" r="18"/></svg>
+                    <span>VIEWE &middot; 360&times;360</span>
+                </div>
+                <div class="dev-sil" data-dev="waveshare-amoled-175C">
+                    <svg viewBox="0 0 64 64"><circle class="shell" cx="32" cy="32" r="28"/><circle class="scr" cx="32" cy="32" r="22"/></svg>
+                    <span>1.75C &middot; 466&times;466</span>
+                </div>
+                <div class="dev-sil" data-dev="waveshare-amoled-216">
+                    <svg viewBox="0 0 64 64"><rect class="shell" x="5" y="5" width="54" height="54" rx="10"/><rect class="scr" x="11" y="11" width="42" height="42" rx="6"/></svg>
+                    <span>2.16 &middot; 480&times;480</span>
+                </div>
+            </div>
+
             <div class="card">
                 <div class="card-glow"></div>
                 <div class="card-inner">
@@ -600,6 +616,11 @@
                     <!-- STATE: flashing (erase + write) -->
                     <div class="card-state" id="stateFlashing">
                         <p class="state-text accent" id="flashText">Preparando...</p>
+                        <svg class="flash-route" viewBox="0 0 300 48" aria-hidden="true">
+                            <path class="fr-base" d="M8,40 L58,40 L88,12 L148,12 L178,36 L238,36 L292,10"/>
+                            <path class="fr-prog" id="frProg" d="M8,40 L58,40 L88,12 L148,12 L178,36 L238,36 L292,10"/>
+                            <circle class="fr-dot" id="frDot" cx="8" cy="40" r="5"/>
+                        </svg>
                         <div class="progress-wrap">
                             <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
                         </div>
@@ -612,6 +633,7 @@
                             <circle cx="26" cy="26" r="25" fill="none" stroke="var(--success)" stroke-width="2"/>
                             <path fill="none" stroke="var(--success)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
                         </svg>
+                        <div class="done-man" id="doneMan" aria-hidden="true"></div>
                         <p class="state-detail success" data-i18n="inst.doneTitle">Instalação concluída</p>
                         <p class="state-text" data-i18n="inst.doneText">O device vai reiniciar automaticamente.</p>
                         <p class="state-text" id="clockStatus" style="display:none;"></p>
@@ -921,6 +943,7 @@
             const el = document.getElementById(id);
             if (el) el.classList.toggle('active', id === stateId);
         });
+        document.dispatchEvent(new CustomEvent('installer:state', {detail: stateId}));  // REDESIGN HOOK
     }
 
     function setBadge(text, variant) {
@@ -1318,6 +1341,7 @@
     window.startFlash = startFlash;
     window.resetToIdle = resetToIdle;
     window.toggleConsole = toggleConsole;
+    window.__nbShowState = showCardState;  // REDESIGN HOOK: hook de teste ?state=
 
     /** Linux-only step for "No port selected" (esp-web-tools parity). */
     function isLinuxDesktop() {
@@ -1348,5 +1372,6 @@
         setBadge('Unsupported', 'error');
     }
     </script>
+<script type="module" src="js/install-scene.js"></script>
 </body>
 </html>
