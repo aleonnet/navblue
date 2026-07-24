@@ -2,6 +2,37 @@
 
 Todas as alterações notáveis deste repositório (instalador web + firmware publicado) serão documentadas aqui.
 
+## [Site 1.2.0] — 2026-07-24
+
+Redesign completo **"Rota Noturna — a página é um rolê"** (plano em `docs/planos_concluidos/redesign-rota-noturna.plan.md`).
+
+### Landing
+
+- **Rota-espinha**: polyline SVG contínua conecta as seções como waypoints de navegação ("KM 01…07" com os ícones de manobra reais do firmware), desenhando-se em gradiente azul→teal conforme o scroll; nasce da zona da estrada do hero com fade; waypoints "executam" ao serem alcançados.
+- **Device-rider** (≥1100px): mini-AMOLED cavalga a rota mostrando a manobra da próxima seção, distância e a velocidade real do scroll em km/h; vira fantasma ao cruzar a demo embutida.
+- **Hero elevado**: 3 camadas de estrelas com paralaxe, faróis passando na estrada 3D, velocímetro dirigido pelo scroll, título com gradiente azul→teal; pulso da rota do hero nasce no marcador (máscara SMIL sincronizada).
+- **Showcase HUD fiel ao device**: mapa heading-up desliza sob o marcador fixo com bearing suavizado nas curvas, distância em metros reais do trajeto, velocidade por trecho, nome da rua em amarelo e perspectiva 3D — roda só com a seção visível.
+- **Demo embutida** (facade): o card vira `<iframe demo.html?embed=1>` apenas no clique, com botão de fullscreen — custo zero no load.
+- **Cenas do problema redesenhadas**: cockpit de moto ilustrado (guidão gaivota, espelhos, gauge com ponteiro, tanque com tampa, estrada noturna), celular com mini-mapa de navegação na barra esquerda, e furto com mão-luva em duas poses consistentes (entra aberta por trás, fecha no bote, sai com o aparelho).
+- Nav mobile com hamburger acessível (antes os links sumiam em ≤680px).
+
+### Instalador web
+
+- **Silhuetas dos 3 devices viram o seletor**: clicáveis em `stateReady` (proxy para os botões reais `data-build-id` — lógica esptool intacta); nome do device "vivo" pulsando; card mais compacto (fileira de botões oculta).
+- **Estado de gravação compacto**: barra de progresso + porcentagem em Orbitron.
+- Chegada com `man_arrive` verde; hooks de teste `?state=stateX&pct=N` cobrem os 8 estados sem hardware.
+- Diff do bloco esptool: **2 hooks aditivos** (`installer:state`, `__nbShowState`) + literais de UI via i18n — nada mais.
+
+### Infra e A11y
+
+- **Design system compartilhado**: `css/tokens.css` (dark-only por decisão de arte) + `css/base.css` nas 3 páginas; logo via `<symbol>`; IBM Plex Mono self-hosted; demo sem Google Fonts (MapLibre CDN documentado como exceção `ABSOLUTE-URL`).
+- **i18n PT-BR/EN vanilla** (~170 chaves): PT canônico no HTML, `data-i18n`, switcher no nav, `?lang=`, persistência; literais do installer via `window.NB_I18N`.
+- **Motor único de scroll**: rAF que dorme quando assentado; hooks determinísticos `?progress=`, `?motion=reduce`, `?debug=fps`, `?og=1`; degradação `perf-lite` (frame>22ms).
+- `prefers-reduced-motion` em toda animação (versão estática digna); skip-link; `:focus-visible`.
+- Higiene: `index-v1/v2.html` e 7 bins órfãos removidos (~12MB); og:image corrigida (repo antigo) e regravada 1200×630; favicon.svg; apple-touch-icon; screenshots com WebP + `<picture>`.
+- Copy corrigido: instalador anunciado com os 3 devices (antes citava só o 1.75C).
+- Lighthouse mobile: index 95/100/100/100 · install 90/100/100/100.
+
 ## [Site 1.1.3] — 2026-07-02
 
 ### Demo
