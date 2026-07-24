@@ -250,39 +250,29 @@
       <div class="scene s3">
         <svg class="stage" viewBox="0 0 400 300" aria-hidden="true">
           <use href="#nb-cockpit"/>
-          <!-- pose ABERTA: chega POR TRÁS do celular, dedos emergem além da borda.
-               Path único com vales entre os dedos (referência Clarity hand-open) -->
+          <!-- pose ABERTA (Phosphor hand-palm, MIT): chega POR TRÁS do celular -->
           <g class="hand-open">
-            <path d="M-40,72 L44,66
-              C60,60 76,56 92,54
-              C120,48 146,44 160,44 C168,45 169,53 162,57 C140,60 116,64 104,66
-              C124,64 150,70 170,72 C178,74 178,82 170,85 C148,88 122,88 106,88
-              C126,92 148,96 162,100 C170,103 169,111 161,113 C140,116 118,114 104,112
-              C122,118 136,120 144,122 C151,124 151,132 143,134 C128,134 112,132 100,128
-              C88,136 76,140 66,140
-              C74,146 84,152 92,158 C98,163 94,171 85,168 C74,164 62,156 54,148
-              C48,143 44,138 42,132 L-40,126 Z" fill="#cdd9f2"/>
-            <rect x="22" y="62" width="26" height="70" rx="12" fill="#a9b9dd"/>
+            <rect x="-40" y="72" width="110" height="56" rx="14" fill="rgba(14,18,25,.92)"
+              stroke="rgba(140,190,255,.5)" stroke-width="5"/>
+            <rect x="52" y="66" width="22" height="68" rx="10" fill="#1a2133"
+              stroke="rgba(140,190,255,.35)" stroke-width="2.5"/>
+            <g transform="translate(214,14) rotate(90) scale(0.62)">
+              <path d="M216,104v48a88,88,0,0,1-176,0V64a16,16,0,0,1,32,0v56a8,8,0,0,0,16,0V32a16,16,0,0,1,32,0v80a8,8,0,0,0,16,0V48a16,16,0,0,1,32,0v80.67A48.08,48.08,0,0,0,128,176a8,8,0,0,0,16,0,32,32,0,0,1,32-32,8,8,0,0,0,8-8V104a16,16,0,0,1,32,0Z"
+                fill="rgba(14,18,25,.92)" stroke="rgba(140,190,255,.55)" stroke-width="9"/>
+            </g>
           </g>
-          <!-- pose FECHADA (grab): palma por trás + banda dos nós e polegar na frente -->
-          <g class="hand-b">
-            <path d="M-24,68 C24,62 68,58 104,60 C122,61 132,68 134,80 L134,116 C132,128 122,136 104,138 C68,141 24,138 -24,130 Z" fill="#cdd9f2"/>
-            <rect x="44" y="58" width="26" height="82" rx="12" fill="#a9b9dd"/>
+          <!-- pose GRAB (Phosphor hand-grabbing): punho fechado atrás, nós à mostra -->
+          <g class="hand-grab">
+            <rect x="-40" y="72" width="106" height="56" rx="14" fill="rgba(14,18,25,.92)"
+              stroke="rgba(140,190,255,.5)" stroke-width="5"/>
+            <rect x="48" y="66" width="22" height="68" rx="10" fill="#1a2133"
+              stroke="rgba(140,190,255,.35)" stroke-width="2.5"/>
+            <g transform="translate(206,26) rotate(90) scale(0.62)">
+              <path d="M216,104v48a88,88,0,0,1-176,0V136a16,16,0,0,1,32,0v8a8,8,0,0,0,16,0V88a16,16,0,0,1,32,0v16a8,8,0,0,0,16,0V88a16,16,0,0,1,32,0v16a8,8,0,0,0,16,0,16,16,0,0,1,32,0Z"
+                fill="rgba(14,18,25,.92)" stroke="rgba(140,190,255,.55)" stroke-width="9"/>
+            </g>
           </g>
           <g class="ph-g"><use href="#nb-phone" x="100" y="34" width="60" height="112"/></g>
-          <g class="hand-f">
-            <path d="M163,50
-              C154,50 148,55 148,62
-              C140,64 140,74 148,77
-              C141,79 141,89 148,92
-              C141,94 141,104 149,107
-              C143,109 143,119 150,122
-              C147,130 152,136 160,137
-              C170,138 176,133 176,124
-              C181,108 181,80 176,64
-              C176,55 170,50 163,50 Z" fill="#cdd9f2"/>
-            <rect x="88" y="118" width="44" height="17" rx="8.5" transform="rotate(-38 110 126)" fill="#cdd9f2"/>
-          </g>
         </svg>
         <div class="cap" data-i18n-html="problem.cap3">Exposto, <b>vira alvo</b></div>
       </div>
