@@ -40,42 +40,44 @@
       <path d="M340,300 L204,120" stroke="rgba(140,190,255,.10)" stroke-width="2" fill="none"/>
       <path d="M200,290 L200,130" stroke="rgba(140,190,255,.14)" stroke-width="2.5"
         stroke-dasharray="14 18" fill="none"/>
-      <!-- espelhos (hastes sobem das pontas) -->
-      <line x1="96" y1="138" x2="80" y2="84" stroke="#1a2133" stroke-width="5" stroke-linecap="round"/>
-      <ellipse cx="76" cy="72" rx="19" ry="13" fill="#0d1119" stroke="#2a3146" stroke-width="2.5" transform="rotate(-16 76 72)"/>
-      <line x1="304" y1="138" x2="320" y2="84" stroke="#1a2133" stroke-width="5" stroke-linecap="round"/>
-      <ellipse cx="324" cy="72" rx="19" ry="13" fill="#0d1119" stroke="#2a3146" stroke-width="2.5" transform="rotate(16 324 72)"/>
+      <!-- espelhos redondos em hastes quase verticais -->
+      <line x1="84" y1="150" x2="74" y2="90" stroke="#1a2133" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="72" cy="76" r="16" fill="#0d1119" stroke="#2a3146" stroke-width="2.5"/>
+      <line x1="316" y1="150" x2="326" y2="90" stroke="#1a2133" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="328" cy="76" r="16" fill="#0d1119" stroke="#2a3146" stroke-width="2.5"/>
       <!-- tanque -->
-      <path d="M116,302 C124,252 154,222 200,222 C246,222 276,252 284,302 Z" fill="#0c0f16" stroke="#232a3c" stroke-width="2"/>
-      <path d="M146,260 C162,241 179,232 199,231" fill="none" stroke="rgba(140,190,255,.13)" stroke-width="3" stroke-linecap="round"/>
+      <path d="M132,302 C138,258 164,228 200,228 C236,228 262,258 268,302 Z" fill="#0c0f16" stroke="#232a3c" stroke-width="2"/>
+      <path d="M158,262 C170,246 184,238 199,237" fill="none" stroke="rgba(140,190,255,.13)" stroke-width="3" stroke-linecap="round"/>
       <!-- mesas/risers -->
-      <line x1="186" y1="216" x2="182" y2="188" stroke="#1a2133" stroke-width="8" stroke-linecap="round"/>
-      <line x1="214" y1="216" x2="218" y2="188" stroke="#1a2133" stroke-width="8" stroke-linecap="round"/>
-      <!-- guidão: sobe do centro, abre e ergue as pontas -->
-      <path d="M200,184 C168,182 132,172 104,154 C88,144 74,134 60,122" fill="none" stroke="url(#barGrad)" stroke-width="11" stroke-linecap="round"/>
-      <path d="M200,184 C232,182 268,172 296,154 C312,144 326,134 340,122" fill="none" stroke="url(#barGrad)" stroke-width="11" stroke-linecap="round"/>
-      <path d="M200,181 C168,179 133,169 106,151 C90,141 76,131 63,119" fill="none" stroke="rgba(140,190,255,.24)" stroke-width="2" stroke-linecap="round"/>
-      <path d="M200,181 C232,179 267,169 294,151 C310,141 324,131 337,119" fill="none" stroke="rgba(140,190,255,.24)" stroke-width="2" stroke-linecap="round"/>
-      <!-- gauge central em cima da barra -->
-      <line x1="200" y1="182" x2="200" y2="174" stroke="#1a2133" stroke-width="7"/>
-      <circle cx="200" cy="158" r="19" fill="#0d1119" stroke="#2a3146" stroke-width="3"/>
-      <circle cx="200" cy="158" r="12.5" fill="#090c12" stroke="rgba(140,190,255,.14)" stroke-width="1.5"/>
-      <path d="M189,149 A15,15 0 0 1 211,149" fill="none" stroke="rgba(140,190,255,.22)" stroke-width="2" stroke-linecap="round"/>
-      <line x1="200" y1="158" x2="192" y2="150" stroke="rgba(101,235,226,.75)" stroke-width="2.2" stroke-linecap="round"/>
-      <circle cx="200" cy="158" r="2" fill="rgba(140,190,255,.5)"/>
-      <!-- alavancas -->
-      <path d="M88,156 C70,164 52,164 38,154" fill="none" stroke="#232a3c" stroke-width="4" stroke-linecap="round"/>
-      <path d="M312,156 C330,164 348,164 362,154" fill="none" stroke="#232a3c" stroke-width="4" stroke-linecap="round"/>
-      <!-- manoplas nas pontas altas -->
-      <path d="M94,147 L56,119" stroke="#0c0f16" stroke-width="20" stroke-linecap="round"/>
-      <path d="M306,147 L344,119" stroke="#0c0f16" stroke-width="20" stroke-linecap="round"/>
+      <line x1="190" y1="180" x2="186" y2="208" stroke="#1a2133" stroke-width="8" stroke-linecap="round"/>
+      <line x1="210" y1="180" x2="214" y2="208" stroke="#1a2133" stroke-width="8" stroke-linecap="round"/>
+      <!-- guidão "gaivota": sobe suave do centro, aplaina e as pontas CAEM -->
+      <path d="M200,178 C164,170 128,152 100,152 C88,152 66,160 48,172" fill="none" stroke="url(#barGrad)" stroke-width="11" stroke-linecap="round"/>
+      <path d="M200,178 C236,170 272,152 300,152 C312,152 334,160 352,172" fill="none" stroke="url(#barGrad)" stroke-width="11" stroke-linecap="round"/>
+      <path d="M200,175 C164,167 129,149 101,149 C89,149 68,157 51,169" fill="none" stroke="rgba(140,190,255,.24)" stroke-width="2" stroke-linecap="round"/>
+      <path d="M200,175 C236,167 271,149 299,149 C311,149 332,157 349,169" fill="none" stroke="rgba(140,190,255,.24)" stroke-width="2" stroke-linecap="round"/>
+      <!-- alavancas apontando para dentro -->
+      <path d="M96,160 L144,169" stroke="#232a3c" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M304,160 L256,169" stroke="#232a3c" stroke-width="3.5" stroke-linecap="round"/>
+      <!-- manoplas nas pontas (caídas) + pesos -->
+      <path d="M84,155 L48,170" stroke="#0c0f16" stroke-width="19" stroke-linecap="round"/>
+      <path d="M316,155 L352,170" stroke="#0c0f16" stroke-width="19" stroke-linecap="round"/>
+      <circle cx="44" cy="171" r="5" fill="#151a26" stroke="rgba(140,190,255,.15)" stroke-width="1.5"/>
+      <circle cx="356" cy="171" r="5" fill="#151a26" stroke="rgba(140,190,255,.15)" stroke-width="1.5"/>
       <g stroke="rgba(140,190,255,.09)" stroke-width="2">
-        <line x1="66" y1="120" x2="78" y2="136"/><line x1="76" y1="127" x2="88" y2="143"/>
-        <line x1="334" y1="120" x2="322" y2="136"/><line x1="324" y1="127" x2="312" y2="143"/>
+        <line x1="58" y1="162" x2="60" y2="172"/><line x1="68" y1="159" x2="70" y2="169"/><line x1="78" y1="156" x2="80" y2="166"/>
+        <line x1="342" y1="162" x2="340" y2="172"/><line x1="332" y1="159" x2="330" y2="169"/><line x1="322" y1="156" x2="320" y2="166"/>
       </g>
+      <!-- gauge central sobre a mesa -->
+      <line x1="200" y1="176" x2="200" y2="166" stroke="#1a2133" stroke-width="6"/>
+      <circle cx="200" cy="150" r="19" fill="#0d1119" stroke="#2a3146" stroke-width="3"/>
+      <circle cx="200" cy="150" r="12.5" fill="#090c12" stroke="rgba(140,190,255,.14)" stroke-width="1.5"/>
+      <path d="M190,142 A13,13 0 0 1 210,142" fill="none" stroke="rgba(140,190,255,.22)" stroke-width="2" stroke-linecap="round"/>
+      <line x1="200" y1="150" x2="192" y2="143" stroke="rgba(101,235,226,.75)" stroke-width="2.2" stroke-linecap="round"/>
+      <circle cx="200" cy="150" r="2" fill="rgba(140,190,255,.5)"/>
       <!-- suporte do celular na barra esquerda -->
-      <circle cx="130" cy="171" r="6.5" fill="#1a2133" stroke="rgba(140,190,255,.18)" stroke-width="1.5"/>
-      <line x1="130" y1="171" x2="130" y2="148" stroke="#1a2133" stroke-width="6"/>
+      <circle cx="130" cy="157" r="6" fill="#1a2133" stroke="rgba(140,190,255,.18)" stroke-width="1.5"/>
+      <line x1="130" y1="157" x2="130" y2="146" stroke="#1a2133" stroke-width="6"/>
       <rect x="106" y="138" width="48" height="10" rx="5" fill="#151a26"/>
     </symbol>
     <symbol id="nb-phone" viewBox="0 0 70 130">
@@ -242,22 +244,28 @@
       <div class="scene s3">
         <svg class="stage" viewBox="0 0 400 300" aria-hidden="true">
           <use href="#nb-cockpit"/>
-          <!-- palma/braço POR TRÁS do celular, entrando pela esquerda -->
+          <!-- braço/palma POR TRÁS do celular, entrando pela esquerda -->
           <g class="hand-b">
-            <path d="M-24,64 L84,60 C110,58 136,64 152,76 C166,86 174,98 173,112 C172,128 162,140 144,146 C124,152 100,148 86,138 L-24,140 Z"
+            <path d="M-24,74 C20,70 58,70 90,76 C104,79 112,86 116,94 L116,122 C112,132 102,138 88,141 C52,146 14,142 -24,138 Z"
               fill="#0e1219" stroke="rgba(140,190,255,.2)" stroke-width="2" stroke-linejoin="round"/>
-            <line x1="50" y1="60" x2="46" y2="138" stroke="rgba(140,190,255,.14)" stroke-width="3"/>
+            <line x1="42" y1="72" x2="38" y2="140" stroke="rgba(140,190,255,.13)" stroke-width="3"/>
           </g>
           <g class="ph-g"><use href="#nb-phone" x="100" y="34" width="60" height="112"/></g>
-          <!-- frente da pegada: dedos + banda dos nós, uma peça só -->
+          <!-- frente da pegada: dorso na borda direita com 4 pontas curtas + polegar -->
           <g class="hand-f">
-            <g fill="#0e1219" stroke="rgba(140,190,255,.28)" stroke-width="2">
-              <rect x="112" y="56"  width="52" height="17" rx="8.5" transform="rotate(3 138 64)"/>
-              <rect x="108" y="78"  width="56" height="17" rx="8.5" transform="rotate(1 136 86)"/>
-              <rect x="109" y="100" width="55" height="17" rx="8.5" transform="rotate(-1 136 108)"/>
-              <rect x="113" y="122" width="51" height="17" rx="8.5" transform="rotate(-3 138 130)"/>
-            </g>
-            <rect x="152" y="48" width="26" height="98" rx="13" fill="#0e1219" stroke="rgba(140,190,255,.24)" stroke-width="2"/>
+            <path d="M163,50
+              C154,50 148,55 148,62
+              C140,64 140,74 148,77
+              C141,79 141,89 148,92
+              C141,94 141,104 149,107
+              C143,109 143,119 150,122
+              C147,130 152,136 160,137
+              C170,138 177,132 177,122
+              L177,64
+              C177,55 171,50 163,50 Z"
+              fill="#0e1219" stroke="rgba(140,190,255,.26)" stroke-width="2" stroke-linejoin="round"/>
+            <rect x="88" y="118" width="44" height="17" rx="8.5" transform="rotate(-38 110 126)"
+              fill="#0e1219" stroke="rgba(140,190,255,.26)" stroke-width="2"/>
           </g>
         </svg>
         <div class="cap" data-i18n-html="problem.cap3">Exposto, <b>vira alvo</b></div>
